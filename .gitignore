@@ -1,0 +1,42 @@
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+venv/
+env/
+ENV/
+.venv/
+
+# instance
+instance/
+*.db             # SQLite
+*.sqlite3
+
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+.DS_Store        # macOS
+Thumbs.db        # Windows
+
+.vscode/
+.idea/
+
+.ipynb_checkpoints/
+
+static/css/*.css.map
+static/js/*.js.map
+
+.env
+
+htmlcov/
+coverage.xml
+*.cover
+.cache
+
+node_modules/
+
+__tests__/
