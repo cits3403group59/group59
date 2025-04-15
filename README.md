@@ -5,7 +5,7 @@
 | Student ID    | Student Name      | GitHub Username |
 | ------------- | ----------------- | --------------- |
 | 23332873      | Blythe Cheung     |                 |
-| 23902466      | Sharan Prabhu     |                 |
+| 23902466      | Sharan Prabhu     | sharanp245      |
 | 24279373      | Chunyu Zheng      |                 |
 | 23764974      | Olivia Fitzgerald | OliviaFitzgerald|
 
