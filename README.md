@@ -6,7 +6,7 @@
 | ------------- | ----------------- | --------------- |
 | 23332873      | Blythe Cheung     |                 |
 | 23902466      | Sharan Prabhu     | sharanp245      |
-| 24279373      | Chunyu Zheng      |                 |
+| 24279373      | Chunyu Zheng      | chunyuzheng     |
 | 23764974      | Olivia Fitzgerald | OliviaFitzgerald|
 
 ## Instructions
