@@ -5,8 +5,9 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="../static/introductory-charts.js"></script>
         <script src="../static/dropdown.js"></script> 
-        <link rel="stylesheet" href="../static/template.css" />
-        <title>Carbon Copy - Introductory Page</title>
+        <link rel="stylesheet" href="../static/template.css"/>
+        <script src="../static/my-data-visualise-charts.js"></script>
+        <title>Carbon Copy - Visualise Data Page</title>
     </head>
     <body>
         <div id="background" >
@@ -108,45 +109,56 @@
                 </div>
             </nav>
 
-            <!--Dummy Graphs-->
-            <div class="flex flex-1">
-                <!-- Sidebar -->
-                <aside class="w-64 bg-white shadow-md p-6">
-                  <ul class="space-y-4">
-                    <li><a href="#" class="text-gray-700 hover:text-blue-500 font-semibold">Overview</a></li>
-                    <li><a href="#" class="text-gray-700 hover:text-blue-500 font-semibold">Reports</a></li>
-                    <li><a href="#" class="text-gray-700 hover:text-blue-500 font-semibold">Analytics</a></li>
-                    <li><a href="#" class="text-gray-700 hover:text-blue-500 font-semibold">Settings</a></li>
-                  </ul>
-                </aside>
+            <!-- Two Section Layout -->
+            <div class="h-screen flex flex-col lg:flex-row items-center justify-center">
+                <!-- Left Section (Text) -->
+                <div class="w-full lg:w-1/2 flex flex-col justify-center items-start ml-10">
+                    <h1 class="font-bold text-[6rem]">My Data</h1>
+                    <h3 class="text-[1.5rem]">How are your habits tracking over time?</h3>
+                </div>
             
-                <!-- Dashboard Content -->
-                <main class="flex-1 p-6 space-y-6">
-                  <h1 class="text-3xl font-bold mb-6">Welcome back!</h1>
-            
-                  <!-- Example Chart Card -->
-                  <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h2 class="text-xl font-bold mb-4">Site Traffic</h2>
-                    <canvas id="trafficChart" width="600" height="300"></canvas>
-                  </div>
-            
-                  <!-- Example Stats Cards -->
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                      <div class="text-2xl font-bold">1,024</div>
-                      <div class="text-gray-500">Visitors</div>
+                <!-- Right Section (Charts) -->
+                <div class="items-center lg:w-1/2 flex flex-col space-y-6">
+                    <div class="bg-gray-200 rounded-2xl p-6 shadow h-[300px] w-[500px]">
+                        <canvas id="chart1" class="w-full h-full"></canvas>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                      <div class="text-2xl font-bold">512</div>
-                      <div class="text-gray-500">Sales</div>
+                    <div class="bg-gray-200 rounded-2xl p-6 shadow h-[300px] w-[500px]">
+                        <canvas id="chart2" class="w-full h-full"></canvas>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                      <div class="text-2xl font-bold">98%</div>
-                      <div class="text-gray-500">Satisfaction</div>
+                    <div class="bg-gray-200 rounded-2xl p-6 shadow h-[300px] w-[500px]">
+                        <canvas id="chart3" class="w-full h-full"></canvas>
                     </div>
-                  </div>
+                </div>
+            </div>  
             
-                </main>
+            <!--Dashboard Layout-->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                <!--Row 1-->
+                <div class="bg-gray-200 rounded-2xl p-6 shadow flex items-center justify-center h-[250px]">
+                    <canvas id="studyHoursChart" class="w-full h-full"></canvas>
+                </div>
+                <div class="bg-gray-200 rounded-2xl p-6 shadow flex items-center justify-center h-[250px]">
+                    <canvas id="runningDistanceChart" class="w-full h-full"></canvas>
+                </div>
+                <div class="bg-gray-200 rounded-2xl p-6 shadow flex items-center justify-center h-[250px]">
+                    <canvas id="dietTypeChart" class="w-full h-full"></canvas>
+                </div>
+
+                <!--Row 2-->
+                <div class="bg-gray-200 rounded-2xl p-6 shadow flex items-center justify-center h-[250px]">
+                    <canvas id="sleepStagesChart" class="w-full h-full"></canvas>
+                </div>
+                <div class="bg-gray-200 rounded-2xl p-6 shadow flex items-center justify-center h-[250px] col-span-2">
+                    <canvas id="booksReadChart" class="w-full h-full"></canvas>
+                </div>
+
+                <!--Row 3-->
+                <div class="bg-gray-200 rounded-2xl p-6 shadow flex items-center justify-center h-[250px] col-span-2">
+                    <canvas id="dailyStepsChart" class="w-full h-full"></canvas>
+                </div>
+                <div class="bg-gray-200 rounded-2xl p-6 shadow flex items-center justify-center h-[250px]">
+                    <canvas id="screenTimeChart" class="w-full h-full"></canvas>
+                </div>
             </div>
         </div>    
     </body>
