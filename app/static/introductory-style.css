@@ -13,7 +13,7 @@
 
 #background {
     position: relative; /* Ensure positioning for pseudo-element */
-    height: 100vh;
+    height: 200vh;
     width: 100%;
 }
 
@@ -34,10 +34,6 @@
 }
 
 #navbar {
-    height: 7.5%;
+    height: 75px;
     position: center;
-}
-
-#brand-name {
-    font-size: 6rem;
 }
