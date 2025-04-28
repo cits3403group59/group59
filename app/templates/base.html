@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Carbon Copy{% endblock %}</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/base-style.css">
+        {% block extra_head %}
+        <!-- Additional scripts and links can be added here -->
+        {% endblock %}
+    </head>
+    <body>
+        <div id="background">
+            <!-- Navigation Bar -->
+            <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex">
+                <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                    <!-- Left: Brand Button -->
+                    <a href="#" class="nav-link font-bold text-2xl">
+                        Carbon Copy
+                    </a>
+        
+                    <!-- Middle: Navigate to Other Pages -->
+                    <div class="space-x-6 text-xl">
+                        <a href="#" class="nav-link">Visualise Data</a>
+                        <a href="#" class="nav-link">Upload Data</a>
+                        <a href="#" class="nav-link">Share Data</a>
+                    </div>
+
+                    <!-- Right: Navigate to Sign in Page-->
+                    <div class="flex space-x-4 text-xl">
+                        <a href="#" class="nav-link">Log In</a>
+                        <a href="#" class="nav-link">
+                            <div id="profile-circle" class="w-8 h-8 rounded-full"></div>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div id="content">
+                {% block content %}
+                <!-- Page-specific content will go here -->
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
