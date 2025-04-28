@@ -1,4 +1,4 @@
-<!--This settings page is distinct. We need nav bar-->
+<!--This settings page is distinct. Should we have nav bar?-->
 
 
 <!DOCTYPE html>
@@ -25,6 +25,10 @@
       <button data-tab="profile"
               class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">
         Profile
+      </button>
+      <button data-tab="connections"
+              class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">
+              Connections
       </button>
       <button data-tab="delete"
               class="tab-btn block w-full text-left px-4 py-2 rounded text-red-600 hover:bg-red-100">
@@ -90,6 +94,42 @@
           </button>
         </div>
       </section>
+
+
+      <!--Connections-->
+
+      <!--Changed to dynamic rendering based on real data-->
+      <section id="connections" class="hidden space-y-6">
+        <h3 class="text-xl font-semibold">Manage Connections</h3>
+        <p class="text-gray-700">Here you can view and disconnect any third-party apps or devices linked to your account.</p>
+    
+
+        <ul class="space-y-4">
+          <li class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded">
+            <div>
+              <strong>GitHub</strong><br>
+              <small>Connected on 2025-04-20</small>
+            </div>
+            <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+              Disconnect
+            </button>
+          </li>
+          <li class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded">
+            <div>
+              <strong>Google</strong><br>
+              <small>Connected on 2025-03-15</small>
+            </div>
+            <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
+              Disconnect
+            </button>
+          </li>
+        </ul>
+    
+        <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Connect New App or Device
+        </button>
+      </section>
+
 
       <!--Delete Account-->
       <section id="delete" class="hidden space-y-4">
