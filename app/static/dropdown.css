@@ -1,13 +1,3 @@
-/*We can put all of our CSS into a single style.css file, or split it into separate files in a dedicated styles folder and link to them.*/
-
-nav .brand {
-  display: inline-block;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-right: clamp(30rem, 10vw, 50rem);
-  white-space: nowrap;
-}
 /* Nav bar container */
 nav {
   display: flex;
@@ -16,6 +6,39 @@ nav {
   height: 60px;
   background: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+#profile-circle {
+  background-color: #FA3980; /* Pink background */
+  border-radius: 50%; /* Makes it a circle */
+}
+
+#background {
+  position: relative; /* Ensure positioning for pseudo-element */
+  height: 200vh;
+  width: 100%;
+}
+
+#background::before {
+  content: ""; /* Creates a pseudo-element */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('../static/gradient.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.5; /* Only the background image is semi-transparent */
+  z-index: -1; /* Places the pseudo-element behind the content */
+}
+
+#navbar {
+  height: 75px;
+  position: center;
 }
 
 /*Top menu list*/
@@ -35,11 +58,6 @@ nav ul li {
   margin-right: 30px;
 }
 
-/*The last child is fully displayed*/
-nav ul li.dropdown:last-child .dropdown-content {
-  left: auto;         
-  right: 0;  
-}
 /* menu link */
 nav ul li a {
   text-decoration: none;
@@ -50,6 +68,7 @@ nav ul li a {
 nav ul li.dropdown > a {
   transition: background-color 0.2s ease;
 }
+
 nav ul li.dropdown:hover > a,
 nav ul li.dropdown.open > a {
   background-color: #f2f2f2; 
@@ -83,7 +102,6 @@ nav ul li .dropdown-content .dropdown-item {
   transition: background 0.2s;
 }
 
-/*Description starts on a new line*/
 nav ul li .dropdown-content .dropdown-item small {
   display: block;
   margin-top: 4px;        
@@ -91,7 +109,6 @@ nav ul li .dropdown-content .dropdown-item small {
   color: #666;
   line-height: 1.2;
 }
-
 
 nav ul li .dropdown-content .dropdown-item span[role="img"],
 nav ul li .dropdown-content .dropdown-item strong {
@@ -109,3 +126,4 @@ nav ul li .dropdown-content .dropdown-item:hover {
 .dropdown.open .dropdown-content {
   display: block;
 }
+
