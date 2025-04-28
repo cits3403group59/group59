@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.46.0/dist/apexcharts.min.js"></script>
+        <script src="../static/test.js"></script>
         <link rel="stylesheet" type="text/css" href="../static/introductory-style.css">
         <title>Carbon Copy - Introductory Page</title>
     </head>
@@ -24,7 +26,7 @@
 
                     <!-- Right: Navigate to Sign in Page-->
                     <div class="flex space-x-4 text-xl">
-                        <a href="#" class="nav-link">Sign In</a>
+                        <a href="#" class="nav-link">Log In</a>
                         <a href="#" class="nav-link">
                         <div id="profile-circle" class="w-8 h-8 rounded-full"></div>
                       </a>
@@ -32,20 +34,36 @@
                 </div>
             </nav>
 
-            <div class="flex items-center h-screen">
+            <!--Welcome Branding-->
+            <div id="welcome-branding" class="flex items-center mt-80">
                 <div>
                     <!--Brand Title-->
-                    <h1 id="brand-name" class="font-bold ml-20">Carbon Copy</h1>
-                    <h3 id="slogan" class="ml-20">Ever wondered if someone out there lives life just like you?</h3>
-                    <div id="sign-up-log-in" class="flex space-x-2 mt-6">
-                        <button class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full">
-                          Sign Up
-                        </button>
-                        <button class="bg-pink-100 text-black font-bold py-2 px-6 rounded-full">
-                          Log In
-                        </button>
+                    <div class="ml-10">
+                        <h1 id="brand-name" class="font-bold text-[6rem]">Carbon Copy</h1>
+                        <h3 id="slogan" class="text-[1.5rem]">Ever wondered if someone out there lives life just like you?</h3>
                     </div>
-                </div>               
+                    <!--Sign Up / Log In buttons-->
+                    <div  id="sign-up-log-in" class="flex mt-6">
+                        <a href="#" class="bg-white hover:bg-pink-600 text-black font-semibold py-2 px-6 rounded-full transition ml-92">
+                            Log In 
+                        </a>
+                        <a href="#" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition -ml-50">
+                            Sign Up
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!--Dummy elements to test scroll-->
+            <div class="mt-80 flex items-center justify-center text-3xl font-bold text-white">
+                Scroll Down!
+            </div>
+
+            <!--Dummy charts-->
+            <div class="h-screen flex items-center ml-10">
+                <h2 class="font-bold text-[5rem]">
+                    Find your <br>doppelganger
+                </h2>
             </div>
         </div>    
     </body>
