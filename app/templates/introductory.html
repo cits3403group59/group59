@@ -2,8 +2,8 @@
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.46.0/dist/apexcharts.min.js"></script>
-        <script src="../static/test.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../static/introductory-charts.js"></script>
         <link rel="stylesheet" type="text/css" href="../static/introductory-style.css">
         <title>Carbon Copy - Introductory Page</title>
     </head>
@@ -44,27 +44,33 @@
                     </div>
                     <!--Sign Up / Log In buttons-->
                     <div  id="sign-up-log-in" class="flex mt-6">
-                        <a href="#" class="bg-white hover:bg-pink-600 text-black font-semibold py-2 px-6 rounded-full transition ml-92">
+                        <a href="#" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition ml-92">
                             Log In 
                         </a>
-                        <a href="#" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition -ml-50">
+                        <a href="#" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition -ml-50">
                             Sign Up
                         </a>
                     </div>
                 </div>
             </div>
+            <!--Dummy Charts-->
+            <div class="flex items-center ml-280 mt-30">
+                <div class="chart rounded-lg bg-[#FFCDD3] p-10">
+                    <canvas id="sleep-data" width="500" height="500"></canvas>
+                </div>
+                <div class="chart rounded-lg bg-white p-10 -ml-250 mt-40">
+                    <canvas id="social-media-data" width="400" height="400"></canvas>
+                </div>
 
-            <!--Dummy elements to test scroll-->
-            <div class="mt-80 flex items-center justify-center text-3xl font-bold text-white">
-                Scroll Down!
+            </div>
+            
+            <div class="flex items-center ml-10 mt-60">
+                <div class="chart rounded-full p-6 bg-white">
+                    <canvas id="twin-data" width="400" height="400"></canvas>
+                </div>
+                <h2 class="font-bold text-[5rem] ml-140">Find your <br>doppelganger</h2>
             </div>
 
-            <!--Dummy charts-->
-            <div class="h-screen flex items-center ml-10">
-                <h2 class="font-bold text-[5rem]">
-                    Find your <br>doppelganger
-                </h2>
-            </div>
         </div>    
     </body>
 </html>
