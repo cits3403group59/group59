@@ -1,76 +1,51 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../static/introductory-charts.js"></script>
-        <link rel="stylesheet" type="text/css" href="../static/introductory-style.css">
-        <title>Carbon Copy - Introductory Page</title>
-    </head>
-    <body>
-        <div id="background" >
-            <!-- Navigation Bar -->
-            <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex">
-                <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                    <!-- Left: Brand Button -->
-                    <a href="#" class="nav-link font-bold text-2xl">
-                        Carbon Copy
-                    </a>
-        
-                    <!-- Middle: Navigate to Other Pages -->
-                    <div class="space-x-6 text-xl">
-                        <a href="#" class="nav-link">Visualise Data</a>
-                        <a href="#" class="nav-link">Upload Data</a>
-                        <a href="#" class="nav-link">Share Data</a>
-                    </div>
+{% extends "base.html" %}
 
-                    <!-- Right: Navigate to Sign in Page-->
-                    <div class="flex space-x-4 text-xl">
-                        <a href="#" class="nav-link">Log In</a>
-                        <a href="#" class="nav-link">
-                        <div id="profile-circle" class="w-8 h-8 rounded-full"></div>
-                      </a>
-                    </div>
-                </div>
-            </nav>
+{% block title %}
+Carbon Copy - Introductory Page
+{% endblock %}
 
-            <!--Welcome Branding-->
-            <div id="welcome-branding" class="flex items-center mt-80">
-                <div>
-                    <!--Brand Title-->
-                    <div class="ml-10">
-                        <h1 id="brand-name" class="font-bold text-[6rem]">Carbon Copy</h1>
-                        <h3 id="slogan" class="text-[1.5rem]">Ever wondered if someone out there lives life just like you?</h3>
-                    </div>
-                    <!--Sign Up / Log In buttons-->
-                    <div  id="sign-up-log-in" class="flex mt-6">
-                        <a href="#" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition ml-92">
-                            Log In 
-                        </a>
-                        <a href="#" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition -ml-50">
-                            Sign Up
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!--Dummy Charts-->
-            <div class="flex items-center ml-280 mt-30">
-                <div class="chart rounded-lg bg-[#FFCDD3] p-10">
-                    <canvas id="sleep-data" width="500" height="500"></canvas>
-                </div>
-                <div class="chart rounded-lg bg-white p-10 -ml-250 mt-40">
-                    <canvas id="social-media-data" width="400" height="400"></canvas>
-                </div>
+{% block extra_head %}
+<script src="../static/introductory-charts.js"></script>
+{% endblock %}
 
-            </div>
-            
-            <div class="flex items-center ml-10 mt-60">
-                <div class="chart rounded-full p-6 bg-white">
-                    <canvas id="twin-data" width="400" height="400"></canvas>
-                </div>
-                <h2 class="font-bold text-[5rem] ml-140">Find your <br>doppelganger</h2>
-            </div>
+{% block content %}
+<!-- Welcome Branding -->
+<div id="welcome-branding" class="flex flex-col items-center mt-20 space-y-10">
+    <!-- Brand Title -->
+    <div class="text-center">
+        <h1 id="brand-name" class="font-bold text-6xl">Carbon Copy</h1>
+        <h3 id="slogan" class="text-xl mt-4">Ever wondered if someone out there lives life just like you?</h3>
+    </div>
 
-        </div>    
-    </body>
-</html>
+    <!-- Sign Up / Log In Buttons -->
+    <div id="sign-up-log-in" class="flex space-x-6">
+        <a href="#" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition">
+            Log In
+        </a>
+        <a href="#" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition">
+            Sign Up
+        </a>
+    </div>
+</div>
+
+<!-- Dummy Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-20 px-10">
+    <!-- Sleep Data Chart -->
+    <div class="chart rounded-lg bg-[#FFCDD3] p-10 flex items-center justify-center">
+        <canvas id="sleep-data" width="500" height="500"></canvas>
+    </div>
+
+    <!-- Social Media Data Chart -->
+    <div class="chart rounded-lg bg-white p-10 flex items-center justify-center">
+        <canvas id="social-media-data" width="400" height="400"></canvas>
+    </div>
+</div>
+
+<!-- Twin Data Section -->
+<div class="flex flex-col items-center mt-20 space-y-6">
+    <div class="chart rounded-full p-6 bg-white flex items-center justify-center">
+        <canvas id="twin-data" width="400" height="400"></canvas>
+    </div>
+    <h2 class="font-bold text-5xl text-center">Find your <br>doppelganger</h2>
+</div>
+{% endblock %}
