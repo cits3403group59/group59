@@ -14,28 +14,6 @@ nav {
     border-radius: 50%; /* Makes it a circle */
   }
   
-  #background {
-    position: relative; /* Ensure positioning for pseudo-element */
-    height: 250vh;
-    width: 100%;
-  }
-  
-  #background::before {
-    content: ""; /* Creates a pseudo-element */
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-image: url('../static/gradient.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    opacity: 0.5; /* Only the background image is semi-transparent */
-    z-index: -1; /* Places the pseudo-element behind the content */
-  }
-  
   #navbar {
     height: 75px;
     position: center;
@@ -65,6 +43,7 @@ nav {
     display: block;
     color: #333;
   }
+  
   nav ul li.dropdown > a {
     transition: background-color 0.2s ease;
   }
