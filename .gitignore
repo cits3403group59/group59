@@ -40,3 +40,5 @@ coverage.xml
 node_modules/
 
 __tests__/
+
+myenv/
