@@ -1,134 +1,61 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../static/introductory-charts.js"></script>
-        <script src="../static/dropdown.js"></script> 
-        <link rel="stylesheet" href="../static/dropdown.css" />
-        <title>Carbon Copy - Upload Data</title>
-    </head>
-    <body>
-        <div id="background" >
-            <!-- Navigation Bar -->
-            <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex">
-                <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                    <!--Left: Brand Button-->
-                    <a href="#" class="hover:text-[#FA3980] font-bold text-2xl">
-                        Carbon Copy
-                    </a>
+{% extends "base.html" %}
 
-                    <!--Middle: Navigate to other pages-->
-                    <div class="space-x-6 text-xl">
-                        <ul>
-                            <!--Visualise Data-->
-                            <li class="dropdown">
-                                <a href="#">Visualise Data ▾</a>
-                                <div class="dropdown-content">
-                                <div class="dropdown-item">
-                                    <span role="img" aria-label="My Data"></span>
-                                    <strong>My Data</strong><br>
-                                    <small>View personal data over time</small>
-                                </div>
-                                <div class="dropdown-item">
-                                    <span role="img" aria-label="Twin Data"></span>
-                                    <strong>Twin Data</strong><br>
-                                    <small>Find and view data doppelgänger</small>
-                                </div>
-                                <div class="dropdown-item">
-                                    <span role="img" aria-label="Friends Data"></span>
-                                    <strong>Friends Data</strong><br>
-                                    <small>View data shared by friends</small>
-                                </div>
-                                </div>
-                            </li>
+{% block title %}Carbon Copy - Upload Data{% endblock %}
+
+{% block content %}
+<div class="upload-page-content p-8">
+    <!-- Main heading section -->
+    <h1 style="font-size: 3.75rem; font-weight: 700; color: black; margin-top: 1.5rem;">Upload Data</h1>
+    
+    <!-- Subtitle text -->
+    <p style="font-size: 1.25rem; margin-top: 0.5rem; margin-bottom: 1.5rem;">Enter your data - we will do the rest!</p>
+    
+    <!-- Button container -->
+    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+        <!-- Manual button with hover effect -->
+        <a href="#" class="manual-btn" style="background-color: white; color: black; font-weight: 600; padding: 0.5rem 1.5rem; border-radius: 9999px; text-decoration: none; display: inline-block; transition: all 0.3s ease;">
+            Manual
+        </a>
         
-                            <!--Upload data-->
-                            <li class="dropdown">
-                                <a href="#">Upload Data ▾</a>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-item">
-                                        <span role="img" aria-label="Manual"></span>
-                                        <strong>Manual</strong><br>
-                                        <small>Enter and update data manually</small>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <span role="img" aria-label="From Device">⏱</span>
-                                        <strong>From Device</strong><br>
-                                        <small>Connect and transfer data from API</small>
-                                    </div>
-                                </div>
-                            </li>
-        
-                            <!--Share data-->
-                            <li class="dropdown">
-                                <a href="#">Share Data ▾</a>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-item">
-                                        <span role="img" aria-label="Friends"></span>
-                                        <strong>Friends</strong><br>
-                                        <small>Find friends to compare with</small>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <span role="img" aria-label="Requests"></span>
-                                        <strong>Requests</strong><br>
-                                        <small>Manage share requests</small>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+        <!-- From Device button with hover effect -->
+        <a href="#" class="device-btn" style="background-color: #FA3980; color: white; font-weight: 600; padding: 0.5rem 1.5rem; border-radius: 9999px; text-decoration: none; display: inline-block; transition: all 0.3s ease;">
+            From Device
+        </a>
+    </div>
+</div>
 
-                    <!--Right: Navigate to Sign In and Settings Page-->
-                    <div class="flex space-x-4 text-xl">
-                        <ul>
-                            <li class="dropdown" style="margin-left:auto">
-                                <a href="#">First Last ▾</a>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-item">
-                                        <strong>Manage Account</strong><br>
-                                        <small>Update contact information</small>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <strong>Manage Profile</strong><br>
-                                        <small>Update profile picture and profile settings</small>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <strong>Manage Connections</strong><br>
-                                        <small>Manage connected applications and devices</small>
-                                    </div>
-                                    <div class="dropdown-item">
-                                        <strong>Delete Account</strong><br>
-                                        <small>Permanently delete account</small>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+<style>
+/* Ensure the background covers the entire page */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-            <!--You can delete everything from here until the end of body tag and replace with the relevant elements to your view-->
-            <!--Welcome Branding-->
-            <div id="welcome-branding" class="flex items-center mt-80">
-                <div>
-                    <!--Brand Title-->
-                    <div class="ml-10">
-                        <h1 id="brand-name" class="font-bold text-[6rem]">Upload Data</h1>
-                        <h3 id="slogan" class="text-[1.5rem]">Enter your data - we will do the rest!</h3>
-                    </div>
-                    <!--Sign Up / Log In buttons-->
-                    <div  id="sign-up-log-in" class="flex gap-4 mt-6 ml-10">
-                        <a href="#" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition">
-                            Manual 
-                        </a>
-                        <a href="#" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition">
-                            From Device
-                        </a>
-                    </div>
-                </div>
-            </div>
+body > div {
+    min-height: 100vh;
+}
 
-        </div>    
-    </body>
-</html>
+/* If your background is defined in a container div with a specific class */
+.bg-\[url\(\.\.\/static\/gradient\.png\)\] {
+    min-height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Add extra space at the bottom to ensure content doesn't get cut off */
+.upload-page-content {
+    padding-bottom: 50vh;
+}
+
+/* Hover effects for buttons */
+.manual-btn:hover {
+    background-color: #FA3980 !important;
+    color: white !important;
+}
+
+.device-btn:hover {
+    background-color: #e02e6b !important; /* Darker pink for hover */
+}
+</style>
+{% endblock %}
