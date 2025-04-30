@@ -39,6 +39,7 @@ nav {
 #navbar {
   height: 75px;
   position: center;
+  z-index: 900; /* Added this line */
 }
 
 /*Top menu list*/
@@ -88,7 +89,8 @@ nav ul li.dropdown.open > a {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   min-width: 300px;
   padding: 8px 0;
-  z-index: 100;
+  z-index: 1000; /* Ensures dropdown is above other elements */
+  /*z-index: 100; removed this to ensure dropdown is above other elements*/
   white-space: nowrap;  
 }
 
