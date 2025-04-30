@@ -21,211 +21,213 @@
         <script src="https://kit.fontawesome.com/5c15797d1f.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="bg-[url(../static/gradient.png)] bg-fixed">
-            <!-- Navigation Bar -->
-            <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex">
-                <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                    <!--Left: Brand Button-->
-                    <a href="#" class="hover:text-[#FA3980] font-bold text-2xl">
-                        Carbon Copy
-                    </a>
+        <div id="background" class="relative custom-bg">
+            <div class="relative z-10">
+                <!-- Navigation Bar -->
+                <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex">
+                    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                        <!--Left: Brand Button-->
+                        <a href="#" class="hover:text-[#FA3980] font-bold text-2xl">
+                            Carbon Copy
+                        </a>
 
-                    <!-- Hamburger Toggle Button (Small Screens Only) -->
-                    <button id="menu-toggle" class="md:hidden text-2xl text-gray-800 focus:outline-none">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                        <!-- Hamburger Toggle Button (Small Screens Only) -->
+                        <button id="menu-toggle" class="md:hidden text-2xl text-gray-800 focus:outline-none">
+                            <i class="fas fa-bars"></i>
+                        </button>
 
-                    <!--Middle: Navigate to other pages-->
-                    <div class="space-x-6 text-xl hidden md:block">
-                        <ul>
-                            <!--Visualise Data-->
-                            <li class="dropdown">
-                                <a href="{{url_for('introductory')}}" class="">Visualise Data <i class="fa-solid fa-caret-down"></i></a>
-                                <div class="dropdown-content">
-                                <div class="dropdown-item">
-                                    <a href="{{url_for('vis_my_data')}}">
-                                        <span role="button" aria-label="My Data"><i class="fa-solid fa-clock-rotate-left"></i></span>
-                                        <strong>My Data</strong><br>
-                                        <small>View personal data over time</small>
-                                    </a>
-                                </div>
-                                <div class="dropdown-item">
-                                    <a href="{{url_for('vis_twin_data')}}">
-                                        <span role="button" aria-label="Twin Data"><i class="fa-solid fa-people-arrows"></i></span>
-                                        <strong>Twin Data</strong><br>
-                                        <small>Find and view data doppelgänger</small>
-                                    </a>
-                                </div>
-                                <div class="dropdown-item">
-                                    <a href="#">
-                                        <span role="button" aria-label="Friends Data"><i class="fa-solid fa-user-group"></i></span>
-                                        <strong>Friends Data</strong><br>
-                                        <small>View data shared by friends</small>
-                                    </a>
-                                </div>
-                                </div>
-                            </li>
-        
-                            <!--Upload data-->
-                            <li class="dropdown">
-                                <a href="{{url_for('upload_data')}}"">Upload Data <i class="fa-solid fa-caret-down"></i></a>
-                                <div class="dropdown-content">
+                        <!--Middle: Navigate to other pages-->
+                        <div class="space-x-6 text-xl hidden md:block">
+                            <ul>
+                                <!--Visualise Data-->
+                                <li class="dropdown">
+                                    <a href="{{url_for('introductory')}}" class="">Visualise Data <i class="fa-solid fa-caret-down"></i></a>
+                                    <div class="dropdown-content">
                                     <div class="dropdown-item">
-                                        <a href="{{url_for('manual_data')}}">
-                                            <span role="button" aria-label="Manual"><i class="fa-solid fa-hand"></i></span>
-                                            <strong>Manual</strong><br>
-                                            <small>Enter and update data manually</small>
+                                        <a href="{{url_for('vis_my_data')}}">
+                                            <span role="button" aria-label="My Data"><i class="fa-solid fa-clock-rotate-left"></i></span>
+                                            <strong>My Data</strong><br>
+                                            <small>View personal data over time</small>
                                         </a>
                                     </div>
                                     <div class="dropdown-item">
-                                        <a href="{{url_for('upload_data')}}">
-                                            <span role="button" aria-label="From Device"><i class="fa-solid fa-mobile"></i></span>
-                                            <strong>From Device</strong><br>
-                                            <small>Connect and transfer data from API</small>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-        
-                            <!--Share data-->
-                            <li class="dropdown">
-                                <a href="{{url_for('share_data')}}">Share Data <i class="fa-solid fa-caret-down"></i></a>
-                                <div class="dropdown-content">
-                                    <div class="dropdown-item">
-                                        <a href="#">
-                                            <span role="button" aria-label="Friends"><i class="fa-solid fa-user-group"></i></span>
-                                            <strong>Friends</strong><br>
-                                            <small>Find friends to compare with</small>
+                                        <a href="{{url_for('vis_twin_data')}}">
+                                            <span role="button" aria-label="Twin Data"><i class="fa-solid fa-people-arrows"></i></span>
+                                            <strong>Twin Data</strong><br>
+                                            <small>Find and view data doppelgänger</small>
                                         </a>
                                     </div>
                                     <div class="dropdown-item">
                                         <a href="#">
-                                            <span role="button" aria-label="Requests"><i class="fa-solid fa-bell"></i></span>
-                                            <strong>Requests</strong><br>
-                                            <small>Manage share requests</small>
+                                            <span role="button" aria-label="Friends Data"><i class="fa-solid fa-user-group"></i></span>
+                                            <strong>Friends Data</strong><br>
+                                            <small>View data shared by friends</small>
                                         </a>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+                                    </div>
+                                </li>
+            
+                                <!--Upload data-->
+                                <li class="dropdown">
+                                    <a href="{{url_for('upload_data')}}"">Upload Data <i class="fa-solid fa-caret-down"></i></a>
+                                    <div class="dropdown-content">
+                                        <div class="dropdown-item">
+                                            <a href="{{url_for('manual_data')}}">
+                                                <span role="button" aria-label="Manual"><i class="fa-solid fa-hand"></i></span>
+                                                <strong>Manual</strong><br>
+                                                <small>Enter and update data manually</small>
+                                            </a>
+                                        </div>
+                                        <div class="dropdown-item">
+                                            <a href="{{url_for('upload_data')}}">
+                                                <span role="button" aria-label="From Device"><i class="fa-solid fa-mobile"></i></span>
+                                                <strong>From Device</strong><br>
+                                                <small>Connect and transfer data from API</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+            
+                                <!--Share data-->
+                                <li class="dropdown">
+                                    <a href="{{url_for('share_data')}}">Share Data <i class="fa-solid fa-caret-down"></i></a>
+                                    <div class="dropdown-content">
+                                        <div class="dropdown-item">
+                                            <a href="#">
+                                                <span role="button" aria-label="Friends"><i class="fa-solid fa-user-group"></i></span>
+                                                <strong>Friends</strong><br>
+                                                <small>Find friends to compare with</small>
+                                            </a>
+                                        </div>
+                                        <div class="dropdown-item">
+                                            <a href="#">
+                                                <span role="button" aria-label="Requests"><i class="fa-solid fa-bell"></i></span>
+                                                <strong>Requests</strong><br>
+                                                <small>Manage share requests</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!--Right: Navigate to Sign In and Settings Page-->
+                        <div class="flex space-x-4 text-xl hidden md:block">
+                            <ul>
+                                <li class="dropdown" style="margin-left:auto">
+                                    <a href="{{url_for('settings')}}">Sign In <i class="fa-solid fa-caret-down"></i></a>
+                                    <div class="dropdown-content">
+                                        <a href="{{ url_for('settings') }}#account" class="dropdown-item">
+                                            <strong>Manage Account</strong><br>
+                                            <small>Update contact information</small>
+                                        </a>
+                                        <a href="{{ url_for('settings') }}#profile" class="dropdown-item">
+                                            <strong>Manage Profile</strong><br>
+                                            <small>Update profile picture and profile settings</small>
+                                        </a>
+                                        <a href="{{ url_for('settings') }}#connections" class="dropdown-item">
+                                            <strong>Manage Connections</strong><br>
+                                            <small>Manage connected applications and devices</small>
+                                        </a>
+                                        <a href="{{ url_for('settings') }}#delete" class="dropdown-item text-red-600">
+                                            <span role="button" aria-label="Requests"><i class="fa-solid fa-trash"></i></span>
+                                            <strong>Delete Account</strong><br>
+                                            <small>Permanently delete account</small>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                </nav>
 
-                    <!--Right: Navigate to Sign In and Settings Page-->
-                    <div class="flex space-x-4 text-xl hidden md:block">
-                        <ul>
-                            <li class="dropdown" style="margin-left:auto">
-                                <a href="{{url_for('settings')}}">Sign In <i class="fa-solid fa-caret-down"></i></a>
-                                <div class="dropdown-content">
-                                    <a href="{{ url_for('settings') }}#account" class="dropdown-item">
-                                        <strong>Manage Account</strong><br>
-                                        <small>Update contact information</small>
-                                    </a>
-                                    <a href="{{ url_for('settings') }}#profile" class="dropdown-item">
-                                        <strong>Manage Profile</strong><br>
-                                        <small>Update profile picture and profile settings</small>
-                                    </a>
-                                    <a href="{{ url_for('settings') }}#connections" class="dropdown-item">
-                                        <strong>Manage Connections</strong><br>
-                                        <small>Manage connected applications and devices</small>
-                                    </a>
-                                    <a href="{{ url_for('settings') }}#delete" class="dropdown-item text-red-600">
-                                        <span role="button" aria-label="Requests"><i class="fa-solid fa-trash"></i></span>
-                                        <strong>Delete Account</strong><br>
-                                        <small>Permanently delete account</small>
-                                    </a>
-                                  </div>
-                            </li>
-                        </ul>
+                <!-- Side Drawer Menu for Small Screens -->
+                <div id="side-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+                    <div class="p-4 flex justify-between items-center border-b">
+                        <span class="text-xl font-bold">Menu</span>
+                        <button id="menu-close" class="text-xl text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
+                    <ul class="p-4 space-y-2 text-base">
+                        <!-- Visualise Data -->
+                        <li class="font-semibold text-[#FA3980] mt-4 mb-2">Visualise Data</li>
+                        <li>
+                            <a href="{{ url_for('vis_my_data') }}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-clock-rotate-left mr-2"></i> My Data
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('vis_twin_data') }}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-people-arrows mr-2"></i> Twin Data
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-user-group mr-2"></i> Friends Data
+                            </a>
+                        </li>
+                        <hr class="my-3 border-gray-300">
+
+                        <!-- Upload Data -->
+                        <li class="font-semibold text-[#FA3980] mt-4 mb-2">Upload Data</li>
+                        <li>
+                            <a href="{{ url_for('manual_data') }}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-hand mr-2"></i> Manual
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('upload_data') }}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-mobile mr-2"></i> From Device
+                            </a>
+                        </li>
+                        <hr class="my-3 border-gray-300">
+
+                        <!-- Share Data -->
+                        <li class="font-semibold text-[#FA3980] mt-4 mb-2">Share Data</li>
+                        <li>
+                            <a href="#" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-user-group mr-2"></i> Friends
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-bell mr-2"></i> Requests
+                            </a>
+                        </li>
+                        <hr class="my-3 border-gray-300">
+
+                        <!-- Sign In -->
+                        <li class="font-semibold text-[#FA3980] mt-4 mb-2">Sign In</li>
+                        <li>
+                            <a href="{{ url_for('settings') }}#account" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-user mr-2"></i> Manage Account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('settings') }}#profile" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-id-badge mr-2"></i> Manage Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('settings') }}#connections" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-link mr-2"></i> Manage Connections
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('settings') }}#delete" class="block pl-4 text-red-600 hover:text-red-800">
+                                <i class="fa-solid fa-trash mr-2"></i> Delete Account
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
 
-            <!-- Side Drawer Menu for Small Screens -->
-            <div id="side-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
-                <div class="p-4 flex justify-between items-center border-b">
-                    <span class="text-xl font-bold">Menu</span>
-                    <button id="menu-close" class="text-xl text-gray-700">
-                        <i class="fas fa-times"></i>
-                    </button>
+                <!-- Main Content -->
+                <div id="content">    
+                    {% block content %}
+                    <!-- Page-specific content will go here -->
+                    {% endblock %}
                 </div>
-                <ul class="p-4 space-y-2 text-base">
-                    <!-- Visualise Data -->
-                    <li class="font-semibold text-[#FA3980] mt-4 mb-2">Visualise Data</li>
-                    <li>
-                        <a href="{{ url_for('vis_my_data') }}" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-clock-rotate-left mr-2"></i> My Data
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('vis_twin_data') }}" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-people-arrows mr-2"></i> Twin Data
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-user-group mr-2"></i> Friends Data
-                        </a>
-                    </li>
-                    <hr class="my-3 border-gray-300">
-
-                    <!-- Upload Data -->
-                    <li class="font-semibold text-[#FA3980] mt-4 mb-2">Upload Data</li>
-                    <li>
-                        <a href="{{ url_for('manual_data') }}" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-hand mr-2"></i> Manual
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('upload_data') }}" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-mobile mr-2"></i> From Device
-                        </a>
-                    </li>
-                    <hr class="my-3 border-gray-300">
-
-                    <!-- Share Data -->
-                    <li class="font-semibold text-[#FA3980] mt-4 mb-2">Share Data</li>
-                    <li>
-                        <a href="#" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-user-group mr-2"></i> Friends
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-bell mr-2"></i> Requests
-                        </a>
-                    </li>
-                    <hr class="my-3 border-gray-300">
-
-                    <!-- Sign In -->
-                    <li class="font-semibold text-[#FA3980] mt-4 mb-2">Sign In</li>
-                    <li>
-                        <a href="{{ url_for('settings') }}#account" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-user mr-2"></i> Manage Account
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('settings') }}#profile" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-id-badge mr-2"></i> Manage Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('settings') }}#connections" class="block pl-4 hover:text-[#FA3980]">
-                            <i class="fa-solid fa-link mr-2"></i> Manage Connections
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('settings') }}#delete" class="block pl-4 text-red-600 hover:text-red-800">
-                            <i class="fa-solid fa-trash mr-2"></i> Delete Account
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Main Content -->
-            <div id="content">    
-                {% block content %}
-                <!-- Page-specific content will go here -->
-                {% endblock %}
             </div>
         </div>
     </body>
