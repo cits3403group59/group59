@@ -1,109 +1,113 @@
 /* Nav bar container */
 nav {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    height: 60px;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
   
-  
-  #profile-circle {
-    background-color: #FA3980; /* Pink background */
-    border-radius: 50%; /* Makes it a circle */
-  }
-  
-  #navbar {
-    height: 75px;
-    position: center;
-  }
-  
-  /*Top menu list*/
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    width: 100%;
-    margin-left: auto; 
-    gap: 2rem;
-  }
-  
-  /*each menu item*/
-  nav ul li {
-    position: relative;
-    margin-right: 30px;
-  }
-  
-  /* menu link */
-  nav ul li a {
-    text-decoration: none;
-    padding: 8px 0;
-    display: block;
-    color: #333;
-  }
-  
-  nav ul li.dropdown > a {
-    transition: background-color 0.2s ease;
-  }
-  
-  nav ul li.dropdown:hover > a,
-  nav ul li.dropdown.open > a {
-    background-color: #f2f2f2; 
-    border-radius: 4px;        
-  }
-  
-  /* Drop-down menu container, hidden by default */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%; /* Position the dropdown below the link */
-    left: 50%; /* Align the dropdown's left edge to the center of the link */
-    transform: translateX(-50%); /* Shift the dropdown left by 50% of its width to center it */
-    left: 0;
-    border: 2px solid #e0e0e0;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    min-width: 300px;
-    padding: 8px 0;
-    z-index: 100;
-    white-space: nowrap;  
-  }
-  
-  nav ul li .dropdown-content .dropdown-item {
-    display: block;        
-    padding: 6px 12px;     
-    margin: 4px 8px;    
-    background: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  
-  nav ul li .dropdown-content .dropdown-item small {
-    display: block;
-    margin-top: 4px;        
-    font-size: 0.875rem;
-    color: #666;
-    line-height: 1.2;
-  }
-  
-  nav ul li .dropdown-content .dropdown-item span[role="img"],
-  nav ul li .dropdown-content .dropdown-item strong {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 0.5rem;   
-  }
-  
-  nav ul li .dropdown-content .dropdown-item:hover {
-    background: #f2f2f2;
-  }
-  
-  /* Displays a dropdown whenever hovering or with .open class */
-  .dropdown:hover .dropdown-content,
-  .dropdown.open .dropdown-content {
-    display: block;
-  }
-  
+.custom-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../static/gradient.png');
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+#navbar {
+  height: 75px;
+  position: center;
+}
+
+/*Top menu list*/
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  margin-left: auto; 
+  gap: 2rem;
+}
+
+/*each menu item*/
+nav ul li {
+  position: relative;
+  margin-right: 30px;
+}
+
+/* menu link */
+nav ul li a {
+  text-decoration: none;
+  padding: 8px 0;
+  display: block;
+  color: #333;
+}
+
+nav ul li.dropdown > a {
+  transition: background-color 0.2s ease;
+}
+
+nav ul li.dropdown:hover > a,
+nav ul li.dropdown.open > a {
+  background-color: #f2f2f2; 
+  border-radius: 4px;        
+}
+
+/* Drop-down menu container, hidden by default */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position the dropdown below the link */
+  left: 50%; /* Align the dropdown's left edge to the center of the link */
+  transform: translateX(-50%); /* Shift the dropdown left by 50% of its width to center it */
+  left: 0;
+  border: 2px solid #e0e0e0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  min-width: 300px;
+  padding: 8px 0;
+  z-index: 100;
+  white-space: nowrap;  
+}
+
+nav ul li .dropdown-content .dropdown-item {
+  display: block;        
+  padding: 6px 12px;     
+  margin: 4px 8px;    
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+nav ul li .dropdown-content .dropdown-item small {
+  display: block;
+  margin-top: 4px;        
+  font-size: 0.875rem;
+  color: #666;
+  line-height: 1.2;
+}
+
+nav ul li .dropdown-content .dropdown-item span[role="img"],
+nav ul li .dropdown-content .dropdown-item strong {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5rem;   
+}
+
+nav ul li .dropdown-content .dropdown-item:hover {
+  background: #f2f2f2;
+}
+
+/* Displays a dropdown whenever hovering or with .open class */
+.dropdown:hover .dropdown-content,
+.dropdown.open .dropdown-content {
+  display: block;
+}
