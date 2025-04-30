@@ -24,12 +24,17 @@ def signup():
 # Route for the visualise data page
 @app.route('/visualise-my-data')
 def vis_my_data():
-    return render_template('static-visualise-my-data.html') 
+    return render_template('visualise-my-data.html') 
 
 # Route for the visualise twin data page
 @app.route('/visualise-twin-data')
 def vis_twin_data():
-    return render_template('static-visualise-twin-data.html')
+    return render_template('visualise-twin-data.html')
+
+# Route for the visualise friend data page
+@app.route('/visualise-twin-data')
+def vis_twin_data():
+    return render_template('visualise-friend-data.html')
 
 # Route for upload data page
 @app.route('/upload-data')
