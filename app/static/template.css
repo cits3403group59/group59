@@ -1,13 +1,4 @@
-/* Nav bar container */
-nav {
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  height: 60px;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-  
+/* Background */
 .custom-bg::before {
   content: '';
   position: absolute;
@@ -17,6 +8,27 @@ nav {
   background-attachment: fixed;
   opacity: 0.5;
   z-index: 0;
+}
+
+/* Title Styles */
+.main-title {
+  font-size: 100px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.slogan {
+  font-size: 20px; /* Equivalent to text-xl */
+}
+
+/* Nav bar container */
+nav {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 #navbar {
