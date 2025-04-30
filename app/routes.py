@@ -21,12 +21,35 @@ def login():
 def signup():
     return render_template('signup-page.html')
 
+# Route for the visualise data page
+@app.route('/visualise-my-data')
+def vis_my_data():
+    return render_template('static-visualise-my-data.html') 
 
-# Route for the upload data page
+# Route for the visualise twin data page
+@app.route('/visualise-twin-data')
+def vis_twin_data():
+    return render_template('static-visualise-twin-data.html')
+
+# Route for upload data page
 @app.route('/upload-data')
 def upload_data():
     return render_template('upload-data-page.html')
 
+# Route for manual data page
+@app.route('/manual-data')
+def manual_data():
+    return render_template('manual-data.html')
+
+# Route for settings page
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+# Route for share data page
+@app.route('/share-data')
+def share_data():
+    return render_template('share-data.html')
 
 
 # Run the application
