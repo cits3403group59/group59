@@ -134,7 +134,7 @@
             <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex">
                 <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                     <!--Left: Brand Button-->
-                    <a href="static-introductory.html" class="hover:text-[#FA3980] font-bold text-2xl">
+                    <a href="#" class="hover:text-[#FA3980] font-bold text-2xl">
                         Carbon Copy
                     </a>
                     <!-- Empty space - no menu items -->
@@ -198,57 +198,81 @@
         </div>
 
         <script>
-            // Set max date for date of birth (cannot be future date)
-            window.addEventListener('DOMContentLoaded', (event) => {
-                const today = new Date();
-                const year = today.getFullYear();
-                const month = String(today.getMonth() + 1).padStart(2, '0');
-                const day = String(today.getDate()).padStart(2, '0');
-                const maxDate = `${year}-${month}-${day}`;
-                
-                document.getElementById('dob').setAttribute('max', maxDate);
-                
-                // Set min date (e.g., 120 years ago)
-                const minYear = year - 120;
-                const minDate = `${minYear}-${month}-${day}`;
-                document.getElementById('dob').setAttribute('min', minDate);
+            // Set DOB date constraints
+            window.addEventListener('DOMContentLoaded', () => {
+              const today = new Date();
+              const year = today.getFullYear();
+              const month = String(today.getMonth() + 1).padStart(2, '0');
+              const day = String(today.getDate()).padStart(2, '0');
+              const maxDate = `${year}-${month}-${day}`;
+              const minYear = year - 120;
+              const minDate = `${minYear}-${month}-${day}`;
+      
+              document.getElementById('dob').setAttribute('max', maxDate);
+              document.getElementById('dob').setAttribute('min', minDate);
             });
-            
-            // Form submission handler
+      
+            // Handle form submission
             document.getElementById('signup-form').addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                // Get form values (Element objects are addressed by IDs)
-                const firstName = document.getElementById('name').value;
-                const lastName = document.getElementById('lastName').value;
-                const email = document.getElementById('email').value;
-                const dob = document.getElementById('dob').value;
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirm-password').value;
-                const termsAccepted = document.getElementById('terms').checked;
-                
-                // If any field is left empty, show an alert
-                if (!firstName || !lastName || !email || !password || !dob) {
-                  alert('Please fill in all fields');
-                  return;
+              event.preventDefault();
+      
+              const firstName = document.getElementById('name').value.trim();
+              const lastName = document.getElementById('lastName').value.trim();
+              const email = document.getElementById('email').value.trim();
+              const dob = document.getElementById('dob').value;
+              const password = document.getElementById('password').value;
+              const confirmPassword = document.getElementById('confirm-password').value;
+              const termsAccepted = document.getElementById('terms').checked;
+      
+              if (!firstName || !lastName || !email || !password || !dob) {
+                alert('Please fill in all fields');
+                return;
+              }
+      
+              if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+              }
+      
+              if (!termsAccepted) {
+                alert('You must accept the Terms of Service and Privacy Policy');
+                return;
+              }
+      
+              fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  first_name: firstName,
+                  last_name: lastName,
+                  email: email,
+                  password: password,
+                  dob: dob,
+                  terms_accepted: termsAccepted
+                }),
+              })
+              .then(response => response.json())
+              .then(data => {
+                if (data.error) {
+                  alert(data.error);
+                } else if (data.errors) {
+                  let errorMessage = '';
+                  for (const [field, message] of Object.entries(data.errors)) {
+                    errorMessage += `${field}: ${message}\n`;
+                  }
+                  alert('Registration failed:\n' + errorMessage);
+                } else {
+                  alert('Account created successfully! Redirecting to login...');
+                  window.location.href = '/login';
                 }
-                 
-                // If password and confirm password do not match, show an alert
-                if (password !== confirmPassword) {
-                  alert('Passwords do not match');
-                  return;
-                }
-                
-                if (!termsAccepted) {
-                  alert('You must accept the Terms of Service and Privacy Policy');
-                  return;
-                }
-                
-                // Here you would typically send the form data to your server
-                // For now, we'll just simulate success and redirect
-                alert('Account created successfully!');
-                window.location.href = 'index.html';
+              })
+              .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+              });
             });
-        </script>
+          </script>
     </body>
 </html>
