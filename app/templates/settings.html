@@ -1,155 +1,90 @@
-<!--This settings page is distinct. Should we have nav bar?-->
+<!--This settings page inherits from base.html-->
 
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Settings</title>
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="h-screen w-screen overflow-hidden bg-white">
-  <!--May need to be changed to <div class="flex flex-1 overflow-hidden"> after it is added to the main html, there is a nav bar above-->
-  <div class="flex h-full">
-    <aside class="w-64 bg-gray-200 p-6 rounded-r-2xl h-full flex-shrink-0 space-y-4">
-      <h2 class="text-2xl font-bold">Settings</h2>
-      <button data-tab="overview"
-              class="tab-btn block w-full text-left px-4 py-2 rounded bg-gray-300 hover:bg-gray-300">
-        Overview
-      </button>
-      <button data-tab="account"
-              class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">
-        Account
-      </button>
-      <button data-tab="profile"
-              class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">
-        Profile
-      </button>
-      <button data-tab="connections"
-              class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">
-              Connections
-      </button>
-      <button data-tab="delete"
-              class="tab-btn block w-full text-left px-4 py-2 rounded text-red-600 hover:bg-red-100">
-        Delete Account
-      </button>
-    </aside>
+{% block title %}Settings{% endblock %}
 
-    <!--Main Content-->
-    <main class="flex-1 bg-white p-8 rounded-l-2xl overflow-auto h-full">
-      <!--Overview-->
-      <section id="overview" class="space-y-4">
-        <h3 class="text-xl font-semibold">Homepage Overview</h3>
-        <p class="text-gray-700">
-          Make changes to the description that appears on your homepage to help visitors understand the purpose of your website.
-        </p>
-        <textarea class="w-full h-32 px-3 py-2 border rounded" 
-                  placeholder="Type your homepage description…"></textarea>
-        <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Save Overview
-        </button>
-      </section>
-
-      <!--Account-->
-      <section id="account" class="hidden space-y-4">
-        <h3 class="text-xl font-semibold">Account Settings</h3>
-        <div class="space-y-2">
-          <label class="block font-medium">Email Address</label>
-          <input type="email"
-                 class="w-full px-3 py-2 border rounded"
-                 placeholder="you@example.com">
-          <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Save Email
-          </button>
-        </div>
-        <div class="space-y-2">
-          <label class="block font-medium">Password</label>
-          <input type="password"
-                 class="w-full px-3 py-2 border rounded"
-                 placeholder="New password">
-          <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Change Password
-          </button>
-        </div>
-      </section>
-
-      <!--Profile-->
-      <section id="profile" class="hidden space-y-4">
-        <h3 class="text-xl font-semibold">Profile Settings</h3>
-        <div class="space-y-2">
-          <label class="block font-medium">Profile Picture</label>
-          <input type="file" class="block">
-          <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Upload Photo
-          </button>
-        </div>
-        <div class="space-y-2">
-          <label class="block font-medium">User Name</label>
-          <input type="text"
-                 class="w-full px-3 py-2 border rounded"
-                 placeholder="Your Name">
-          <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Save Name
-          </button>
-        </div>
-      </section>
-
-
-      <!--Connections-->
-
-      <!--Changed to dynamic rendering based on real data-->
-      <section id="connections" class="hidden space-y-6">
-        <h3 class="text-xl font-semibold">Manage Connections</h3>
-        <p class="text-gray-700">Here you can view and disconnect any third-party apps or devices linked to your account.</p>
-    
-
-        <ul class="space-y-4">
-          <li class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded">
-            <div>
-              <strong>GitHub</strong><br>
-              <small>Connected on 2025-04-20</small>
-            </div>
-            <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
-              Disconnect
-            </button>
-          </li>
-          <li class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded">
-            <div>
-              <strong>Google</strong><br>
-              <small>Connected on 2025-03-15</small>
-            </div>
-            <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">
-              Disconnect
-            </button>
-          </li>
-        </ul>
-    
-        <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Connect New App or Device
-        </button>
-      </section>
-
-
-      <!--Delete Account-->
-      <section id="delete" class="hidden space-y-4">
-        <h3 class="text-xl font-semibold text-red-600">Delete Account</h3>
-        <p class="text-gray-700">
-          Once you delete your account, all your data will be permanently removed. This action cannot be undone.
-        </p>
-        <div class="space-y-2">
-          <label class="block font-medium">Confirm Password</label>
-          <input type="password"
-                 class="w-full px-3 py-2 border rounded"
-                 placeholder="Enter your password">
-        </div>
-        <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-          Delete My Account
-        </button>
-      </section>
-    </main>
-  </div>
-  <!--Tab Switching Script-->
-  <script src="../static/tabs_setting.js"></script>
-</body>
-</html>
+{% block content %}
+<!-- Settings Page Title -->
+<div class="flex h-full">
+  <aside class="w-64 bg-gray-200 p-6 rounded-r-2xl h-full flex-shrink-0 space-y-4">
+    <h2 class="text-2xl font-bold">Settings</h2>
+    <button data-tab="overview" class="tab-btn block w-full text-left px-4 py-2 rounded bg-gray-300 hover:bg-gray-300">Overview</button>
+    <button data-tab="account" class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">Account</button>
+    <button data-tab="profile" class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">Profile</button>
+    <button data-tab="connections" class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">Connections</button>
+    <button data-tab="delete" class="tab-btn block w-full text-left px-4 py-2 rounded text-red-600 hover:bg-red-100">Delete Account</button>
+  </aside>
+<!--homepage-overview-->
+  <main class="flex-1 bg-white p-8 rounded-l-2xl overflow-auto h-full">
+    <section id="overview" class="space-y-4">
+      <h3 class="text-xl font-semibold">Homepage Overview</h3>
+      <p class="text-gray-700">Make changes to the description that appears on your homepage to help visitors understand the purpose of your website.</p>
+      <textarea class="w-full h-32 px-3 py-2 border rounded" placeholder="Type your homepage description…"></textarea>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Overview</button>
+    </section>
+<!--account-->
+    <section id="account" class="hidden space-y-4">
+      <h3 class="text-xl font-semibold">Account Settings</h3>
+      <div class="space-y-2">
+        <label class="block font-medium">Email Address</label>
+        <input type="email" class="w-full px-3 py-2 border rounded" placeholder="you@example.com">
+        <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Email</button>
+      </div>
+      <div class="space-y-2">
+        <label class="block font-medium">Password</label>
+        <input type="password" class="w-full px-3 py-2 border rounded" placeholder="New password">
+        <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Change Password</button>
+      </div>
+    </section>
+<!--profile-->
+    <section id="profile" class="hidden space-y-4">
+      <h3 class="text-xl font-semibold">Profile Settings</h3>
+      <div class="space-y-2">
+        <label class="block font-medium">Profile Picture</label>
+        <input type="file" class="block">
+        <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Upload Photo</button>
+      </div>
+      <div class="space-y-2">
+        <label class="block font-medium">User Name</label>
+        <input type="text" class="w-full px-3 py-2 border rounded" placeholder="Your Name">
+        <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Name</button>
+      </div>
+    </section>
+<!--connections-->
+    <section id="connections" class="hidden space-y-6">
+      <h3 class="text-xl font-semibold">Manage Connections</h3>
+      <p class="text-gray-700">Here you can view and disconnect any third-party apps or devices linked to your account.</p>
+      <ul class="space-y-4">
+        <li class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded">
+          <div>
+            <strong>GitHub</strong><br>
+            <small>Connected on 2025-04-20</small>
+          </div>
+          <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Disconnect</button>
+        </li>
+        <li class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded">
+          <div>
+            <strong>Google</strong><br>
+            <small>Connected on 2025-03-15</small>
+          </div>
+          <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Disconnect</button>
+        </li>
+      </ul>
+      <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Connect New App or Device</button>
+    </section>
+<!--delete-->
+    <section id="delete" class="hidden space-y-4">
+      <h3 class="text-xl font-semibold text-red-600">Delete Account</h3>
+      <p class="text-gray-700">Once you delete your account, all your data will be permanently removed. This action cannot be undone.</p>
+      <div class="space-y-2">
+        <label class="block font-medium">Confirm Password</label>
+        <input type="password" class="w-full px-3 py-2 border rounded" placeholder="Enter your password">
+      </div>
+      <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete My Account</button>
+    </section>
+  </main>
+</div>
+<!--Introducing Tab switching logic script-->
+<script src="{{ url_for('static', filename='tabs_setting.js') }}"></script>
+{% endblock %}
