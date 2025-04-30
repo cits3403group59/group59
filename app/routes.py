@@ -32,8 +32,8 @@ def vis_twin_data():
     return render_template('visualise-twin-data.html')
 
 # Route for the visualise friend data page
-@app.route('/visualise-twin-data')
-def vis_twin_data():
+@app.route('/visualise-friend-data')
+def vis_friend_data():
     return render_template('visualise-friend-data.html')
 
 # Route for upload data page
