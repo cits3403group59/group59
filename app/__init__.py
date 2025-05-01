@@ -1,9 +1,10 @@
 """
-This python fule contains a Flaks application instances 
+This file contains the initialization code for the Carbon Copy application.
+It sets up the Flask application, and imports the routes.
 """
 from flask import Flask
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'temporary_secret_key'  # Replace with a secure key in production
+application = Flask(__name__)
 
 from app import routes 
+
