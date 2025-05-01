@@ -1,23 +1,42 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const tabs   = document.querySelectorAll('.tab-btn');
-  const panels = document.querySelectorAll('main section');
+function switchToTab(tabName) {
+  document.querySelectorAll('main section').forEach(section => {
+    section.classList.add('hidden');
+  });
+  const activeSection = document.getElementById(tabName);
+  if (activeSection) {
+    activeSection.classList.remove('hidden');
+  }
 
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabs.forEach(b => b.classList.remove('bg-gray-300'));
-      btn.classList.add('bg-gray-300');
-      const target = btn.dataset.tab;
-      panels.forEach(sec => {
-        sec.id === target
-          ? sec.classList.remove('hidden')
-          : sec.classList.add('hidden');
-      });
+
+   document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('bg-gray-300', 'font-bold');
+    btn.classList.add('hover:bg-gray-300');
+  });
+   const activeBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+     if (activeBtn) {
+      activeBtn.classList.add('bg-gray-300', 'font-bold');
+      activeBtn.classList.remove('hover:bg-gray-300');
+  }
+}
+
+function initTabSwitching() {
+  // left button to switch
+  document.querySelectorAll('.tab-btn').forEach(button => {
+    button.addEventListener('click', event => {
+      event.preventDefault();
+      const targetTab = button.getAttribute('data-tab');
+      window.location.hash = targetTab;
+      switchToTab(targetTab);
     });
   });
 
-  const h = location.hash.slice(1);
-  if (h) {
-    const btn = document.querySelector(`[data-tab="${h}"]`);
-    if (btn) btn.click();
-  }
-});
+  const initialTab = window.location.hash.replace('#', '') || 'account';
+  switchToTab(initialTab);
+// Update the URL hash when the page loads
+  window.addEventListener('hashchange', () => {
+    const newTab = window.location.hash.replace('#', '') || 'account';
+    switchToTab(newTab);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', initTabSwitching);

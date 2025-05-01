@@ -21,7 +21,7 @@
         <script src="https://kit.fontawesome.com/5c15797d1f.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div id="background" class="relative custom-bg">
+        <div id="background" class="relative custom-bg {% block bg_modifier %}{% endblock %}">
             <div class="relative z-10">
                 <!-- Navigation Bar -->
                 <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex z-900"> <!-- Added flex z-900 to ensure navbar is always on top of elements-->

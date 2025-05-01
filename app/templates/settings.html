@@ -1,30 +1,34 @@
 <!--This settings page inherits from base.html-->
 
 {% extends "base.html" %}
-
+{% block bg_modifier %}
+  min-h-screen bg-cover bg-center
+{% endblock %}
 {% block title %}Settings{% endblock %}
 
 {% block content %}
 <!-- Settings Page Title -->
-<div class="flex h-full">
-  <aside class="w-64 bg-gray-200 p-6 rounded-r-2xl h-full flex-shrink-0 space-y-4">
-    <h2 class="text-2xl font-bold">Settings</h2>
-    <button data-tab="overview" class="tab-btn block w-full text-left px-4 py-2 rounded bg-gray-300 hover:bg-gray-300">Overview</button>
+<div class="container mx-auto px-4 py-8">
+ <div class="bg-white rounded-lg shadow-md flex overflow-hidden">
+    <!--sidebar-->
+   <aside class="w-64 bg-gray-100 p-6 space-y-4">
+    <h2 class="text-2xl font-bold mb-6">Settings</h2>
+    {#<button data-tab="overview" class="tab-btn block w-full text-left px-4 py-2 rounded bg-gray-300 hover:bg-gray-300">Overview</button>#}
     <button data-tab="account" class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">Account</button>
     <button data-tab="profile" class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">Profile</button>
     <button data-tab="connections" class="tab-btn block w-full text-left px-4 py-2 rounded hover:bg-gray-300">Connections</button>
     <button data-tab="delete" class="tab-btn block w-full text-left px-4 py-2 rounded text-red-600 hover:bg-red-100">Delete Account</button>
-  </aside>
-<!--homepage-overview-->
-  <main class="flex-1 bg-white p-8 rounded-l-2xl overflow-auto h-full">
-    <section id="overview" class="space-y-4">
+   </aside>
+
+  <main class="flex-1 p-8">
+    <!--<section id="overview" class="hidden">
       <h3 class="text-xl font-semibold">Homepage Overview</h3>
       <p class="text-gray-700">Make changes to the description that appears on your homepage to help visitors understand the purpose of your website.</p>
       <textarea class="w-full h-32 px-3 py-2 border rounded" placeholder="Type your homepage description…"></textarea>
       <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Overview</button>
-    </section>
+    </section>-->
 <!--account-->
-    <section id="account" class="hidden space-y-4">
+    <section id="account" class="space-y-4">
       <h3 class="text-xl font-semibold">Account Settings</h3>
       <div class="space-y-2">
         <label class="block font-medium">Email Address</label>
@@ -39,7 +43,7 @@
     </section>
 <!--profile-->
     <section id="profile" class="hidden space-y-4">
-      <h3 class="text-xl font-semibold">Profile Settings</h3>
+      <h3 class="text-xl font-semibold mb-4">Profile Settings</h3>
       <div class="space-y-2">
         <label class="block font-medium">Profile Picture</label>
         <input type="file" class="block">
@@ -53,7 +57,7 @@
     </section>
 <!--connections-->
     <section id="connections" class="hidden space-y-6">
-      <h3 class="text-xl font-semibold">Manage Connections</h3>
+      <h3 class="text-xl font-semibold mb-4">Manage Connections</h3>
       <p class="text-gray-700">Here you can view and disconnect any third-party apps or devices linked to your account.</p>
       <ul class="space-y-4">
         <li class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded">
@@ -75,7 +79,7 @@
     </section>
 <!--delete-->
     <section id="delete" class="hidden space-y-4">
-      <h3 class="text-xl font-semibold text-red-600">Delete Account</h3>
+      <h3 class="text-xl font-semibold text-red-600 mb-4">Delete Account</h3>
       <p class="text-gray-700">Once you delete your account, all your data will be permanently removed. This action cannot be undone.</p>
       <div class="space-y-2">
         <label class="block font-medium">Confirm Password</label>
@@ -84,6 +88,7 @@
       <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete My Account</button>
     </section>
   </main>
+ </div>
 </div>
 <!--Introducing Tab switching logic script-->
 <script src="{{ url_for('static', filename='tabs_setting.js') }}"></script>
