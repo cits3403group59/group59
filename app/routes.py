@@ -5,7 +5,7 @@ Contains all request handlers.
 """
 from flask import render_template, redirect, url_for, session
 from app import application
-from flask import request, jsonify, send_from_directory
+from flask import send_from_directory
 
 # Route for the introductory page
 @application.route('/')

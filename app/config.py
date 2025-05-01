@@ -2,15 +2,7 @@
 This module contains the configuration settings for the application.
 It includes settings for the database, CORS, and other application-specific configurations.
 """
-
-# app.py - Main Flask application file
-from flask import Flask, request, jsonify, session, send_from_directory, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from werkzeug.security import generate_password_hash, check_password_hash
-import os
-from datetime import datetime
-
 from app import application # import the application instance from __init__.py
 
 # Enable CORS so that the frontend Javascript can make requests to backend even if it is running from another
