@@ -2,13 +2,8 @@
 models.py contains the database models for the application.
 It defines the User and UserData models, which are used to store user information and carbon footprint data.
 """
-
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from app import application
-
-# Initialize database
-db = SQLAlchemy(application)
+from app import db  # Import db directly from app package
 
 # Creates a User table in database with respective fields
 class User(db.Model):
@@ -37,13 +32,4 @@ class UserData(db.Model):
     
     def __repr__(self):
         return f'<UserData {self.date} - {self.carbon_footprint}>'
-    
-# UserData model for storing carbon footprint data
-class UserData(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    carbon_footprint = db.Column(db.Float, nullable=False)
-    
-    def __repr__(self):
-        return f'<UserData {self.date} - {self.carbon_footprint}>'
+
