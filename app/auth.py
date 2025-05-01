@@ -1,15 +1,12 @@
 """
 Routes for authentication.
 """
-from flask import Blueprint, request, jsonify, session
+from flask import request, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from app import application, db
 from app.models import User
-from flask_cors import CORS
 
-
-# Authentication routes
 @application.route('/api/auth/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -82,8 +79,8 @@ def register():
         db.session.rollback()
         print("Error during registration:", str(e))
         return jsonify({"error": str(e)}), 500
-
-@application.route('/api/auth/login', methods=['POST'])
+    
+    # @application.route('/api/auth/login', methods=['POST'])
 def login():
     data = request.get_json()
     
@@ -140,3 +137,5 @@ def get_current_user():
             "email": user.email
         }
     }), 200
+
+# (rest of the auth.py file remains the same)
