@@ -14,16 +14,6 @@ import os
 def introductory():
     return render_template('introductory.html')
 
-# Route for the login page
-@application.route('/login')
-def login():
-    return render_template('login-page.html')
-
-# Route for the account creation page
-@application.route('/signup')
-def signup():
-    return render_template('signup-page.html')
-
 # Route for the visualise data page
 @application.route('/visualise-my-data')
 def vis_my_data():
@@ -77,6 +67,7 @@ TODO:
 - THIS WILL PROBABLY THROW AN ERROR SINCE SOME OF THESE HTML FILES DO NOT EXIST
 """
 
+################# THIS ISNT BEING USED ATM #######################
 # Basic routes for serving HTML pages
 @application.route('/')
 def home():
@@ -87,21 +78,7 @@ def home():
     else:
         # User is not logged in, serve not-logged-in version
         return send_from_directory('.', 'static-introductory-notloggedin.html')
-
-@application.route('/login')
-def login_page():
-    # If user is already logged in, redirect to home
-    if 'user_id' in session:
-        return redirect(url_for('home'))
-    return send_from_directory('.', 'login.html')
-
-@application.route('/signup')
-def signup_page():
-    # If user is already logged in, redirect to home
-    if 'user_id' in session:
-        return redirect(url_for('home'))
-    return send_from_directory('.', 'signup.html')
-
+    
 @application.route('/dashboard')
 def dashboard():
     # Only allow access if user is logged in
@@ -109,9 +86,25 @@ def dashboard():
         return redirect(url_for('login_page'))
     return send_from_directory('.', 'static-introductory-loggedin.html')
 
+#######################################################################
+
+@application.route('/login')
+def login_page():
+    # If user is already logged in, redirect to home
+    if 'user_id' in session:
+        return redirect(url_for('introductory'))
+    return render_template('login_page.html')
+
+@application.route('/signup')
+def signup_page():
+    # If user is already logged in, redirect to home
+    if 'user_id' in session:
+        return redirect(url_for('introductory'))
+    return render_template('signup_page.html')
+
 @application.route('/logout')
 def logout():
     # Clear the session
     session.pop('user_id', None)
-    return redirect(url_for('home'))
+    return redirect(url_for('introductory'))
 
