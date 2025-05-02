@@ -116,7 +116,7 @@
                         <div class="flex space-x-4 text-xl hidden md:block">
                             <ul>
                                 <li class="dropdown" style="margin-left:auto">
-                                    <a href="{{url_for('settings')}}">Sign In <i class="fa-solid fa-caret-down"></i></a>
+                                    <a href="{{url_for('settings')}}">Settings<i class="fa-solid fa-caret-down"></i></a>
                                     <div class="dropdown-content">
                                         <a href="{{ url_for('settings') }}#account" class="dropdown-item">
                                             <strong>Manage Account</strong><br>
@@ -143,7 +143,7 @@
                 </nav>
 
                 <!-- Side Drawer Menu for Small Screens -->
-                <div id="side-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+                <div id="side-menu" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-1000 overflow-y-auto">
                     <div class="p-4 flex justify-between items-center border-b">
                         <span class="text-xl font-bold">Menu</span>
                         <button id="menu-close" class="text-xl text-gray-700">
