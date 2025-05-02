@@ -5,6 +5,12 @@ It defines the User and UserData models, which are used to store user informatio
 from datetime import datetime
 from app import db  # Import db directly from app package
 
+# Association table for accepted friendships (many-to-many)
+friendships = db.Table('friendships',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('friend_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+)
+
 # Creates a User table in database with respective fields
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,6 +26,18 @@ class User(db.Model):
     # Relationship with UserData
     data = db.relationship('UserData', backref='user', lazy=True, cascade="all, delete-orphan")
     
+    # Friends relationship (accepted friends)
+    friends = db.relationship(
+        'User',
+        secondary=friendships,
+        primaryjoin=id==friendships.c.user_id,
+        secondaryjoin=id==friendships.c.friend_id,
+        backref='friend_of'
+    )
+    # Outgoing and incoming friend requests
+    sent_requests = db.relationship('FriendRequest', foreign_keys='FriendRequest.sender_id', backref='sender', lazy=True)
+    received_requests = db.relationship('FriendRequest', foreign_keys='FriendRequest.receiver_id', backref='receiver', lazy=True)
+    
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -33,3 +51,13 @@ class UserData(db.Model):
     def __repr__(self):
         return f'<UserData {self.date} - {self.carbon_footprint}>'
 
+# New model for pending friend requests
+class FriendRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    status = db.Column(db.String(20), default='pending')  # 'pending', 'accepted', 'denied'
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<FriendRequest from {self.sender_id} to {self.receiver_id} - {self.status}>'
