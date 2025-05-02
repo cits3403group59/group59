@@ -4,6 +4,7 @@ It sets up the Flask application, and imports the routes.
 """
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from flask_cors import CORS
 
 # Create application instance
@@ -20,6 +21,8 @@ CORS(application, resources={r"/*": {"origins": "*"}}, supports_credentials=True
 
 # Initialize database
 db = SQLAlchemy(application)
+migrate = Migrate(application, db)
+
 
 # Import routes AFTER application and db are created - this prevents circular imports
-from app import routes, auth, models
+from app import routes, auth, models, controllers

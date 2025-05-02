@@ -7,7 +7,37 @@
 
 {% block data_content %}
 <!-- Specific visualisation -->
-<div>
-    
-</div>
+<h1>Data</h1> 
+<table> 
+    <thead> 
+        <tr> 
+            <th>id</th> 
+            <th>first</th> 
+            <th>last</th> 
+            <th>email</th> 
+            <th>password_hash</th>
+            <th>dob</th>
+            <th>profile_image</th>
+            <th>joined_date</th>
+            <th>terms accepted</th>
+        </tr> 
+    </thead> 
+
+    <tbody> 
+        {% for user in data %} 
+        <tr> 
+            <td>{{ user[0] }}</td> 
+            <td>{{ user[1] }}</td> 
+            <td>{{ user[2] }}</td> 
+            <td>{{ user[3] }}</td> 
+            <td>{{ user[4] }}</td>
+            <td>{{ user[5] }}</td>
+            <td>{{ user[6] }}</td>
+            <td>{{ user[7] }}</td>
+            <td>{{ user[8] }}</td>
+        </tr> 
+        {% endfor %} 
+    </tbody> 
+</table> 
 {% endblock %}
+

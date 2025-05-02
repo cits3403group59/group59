@@ -3,6 +3,7 @@ A python file containing the routes for the Flask application.
 
 Contains all request handlers.
 """
+import sqlite3
 from flask import render_template, redirect, url_for, session
 from app import application
 from flask import send_from_directory
