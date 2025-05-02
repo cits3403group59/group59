@@ -23,6 +23,5 @@ CORS(application, resources={r"/*": {"origins": "*"}}, supports_credentials=True
 db = SQLAlchemy(application)
 migrate = Migrate(application, db)
 
-
 # Import routes AFTER application and db are created - this prevents circular imports
-from app import routes, auth, models, controllers
+from app import routes, auth, models
