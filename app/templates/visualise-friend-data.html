@@ -23,21 +23,13 @@
         </tr> 
     </thead> 
 
-    <tbody> 
-        {% for user in data %} 
-        <tr> 
-            <td>{{ user[0] }}</td> 
-            <td>{{ user[1] }}</td> 
-            <td>{{ user[2] }}</td> 
-            <td>{{ user[3] }}</td> 
-            <td>{{ user[4] }}</td>
-            <td>{{ user[5] }}</td>
-            <td>{{ user[6] }}</td>
-            <td>{{ user[7] }}</td>
-            <td>{{ user[8] }}</td>
-        </tr> 
-        {% endfor %} 
-    </tbody> 
+    {% for row in data %}
+    <tr>
+      {% for col in row %}
+      <td>{{ col }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
 </table> 
 {% endblock %}
 

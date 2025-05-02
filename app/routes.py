@@ -7,6 +7,7 @@ import sqlite3
 from flask import render_template, redirect, url_for, session
 from app import application
 from flask import send_from_directory
+import os 
 
 # Route for the introductory page
 @application.route('/')
@@ -33,10 +34,21 @@ def vis_my_data():
 def vis_twin_data():
     return render_template('visualise-twin-data.html')
 
-# Route for the visualise friend data page
-@application.route('/visualise-friend-data')
+########################## Display SQL data in html page ##########################
+@application.route('/visualise-friend-data', methods=['GET'])
 def vis_friend_data():
-    return render_template('visualise-friend-data.html')
+    db_path = os.path.join(application.instance_path, 'carbon_copy.db')
+    conn = sqlite3.connect(db_path)  # ✅ Correct usage    
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor() # create a cursor object
+    cursor.execute("SELECT * FROM user LIMIT 10") # query the database
+    data = cursor.fetchall() # fetch all results
+    conn.close() # close the databse 
+    
+    print(data)  # Add this temporarily
+
+    return render_template('visualise-friend-data.html', data=data) # render page by passing data 
+######################################################################################
 
 # Route for upload data page
 @application.route('/upload-data')
@@ -103,12 +115,3 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('home'))
 
-# Display SQL data in html page
-@application.route('/data', methods=['GET'])
-def view_data():
-    conn = sqlite3.connect('carbon_copy.db') # connect to the database
-    cursor = conn.cursor() # create a cursor object
-    cursor.execute("SELECT * FROM User LIMIT 10") # query the database
-    data = cursor.fetchall() # fetch all results
-    conn.close() # close the databse 
-    return render_template('visualise-my-data.html', data=data) # render page by passing data 
