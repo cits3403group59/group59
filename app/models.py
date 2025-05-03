@@ -3,7 +3,7 @@ models.py contains the database models for the application.
 It defines the User and UserData models, which are used to store user information and carbon footprint data.
 """
 from datetime import datetime
-from app import db  # Import db directly from app package
+from app import db  # Import SQLAlchemy instance from __init__.py
 
 # Association table for accepted friendships (many-to-many)
 friendships = db.Table('friendships',

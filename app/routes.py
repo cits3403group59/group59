@@ -66,11 +66,14 @@ def logout():
     session.pop('user_id', None)
     return redirect(url_for('introductory'))
 
+"""
+TOOD: Do this using ORM User.query.all() instead of raw SQL
+"""
 ########################## Display SQL data in html page ##########################
 @application.route('/visualise-friend-data', methods=['GET'])
 def vis_friend_data():
     db_path = os.path.join(application.instance_path, 'carbon_copy.db')
-    conn = sqlite3.connect(db_path)  # ✅ Correct usage    
+    conn = sqlite3.connect(db_path)  
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor() # create a cursor object
     cursor.execute("SELECT * FROM user") # query the database
