@@ -3,6 +3,7 @@ from app import application
 from flask import send_from_directory
 from flask_login import login_required, current_user
 from app.models import db, User, FriendRequest 
+import os
 """
 TOOD: Do this using ORM User.query.all() instead of raw SQL
 """
@@ -10,7 +11,7 @@ TOOD: Do this using ORM User.query.all() instead of raw SQL
 @application.route('/visualise-friend-data', methods=['GET'])
 def vis_friend_data():
     db_path = os.path.join(application.instance_path, 'carbon_copy.db')
-    conn = sqlite3.connect(db_path)  
+    conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor() # create a cursor object
     cursor.execute("SELECT * FROM user") # query the database

@@ -5,7 +5,7 @@ It includes settings for the database, CORS, and other application-specific conf
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-default_db_path = 'sqlite://'+os.path.join(basedir, 'carbon_copy.db')
+default_db_path = 'sqlite:///' + os.path.join(basedir, 'carbon_copy.db')
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret_key' # change this later
