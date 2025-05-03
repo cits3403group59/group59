@@ -7,11 +7,10 @@ from datetime import datetime
 from app import application, db
 from app.models import User
 
-@application.route('/api/auth/register', methods=['GET', 'POST'])
+@application.route('/register', methods=['GET', 'POST'])
 def register():
     data = request.get_json()
     
-    # Print received data for debugging
     print("Received registration data:", data)
     
     # Extract fields
@@ -81,7 +80,7 @@ def register():
         print("Error during registration:", str(e))
         return jsonify({"error": str(e)}), 500
     
-@application.route('/api/auth/login', methods=['POST'])
+@application.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     
@@ -118,24 +117,5 @@ def login():
         }
     }), 200
 
-# API endpoint to get current user info
-@application.route('/api/auth/user', methods=['GET'])
-def get_current_user():
-    if 'user_id' not in session:
-        return jsonify({"error": "Not logged in"}), 401
-    
-    user = User.query.get(session['user_id'])
-    if not user:
-        # Clear invalid session
-        session.pop('user_id', None)
-        return jsonify({"error": "User not found"}), 404
-    
-    return jsonify({
-        "user": {
-            "id": user.id,
-            "firstName": user.first_name,
-            "lastName": user.last_name,
-            "email": user.email
-        }
-    }), 200
+ 
 
