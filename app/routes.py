@@ -19,12 +19,12 @@ def introductory():
 # Route for the visualise data page
 @application.route('/visualise-my-data')
 def vis_my_data():
-    return render_template('visualise-my-data.html') 
+    return render_template('visualise_my_data.html') 
 
 # Route for the visualise twin data page
 @application.route('/visualise-twin-data')
 def vis_twin_data():
-    return render_template('visualise-twin-data.html')
+    return render_template('visualise_twin_data.html')
 
 # Route for upload data page
 @application.route('/upload-data')
@@ -73,13 +73,13 @@ def vis_friend_data():
     conn = sqlite3.connect(db_path)  # ✅ Correct usage    
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor() # create a cursor object
-    cursor.execute("SELECT * FROM user LIMIT 10") # query the database
+    cursor.execute("SELECT * FROM user") # query the database
     data = cursor.fetchall() # fetch all results
     conn.close() # close the databse 
     
     print(data)  # Add this temporarily
 
-    return render_template('visualise-friend-data.html', data=data) # render page by passing data 
+    return render_template('visualise_friend_data.html', data=data) # render page by passing data 
 
 ########################### Share Data With Friends ############################
 # Share link route

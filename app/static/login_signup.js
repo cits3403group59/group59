@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         alert('Registration failed:\n' + errorMessage);
                     } else {
                         alert('Account created successfully! Redirecting to login...');
-                        window.location.href = '../static/login_page.html';
+                        window.location.href = '/login';
                     }
                 })
                 .catch(error => {
