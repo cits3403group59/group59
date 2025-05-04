@@ -27,17 +27,18 @@ TOOD: Do this using ORM User.query.all() instead of raw SQL
 ########################## Display SQL data in html page ##########################
 @main.route('/visualise-friend-data', methods=['GET'])
 def vis_friend_data():
-    db_path = os.path.join(application.instance_path, 'carbon_copy.db')
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor() # create a cursor object
-    cursor.execute("SELECT * FROM user") # query the database
-    data = cursor.fetchall() # fetch all results
-    conn.close() # close the databse 
+    # db_path = os.path.join(application.instance_path, 'carbon_copy.db')
+    # conn = sqlite3.connect(db_path)
+    # conn.row_factory = sqlite3.Row
+    # cursor = conn.cursor() # create a cursor object
+    # cursor.execute("SELECT * FROM user") # query the database
+    # data = cursor.fetchall() # fetch all results
+    # conn.close() # close the databse 
     
-    print(data)  # Add this temporarily
+    # print(data)  # Add this temporarily
 
-    return render_template('visualise_friend_data.html', data=data) # render page by passing data 
+    # return render_template('visualise_friend_data.html', data=data) # render page by passing data 
+    return render_template('visualise_friend_data.html')
 
 # Route for upload data page
 @main.route('/upload-data')
