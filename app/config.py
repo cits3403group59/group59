@@ -3,6 +3,7 @@ This module contains the configuration settings for the application.
 It includes settings for the database, CORS, and other application-specific configurations.
 """
 import os
+from datetime import timedelta
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 instance_dir = os.path.join(basedir, '..', 'instance')  # path to instance/
@@ -14,3 +15,4 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret_key'  # change this later
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or default_db_path
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    REMEMBER_COOKIE_DURATION = timedelta(hours=1)  # Keep user logged in for 1 hour

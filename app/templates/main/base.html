@@ -115,8 +115,10 @@
                         <!--Right: Navigate to Sign In and Settings Page-->
                         <div class="flex space-x-4 text-xl hidden md:block">
                             <ul>
+                                {% if current_user.is_authenticated %}
+                                <!-- User is logged in -->
                                 <li class="dropdown" style="margin-left:auto">
-                                    <a href="{{url_for('main.settings')}}">Settings<i class="fa-solid fa-caret-down"></i></a>
+                                    <a href="{{ url_for('main.settings') }}">{{ current_user.first_name }} {{ current_user.last_name }}<i class="fa-solid fa-caret-down"></i></a>
                                     <div class="dropdown-content">
                                         <a href="{{ url_for('main.settings') }}#account" class="dropdown-item">
                                             <strong>Manage Account</strong><br>
@@ -130,6 +132,11 @@
                                             <strong>Manage Connections</strong><br>
                                             <small>Manage connected applications and devices</small>
                                         </a>
+                                        <a href="{{ url_for('auth.logout') }}" class="dropdown-item">
+                                            <span role="button" aria-label="Logout"><i class="fa-solid fa-sign-out-alt"></i></span>
+                                            <strong>Logout</strong><br>
+                                            <small>Sign out of your account</small>
+                                        </a>
                                         <a href="{{ url_for('main.settings') }}#delete" class="dropdown-item text-red-600">
                                             <span role="button" aria-label="Requests"><i class="fa-solid fa-trash"></i></span>
                                             <strong>Delete Account</strong><br>
@@ -137,6 +144,7 @@
                                         </a>
                                     </div>
                                 </li>
+                            {% endif %}
                             </ul>
                         </div>
                     </div>
