@@ -2,8 +2,14 @@
 models.py contains the database models for the application.
 It defines the User and UserData models, which are used to store user information and carbon footprint data.
 """
-from app import db  # Import SQLAlchemy instance from __init__.py
+from app import db, login_manager  # Import SQLAlchemy instance from __init__.py
 from datetime import datetime
+from flask_login import UserMixin
+
+# This function is used by Flask-Login to load the user from the database
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 # Association table for accepted friendships (many-to-many)
 friendships = db.Table('friendships',
@@ -12,7 +18,7 @@ friendships = db.Table('friendships',
 )
 
 # Creates a User table in database with respective fields
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
@@ -61,3 +67,5 @@ class FriendRequest(db.Model):
 
     def __repr__(self):
         return f'<FriendRequest from {self.sender_id} to {self.receiver_id} - {self.status}>'
+
+

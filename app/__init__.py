@@ -4,21 +4,28 @@ It sets up the Flask application, and imports the routes.
 """
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from flask_migrate import Migrate
-from app.config import Config
 
-# Create application instance
-application = Flask(__name__)
+db = SQLAlchemy()
+login_manager = LoginManager()
+migrate = Migrate()
 
-# specify how application can get configuration details
-application.config.from_object(Config) # from_envvar when we moved the configt to the environment file
-db = SQLAlchemy(application)
-migrate = Migrate(application, db)
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('app.config.Config')
 
-# Import routes AFTER application and db are created - this prevents circular imports
-from app import routes, auth, models, config
+    db.init_app(app)
+    migrate.init_app(app, db)
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
 
+    from .auth import auth as auth_blueprint
+    from .main import main as main_blueprint
+    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(main_blueprint)
 
+    return app
 
 
 # # Configure application
