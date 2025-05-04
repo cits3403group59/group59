@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../static/introductory-charts.js"></script>
+        <script src="../static/dropdown.js"></script> 
+        <link rel="stylesheet" href="../static/dropdown.css" />
+        <title>Carbon Copy - Sign In</title>
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                overflow-x: hidden;
+            }
+            #background {
+                min-height: 100vh;
+                background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%);
+                width: 100%;
+            }
+            .form-input {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #e2e8f0;
+                border-radius: 0.375rem;
+                margin-top: 5px;
+                font-size: 1rem;
+            }
+            .form-label {
+                font-weight: 600;
+                display: block;
+                margin-bottom: 5px;
+            }
+            .form-group {
+                margin-bottom: 20px;
+            }
+            .form-container {
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 30px;
+                width: 100%;
+                max-width: 450px;
+            }
+            .signin-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 90vh;
+                padding: 20px 0;
+            }
+            .submit-button {
+                background-color: #FA3980;
+                color: white;
+                padding: 12px;
+                border-radius: 9999px;
+                font-weight: 600;
+                width: 100%;
+                transition: all 0.3s;
+                cursor: pointer;
+                border: none;
+                font-size: 1rem;
+                margin-top: 10px;
+            }
+            .submit-button:hover {
+                background-color: #e91e63;
+            }
+            .remember-container {
+                margin: 20px 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .remember-checkbox {
+                margin-right: 10px;
+            }
+            .remember-text {
+                font-size: 0.9rem;
+            }
+            .forgot-password {
+                color: #FA3980;
+                text-decoration: none;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+            .signup-link {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 0.9rem;
+            }
+            .signup-text {
+                color: #FA3980;
+                text-decoration: none;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="background">
+            <!-- Simplified Header Bar -->
+            <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex">
+                <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                    <!--Left: Brand Button-->
+                    <a href="static-introductory.html" class="hover:text-[#FA3980] font-bold text-2xl">
+                        Carbon Copy
+                    </a>
+                    <!-- Empty space - no menu items -->
+                    <div></div>
+                </div>
+            </nav>
+
+            <!-- Sign In Form -->
+            <div class="signin-wrapper">
+                <div class="form-container">
+                    <h1 class="text-3xl font-bold mb-6 text-center">Sign In</h1>
+                    
+                    <form id="signin-form">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <div class="remember-container">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="remember" name="remember" class="remember-checkbox">
+                                <label for="remember" class="remember-text">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="submit-button">Sign In</button>
+                    </form>
+                    
+                    <div class="signup-link">
+                        Don't have an account? <a href="signup.html" class="signup-text">Create Account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Form submission handler
+            document.getElementById('signin-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Get form values
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // If any required field is left empty, show an alert
+                if (!email || !password) {
+                  alert('Please fill in all required fields');
+                  return;
+                }
+                
+                // Here you would typically send the form data to your server for authentication
+                // For now, we'll just simulate success and redirect
+                alert('Signed in successfully!');
+                window.location.href = 'static-introductory.html';
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "login_base.html" %}
+
+{% block title %}Carbon Copy - Sign In {% endblock %}
+
+{% block content %}
+<!-- Sign In Form -->
+<div class="signin-wrapper">
+    <div class="form-container">
+        <h1 class="text-3xl font-bold mb-6 text-center">Sign In</h1>
+        
+        <form id="signin-form">
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+            </div>
+            
+            <div class="remember-container">
+                <div class="flex items-center">
+                    <input type="checkbox" id="remember" name="remember" class="remember-checkbox">
+                    <label for="remember" class="remember-text">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="submit-button">Sign In</button>
+        </form>
+        
+        <div class="signup-link">
+            Don't have an account? <a href="{{url_for('auth.register')}}" class="signup-text">Create Account</a>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

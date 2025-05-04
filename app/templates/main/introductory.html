@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+Carbon Copy - Introductory Page
+{% endblock %}
+
+{% block extra_head %}
+<script src="../static/introductory-charts.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<!-- Welcome Branding -->
+<div id="welcome-branding" class="h-screen flex flex-col items-center justify-center space-y-10">
+    <!-- Brand Title -->
+    <div class="text-center">
+        <h1 class="main-title">Carbon Copy</p>
+        <p class="slogan">Ever wondered if someone out there lives life just like you?</p>
+    </div>
+
+    <!-- Sign Up / Log In Buttons -->
+    <div id="sign-up-log-in" class="space-x-6">
+        <a href="{{url_for('auth.login')}}" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition">
+            Log In
+        </a>
+        <a href="{{url_for('auth.register')}}" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition">
+            Sign Up
+        </a>
+    </div>
+    
+    <!-- Call to Action -->
+    <div class="flex flex-col items-center mb-4">
+        <p class="text-lg font-medium">Find out more!</p>
+        <span class="text-2xl animate-bounce mt-2">↓</span>
+    </div>
+</div>
+
+<!-- My Data Section -->
+<section id="my-data-section" class="min-h-screen flex flex-col items-center justify-start pt-20 px-4">
+    <!-- Header -->
+    <h2 class="font-bold text-5xl text-center mb-4">Track Your Habits Over Time</h2>
+  
+    <!-- Time Series Chart -->
+    <div class="chart-container w-full max-w-4xl bg-white mt-10 p-10 rounded-lg shadow-md">
+        <canvas id="habit-time-series" width="800" height="400"></canvas>
+    </div>
+</section>
+
+<!-- Doppelganger Section -->
+<section id="twin-data-section" class="min-h-screen flex flex-col items-center justify-start pt-20 px-4">
+    <!-- Header -->
+    <h2 class="font-bold text-5xl text-center mb-16">Find Your Data Doppelganger</h2>
+  
+    <!-- Charts Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-7xl justify-items-center">
+        <!-- Friends Comparison Chart 1 -->
+        <div class="chart rounded-lg bg-white p-10 flex items-center justify-center">
+            <canvas id="twin-comparison-chart-1" class="w-full h-full"></canvas>
+        </div>
+
+        <!-- Friends Comparison Chart 2 -->
+        <div class="chart rounded-lg bg-[#FFCDD3] p-10 flex items-center justify-center">
+            <canvas id="twin-comparison-chart-2" class="w-full h-full"></canvas>
+        </div>
+
+        <!-- Friends Comparison Chart 3 -->
+        <div class="chart rounded-lg bg-white p-10 flex items-center justify-center">
+            <canvas id="twin-comparison-chart-3" class="w-full h-full"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- Friends Comparison Section -->
+<section id="friends-comparison-section" class="min-h-screen flex flex-col items-center justify-start pt-20 px-4">
+    <!-- Header -->
+    <h2 class="font-bold text-5xl text-center mb-16">Compare Habits With Friends</h2>
+  
+    <!-- Friends Comparison Charts -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full max-w-7xl justify-items-center">
+        <!-- Friends Comparison Chart 1 -->
+        <div class="chart rounded-lg bg-white p-10 flex items-center justify-center">
+            <canvas id="friends-comparison-chart-1" class="w-full h-full"></canvas>
+        </div>
+
+        <!-- Friends Comparison Chart 2 -->
+        <div class="chart rounded-lg bg-[#FFCDD3] p-10 flex items-center justify-center">
+            <canvas id="friends-comparison-chart-2" class="w-full h-full"></canvas>
+        </div>
+
+        <!-- Friends Comparison Chart 3 -->
+        <div class="chart rounded-lg bg-white p-10 flex items-center justify-center">
+            <canvas id="friends-comparison-chart-3" class="w-full h-full"></canvas>
+        </div>
+    </div>
+</section>
+  
+{% endblock %}

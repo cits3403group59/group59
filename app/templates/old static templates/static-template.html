@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../static/introductory-charts.js"></script>
+        <script src="../static/dropdown.js"></script> 
+        <link rel="stylesheet" href="../static/template.css" />
+        <title>Carbon Copy - Introductory Page</title>
+    </head>
+    <body>
+        <div id="background" >
+            <!-- Navigation Bar -->
+            <nav id="navbar" class="sticky top-0 bg-white items-center justify-center flex">
+                <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                    <!--Left: Brand Button-->
+                    <a href="#" class="hover:text-[#FA3980] font-bold text-2xl">
+                        Carbon Copy
+                    </a>
+
+                    <!--Middle: Navigate to other pages-->
+                    <div class="space-x-6 text-xl">
+                        <ul>
+                            <!--Visualise Data-->
+                            <li class="dropdown">
+                                <a href="#">Visualise Data ▾</a>
+                                <div class="dropdown-content">
+                                <div class="dropdown-item">
+                                    <span role="img" aria-label="My Data"></span>
+                                    <strong>My Data</strong><br>
+                                    <small>View personal data over time</small>
+                                </div>
+                                <div class="dropdown-item">
+                                    <span role="img" aria-label="Twin Data"></span>
+                                    <strong>Twin Data</strong><br>
+                                    <small>Find and view data doppelgänger</small>
+                                </div>
+                                <div class="dropdown-item">
+                                    <span role="img" aria-label="Friends Data"></span>
+                                    <strong>Friends Data</strong><br>
+                                    <small>View data shared by friends</small>
+                                </div>
+                                </div>
+                            </li>
+        
+                            <!--Upload data-->
+                            <li class="dropdown">
+                                <a href="#">Upload Data ▾</a>
+                                <div class="dropdown-content">
+                                    <div class="dropdown-item">
+                                        <span role="img" aria-label="Manual"></span>
+                                        <strong>Manual</strong><br>
+                                        <small>Enter and update data manually</small>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <span role="img" aria-label="From Device">⏱</span>
+                                        <strong>From Device</strong><br>
+                                        <small>Connect and transfer data from API</small>
+                                    </div>
+                                </div>
+                            </li>
+        
+                            <!--Share data-->
+                            <li class="dropdown">
+                                <a href="#">Share Data ▾</a>
+                                <div class="dropdown-content">
+                                    <div class="dropdown-item">
+                                        <span role="img" aria-label="Friends"></span>
+                                        <strong>Friends</strong><br>
+                                        <small>Find friends to compare with</small>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <span role="img" aria-label="Requests"></span>
+                                        <strong>Requests</strong><br>
+                                        <small>Manage share requests</small>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--Right: Navigate to Sign In and Settings Page-->
+                    <div class="flex space-x-4 text-xl">
+                        <ul>
+                            <li class="dropdown" style="margin-left:auto">
+                                <a href="#">First Last ▾</a>
+                                <div class="dropdown-content">
+                                    <a href="settings.html#account" class="dropdown-item">
+                                      <strong>Manage Account</strong><br>
+                                      <small>Update contact information</small>
+                                    </a>
+                                    <a href="settings.html#profile" class="dropdown-item">
+                                      <strong>Manage Profile</strong><br>
+                                      <small>Update profile picture and profile settings</small>
+                                    </a>
+                                    <a href="settings.html#connections" class="dropdown-item">
+                                      <strong>Manage Connections</strong><br>
+                                      <small>Manage connected applications and devices</small>
+                                    </a>
+                                    <a href="settings.html#delete" class="dropdown-item text-red-600">
+                                      <strong>Delete Account</strong><br>
+                                      <small>Permanently delete account</small>
+                                    </a>
+                                  </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- YOUR CONTENT GOES HERE-->
+        </div>    
+    </body>
+</html>

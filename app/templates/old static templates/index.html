@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carbon Copy</title>
+
+  <!--CSS file reference for drop-down navigation-->
+  <link rel="stylesheet" href="../static/dropdown.css" />
+
+
+</head>
+<body>
+
+  <!--Dropdown nav snippet begin-->
+  <nav>
+    <span class="brand">Carbon Copy</span>
+    <ul>
+      <li class="dropdown">
+        <a href="#">Visualise Data ▾</a>
+        <div class="dropdown-content">
+          <div class="dropdown-item">
+            <span role="img" aria-label="My Data">🙂</span>
+            <strong>My Data</strong><br>
+            <small>View personal data over time</small>
+          </div>
+          <div class="dropdown-item">
+            <span role="img" aria-label="Twin Data">👯</span>
+            <strong>Twin Data</strong><br>
+            <small>Find and view data doppelgänger</small>
+          </div>
+          <div class="dropdown-item">
+            <span role="img" aria-label="Friends Data">🔗</span>
+            <strong>Friends Data</strong><br>
+            <small>View data shared by friends</small>
+          </div>
+        </div>
+      </li>
+
+      <!--upload data-->
+      <li class="dropdown">
+        <a href="#">Upload Data ▾</a>
+        <div class="dropdown-content">
+          <div class="dropdown-item">
+            <span role="img" aria-label="Manual">✋</span>
+            <strong>Manual</strong><br>
+            <small>Enter and update data manually</small>
+          </div>
+          <div class="dropdown-item">
+            <span role="img" aria-label="From Device">⏱️</span>
+            <strong>From Device</strong><br>
+            <small>Connect and transfer data from API</small>
+          </div>
+        </div>
+      </li>
+
+      <!--share data-->
+      <li class="dropdown">
+        <a href="#">Share Data ▾</a>
+        <div class="dropdown-content">
+          <div class="dropdown-item">
+            <span role="img" aria-label="Friends">👯</span>
+            <strong>Friends</strong><br>
+            <small>Find friends to compare with</small>
+          </div>
+          <div class="dropdown-item">
+            <span role="img" aria-label="Requests">🔔</span>
+            <strong>Requests</strong><br>
+            <small>Manage share requests</small>
+          </div>
+        </div>
+      </li>
+    <!--Change the static First Last below to dynamically rendered user.id,-->
+      <li class="dropdown" style="margin-left:auto">
+       <a href="#">First Last ▾</a>
+       <div class="dropdown-content">
+        <a href="../setting/setting.html#account" class="dropdown-item">
+          <strong>Manage Account</strong><br>
+          <small>Update contact information</small>
+        </a>
+        <a href="../setting/setting.html#profile" class="dropdown-item">
+          <strong>Manage Profile</strong><br>
+          <small>Update profile picture and profile settings</small>
+        </a>
+        <a href="../setting/setting.html#connections" class="dropdown-item">
+          <strong>Manage Connections</strong><br>
+          <small>Manage connected applications and devices</small>
+        </a>
+        <a href="../setting/setting.html#delete" class="dropdown-item text-red-600">
+          <strong>Delete Account</strong><br>
+          <small>Permanently delete account</small>
+        </a>
+       </div>
+      </li>
+    </ul>
+  </nav>
+  <!--Dropdown nav snippet end-->
+
+  <!--This is the js script for the drop-down nav-->
+  <script src="js/dropdown.js"></script> 
+</body>
+</html>

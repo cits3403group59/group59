@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ page_title }}
+{% endblock %}
+
+{% block extra_head %}
+  {# Optional: Add custom styles/scripts here if needed #}
+{% endblock %}
+
+{% block content %}
+<div id="welcome-branding" class="h-screen flex flex-col items-center justify-center space-y-10">
+    <!-- Brand Title -->
+    <div class="text-center">
+        <h1 class="main-title">{{ main_title }}</h1>
+        <p class="slogan">{{ slogan }}</p>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="flex flex-col items-center mb-4">
+        {% block call_to_action %}
+        <p class="text-lg font-medium">{{ call }}</p>
+        <span class="text-2xl animate-bounce mt-2">↓</span>
+        {% endblock %}
+    </div>
+
+    <!-- Custom Data Content -->
+    {% block data_content %}
+    <!-- Override this in child templates -->
+    {% endblock %}
+</div>
+{% endblock %}
