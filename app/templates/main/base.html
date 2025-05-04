@@ -207,7 +207,8 @@
                         <hr class="my-3 border-gray-300">
 
                         <!-- Sign In -->
-                        <li class="font-semibold text-[#FA3980] mt-4 mb-2">Sign In</li>
+                        {% if current_user.is_authenticated %}
+                        <li class="font-semibold text-[#FA3980] mt-4 mb-2">Settings</li>
                         <li>
                             <a href="{{ url_for('main.settings') }}#account" class="block pl-4 hover:text-[#FA3980]">
                                 <i class="fa-solid fa-user mr-2"></i> Manage Account
@@ -224,10 +225,16 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ url_for('auth.logout') }}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url_for('main.settings') }}#delete" class="block pl-4 text-red-600 hover:text-red-800">
                                 <i class="fa-solid fa-trash mr-2"></i> Delete Account
                             </a>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
 
