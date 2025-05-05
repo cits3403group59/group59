@@ -2,13 +2,12 @@
 
 {% block title %}Carbon Copy - Sign Up{% endblock %}
 
+
 {% block extra_head %}
 <script>
+    // Remove unnecessary onclick event that interferes with the date picker
     window.onload = function () {
-        document.getElementById('signin-form').onclick = function () {
-            console.log("SIGN IN FORM CLICKED");
-            window.location.href = "/register";
-        }
+        // Ensure no global click handlers interfere with the date picker
     }
 </script>
 {% endblock %}
@@ -20,7 +19,7 @@
     <div class="form-container">
         <h1 class="text-3xl font-bold mb-6 text-center">Create Account</h1>
 
-        <form method="POST">
+        <form method="POST" action="{{ url_for('auth.register') }}">
             {{ form.hidden_tag() }}
         
             <div class="form-group">

@@ -115,8 +115,10 @@
                         <!--Right: Navigate to Sign In and Settings Page-->
                         <div class="flex space-x-4 text-xl hidden md:block">
                             <ul>
+                                {% if current_user.is_authenticated %}
+                                <!-- User is logged in -->
                                 <li class="dropdown" style="margin-left:auto">
-                                    <a href="{{url_for('main.settings')}}">Settings<i class="fa-solid fa-caret-down"></i></a>
+                                    <a href="{{ url_for('main.settings') }}">{{ current_user.first_name }} {{ current_user.last_name }}<i class="fa-solid fa-caret-down"></i></a>
                                     <div class="dropdown-content">
                                         <a href="{{ url_for('main.settings') }}#account" class="dropdown-item">
                                             <strong>Manage Account</strong><br>
@@ -130,6 +132,11 @@
                                             <strong>Manage Connections</strong><br>
                                             <small>Manage connected applications and devices</small>
                                         </a>
+                                        <a href="{{ url_for('auth.logout') }}" class="dropdown-item">
+                                            <span role="button" aria-label="Logout"><i class="fa-solid fa-sign-out-alt"></i></span>
+                                            <strong>Logout</strong><br>
+                                            <small>Sign out of your account</small>
+                                        </a>
                                         <a href="{{ url_for('main.settings') }}#delete" class="dropdown-item text-red-600">
                                             <span role="button" aria-label="Requests"><i class="fa-solid fa-trash"></i></span>
                                             <strong>Delete Account</strong><br>
@@ -137,6 +144,7 @@
                                         </a>
                                     </div>
                                 </li>
+                            {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -199,7 +207,8 @@
                         <hr class="my-3 border-gray-300">
 
                         <!-- Sign In -->
-                        <li class="font-semibold text-[#FA3980] mt-4 mb-2">Sign In</li>
+                        {% if current_user.is_authenticated %}
+                        <li class="font-semibold text-[#FA3980] mt-4 mb-2">Settings</li>
                         <li>
                             <a href="{{ url_for('main.settings') }}#account" class="block pl-4 hover:text-[#FA3980]">
                                 <i class="fa-solid fa-user mr-2"></i> Manage Account
@@ -216,10 +225,16 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ url_for('auth.logout') }}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-sign-out-alt mr-2"></i> Logout
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url_for('main.settings') }}#delete" class="block pl-4 text-red-600 hover:text-red-800">
                                 <i class="fa-solid fa-trash mr-2"></i> Delete Account
                             </a>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
 

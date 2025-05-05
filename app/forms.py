@@ -2,10 +2,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, DateField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from datetime import date
+from wtforms.fields import DateField
+
 
 class SignInForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
+    remember = BooleanField('Remember me')  # <--- Add this
     submit = SubmitField('Sign In')
 
 class SignUpForm(FlaskForm):
