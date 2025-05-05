@@ -1,0 +1,4 @@
+sleep_hours,exercise_hours,caffeine_intake,screen_time,work_hours,outside_time,weekly_spend,step_count,time_with_friends,salary,transport,hobbies,applications_used,alcohol_usage,vehicle_ownership
+5,0.5,1,1,5,0.2,10,20000,2,70000,bicycle,computer programming|cooking,Facebook|Instagram,Yes,Yes
+6,1.0,2,2,10,1.0,100,500,5,100000,car,creative writing,TikTok,No,Yes
+7,2.0,10,3,15,10.0,1000,8000,10,20000,walking,musical intruments|sport,YouTube|WhatsApp,Yes,No
