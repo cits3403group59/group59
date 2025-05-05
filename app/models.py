@@ -63,6 +63,12 @@ class User(db.Model, UserMixin):
         db.session.delete(request)
         db.session.commit()
         
+    def find_friend_by_email(self, email):
+        user = User.query.filter_by(email=email).first()  # Find user by email
+        if user:
+            return user
+        return None
+        
     def send_friend_request(self, receiver):
         if self.id == receiver.id:
             raise ValueError("You cannot send a friend request to yourself.")

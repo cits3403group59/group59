@@ -4,7 +4,11 @@ A python file containing the routes for the Flask main.
 Contains all request handlers.
 """
 from . import main  # Import the blueprint
-from flask import render_template
+from flask import render_template, flash
+from flask_login import login_required, current_user
+from app.models import FriendRequest
+from app.forms import FindFriendForm
+from flask_wtf import FlaskForm
 
 # Route for the introductory page
 @main.route('/')
@@ -60,3 +64,44 @@ def settings():
 def share_data():
     return render_template('share-data.html')
 
+# Route for manage friends page
+@main.route('/manage-friends')
+def manage_friends():
+    return render_template('manage_friends.html')
+
+# Route for friend requests page
+@main.route('/friend-requests')
+@login_required
+def friend_requests():
+    form = FlaskForm()  
+    return render_template('friend_request.html', form=form)
+
+
+# Route for find friends page
+@main.route('/find-friends', methods=['GET', 'POST'])
+@login_required
+def find_friends():
+    form = FindFriendForm()  # Create an instance of the form
+
+    if form.validate_on_submit():  # Check if the form is submitted and valid
+        search_email = form.email.data  # Get the email input from the form
+        
+        # Use the method to find the friend by email
+        friend = current_user.find_friend_by_email(search_email)
+        
+        if friend:
+            # Check if a friend request already exists
+            existing_request = FriendRequest.query.filter(
+                ((FriendRequest.sender_id == current_user.id) & (FriendRequest.receiver_id == friend.id)) |
+                ((FriendRequest.sender_id == friend.id) & (FriendRequest.receiver_id == current_user.id))
+            ).first()
+            
+            if existing_request:
+                flash("Friend request already exists.")
+            else:
+                return render_template('find_friends.html', form=form, friend=friend, is_found=True)
+        else:
+            flash("No user found with that email.")
+            return render_template('find_friends.html', form=form, is_found=False)
+
+    return render_template('find_friends.html', form=form, is_found=None)

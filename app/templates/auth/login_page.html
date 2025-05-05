@@ -3,6 +3,13 @@
 {% block title %}Carbon Copy - Sign In {% endblock %}
 
 {% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 <div class="signin-wrapper">
     <div class="form-container">
         <h1 class="text-3xl font-bold mb-6 text-center">Sign In</h1>
