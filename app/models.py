@@ -44,8 +44,70 @@ class User(db.Model, UserMixin):
     sent_requests = db.relationship('FriendRequest', foreign_keys='FriendRequest.sender_id', backref='sender', lazy=True)
     received_requests = db.relationship('FriendRequest', foreign_keys='FriendRequest.receiver_id', backref='receiver', lazy=True)
     
+    # Method to accept a friend request
+    def accept_friend_request(self, request):
+        if request.receiver_id != self.id:
+            raise ValueError("This friend request is not addressed to this user.")
+        
+        sender = request.sender
+        
+        # Add each other as friends (if not already)
+        if sender not in self.friends:
+            self.friends.append(sender)
+            
+        # ensure connection is mutual
+        if self not in sender.friends:
+            sender.friends.append(self)
+
+        # Remove the friend request from the DB
+        db.session.delete(request)
+        db.session.commit()
+        
+    def send_friend_request(self, receiver):
+        if self.id == receiver.id:
+            raise ValueError("You cannot send a friend request to yourself.")
+    
+        # Check if already friends
+        if receiver in self.friends:
+            raise ValueError("You are already friends with this user.")
+        
+        # Check if request already exists (in the other direction)
+        existing_request = FriendRequest.query.filter(
+            ((FriendRequest.sender_id == self.id) & (FriendRequest.receiver_id == receiver.id)) |
+            ((FriendRequest.sender_id == receiver.id) & (FriendRequest.receiver_id == self.id))
+        ).first()
+        
+        if existing_request:
+            raise ValueError("Friend already exists between you and this user.")
+        
+        # create and commit new friend
+        request = FriendRequest(sender_id=self.id, receiver_id=receiver.id)
+        db.session.add(request)
+        db.session.commit()
+        
+    def deny_friend_request(self, request):
+        if request.receiver_id != self.id:
+            raise ValueError("You cannot deny a request not addressed to you.")
+        db.session.delete(request)
+        db.session.commit()
+
+    def cancel_friend_request(self, request):
+        if request.sender_id != self.id:
+            raise ValueError("You can only cancel requests you sent.")
+        db.session.delete(request)
+        db.session.commit()
+
+    def remove_friend(self, friend_user):
+        if friend_user in self.friends:
+            self.friends.remove(friend_user)
+            friend_user.friends.remove(self)  # Ensure bidirectional removal
+            db.session.commit()
+        else:
+            raise ValueError("This user is not your friend.")
+
     def __repr__(self):
         return f'<User {self.email}>'
+
 
 # UserData model for storing carbon footprint data
 class UserData(db.Model):
