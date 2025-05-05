@@ -1,0 +1,68 @@
+{% extends "login_base.html" %}
+
+{% block title %}Carbon Copy - Sign Up{% endblock %}
+
+{% block extra_head %}
+<script>
+    window.onload = function () {
+        document.getElementById('signin-form').onclick = function () {
+            console.log("SIGN IN FORM CLICKED");
+            window.location.href = "/register";
+        }
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Sign In Form -->
+<!-- Sign Up Form -->
+<div class="signup-wrapper">
+    <div class="form-container">
+        <h1 class="text-3xl font-bold mb-6 text-center">Create Account</h1>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+        
+            <div class="form-group">
+                {{ form.first_name.label }}<br>
+                {{ form.first_name(class="form-input") }}
+            </div>
+        
+            <div class="form-group">
+                {{ form.last_name.label }}<br>
+                {{ form.last_name(class="form-input") }}
+            </div>
+        
+            <div class="form-group">
+                {{ form.email.label }}<br>
+                {{ form.email(class="form-input") }}
+            </div>
+        
+            <div class="form-group">
+                {{ form.dob.label }}<br>
+                {{ form.dob(class="form-input") }}
+            </div>
+        
+            <div class="form-group">
+                {{ form.password.label }}<br>
+                {{ form.password(class="form-input") }}
+            </div>
+        
+            <div class="form-group">
+                {{ form.confirm_password.label }}<br>
+                {{ form.confirm_password(class="form-input") }}
+            </div>
+        
+            <div class="form-group">
+                {{ form.terms_accepted() }} {{ form.terms_accepted.label }}
+            </div>
+        
+            <button type="submit" class="submit-button">{{ form.submit.label.text }}</button>
+        </form>
+        
+        <div class="signin-link">
+            Already have an account? <a href="{{url_for('auth.login')}}" class="signin-text">Sign In</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

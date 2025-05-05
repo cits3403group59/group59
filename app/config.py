@@ -1,18 +1,16 @@
-# """
-# This module contains the configuration settings for the application.
-# It includes settings for the database, CORS, and other application-specific configurations.
-# """
-# from flask_cors import CORS
-# from app import application # import the application instance from __init__.py
+"""
+This module contains the configuration settings for the application.
+It includes settings for the database, CORS, and other application-specific configurations.
+"""
+import os
 
-# # Enable CORS so that the frontend Javascript can make requests to backend even if it is running from another
-# # domain or port
-# CORS(application, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+basedir = os.path.abspath(os.path.dirname(__file__))
+instance_dir = os.path.join(basedir, '..', 'instance')  # path to instance/
 
-# # Configure database
-# application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# application.config['SECRET_KEY'] = 'your_secret_key'  # Change this in production!
-# application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///carbon_copy.db'  # SQLite for simplicity
+# Absolute path to DB file in instance/
+default_db_path = 'sqlite:///' + os.path.join(instance_dir, 'carbon_copy.db')
 
-# # Set a specific password hashing method that works on older Python versions
-# application.config['WERKZEUG_DEFAULT_PASSWORD_HASH'] = 'pbkdf2:sha256:150000'
+class Config:
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret_key'  # change this later
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or default_db_path
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

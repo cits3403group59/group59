@@ -20,14 +20,14 @@ Carbon Copy - Introductory Page
 
     <!-- Sign Up / Log In Buttons -->
     <div id="sign-up-log-in" class="space-x-6">
-        <a href="{{url_for('login_page')}}" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition">
+        <a href="{{url_for('auth.login')}}" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition">
             Log In
         </a>
-        <a href="{{url_for('signup_page')}}" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition">
+        <a href="{{url_for('auth.register')}}" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition">
             Sign Up
         </a>
     </div>
-
+    
     <!-- Call to Action -->
     <div class="flex flex-col items-center mb-4">
         <p class="text-lg font-medium">Find out more!</p>
