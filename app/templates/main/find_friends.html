@@ -22,7 +22,12 @@
 
         <form action="{{ url_for('main.send_request', user_id=friend.id) }}" method="POST">
             {{ form.hidden_tag() }}  <!-- CSRF token -->
-            <button type="submit" class="bg-green-500 text-white px-4 py-2 mt-4 rounded-lg">Send Friend Request</button>
+            
+            {% if is_already_friends %}
+                <button type="button" class="bg-gray-400 text-white px-4 py-2 mt-4 rounded-lg cursor-not-allowed" disabled>Already Friends</button>
+            {% else %}
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 mt-4 rounded-lg">Send Friend Request</button>
+            {% endif %}
         </form>
     </div>
     {% elif is_found is not none %}
@@ -30,3 +35,4 @@
     {% endif %}
 </section>
 {% endblock %}
+

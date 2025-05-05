@@ -33,3 +33,6 @@ class SignUpForm(FlaskForm):
 class FindFriendForm(FlaskForm):
     email = StringField('Email', validators=[InputRequired(), Email()])
     submit = SubmitField('Search')
+    
+class RemoveFriendForm(FlaskForm):
+    submit = SubmitField('Remove Friend')

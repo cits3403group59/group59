@@ -44,6 +44,10 @@ class User(db.Model, UserMixin):
     sent_requests = db.relationship('FriendRequest', foreign_keys='FriendRequest.sender_id', backref='sender', lazy=True)
     received_requests = db.relationship('FriendRequest', foreign_keys='FriendRequest.receiver_id', backref='receiver', lazy=True)
     
+    # Getter method to retrieve the user's friends
+    def get_user_friends(self):
+        return self.friends
+    
     # Method to accept a friend request
     def accept_friend_request(self, request):
         if request.receiver_id != self.id:

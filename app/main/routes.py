@@ -4,10 +4,10 @@ A python file containing the routes for the Flask main.
 Contains all request handlers.
 """
 from . import main  # Import the blueprint
-from flask import render_template, flash
+from flask import render_template, flash, request
 from flask_login import login_required, current_user
 from app.models import FriendRequest
-from app.forms import FindFriendForm
+from app.forms import FindFriendForm, RemoveFriendForm
 from flask_wtf import FlaskForm
 
 # Route for the introductory page
@@ -65,9 +65,20 @@ def share_data():
     return render_template('share-data.html')
 
 # Route for manage friends page
-@main.route('/manage-friends')
+@main.route('/manage-friends', methods=['GET'])
+@login_required
 def manage_friends():
-    return render_template('manage_friends.html')
+    friends = current_user.get_user_friends()  # Get the user's friends
+    search_query = request.args.get('search', '').lower()  # Get the search query from the URL
+
+    # Filter friends based on the search query
+    if search_query:
+        friends = [friend for friend in friends if search_query in friend.first_name.lower() or search_query in friend.last_name.lower() or search_query in friend.email.lower()]
+
+    # Create a RemoveFriendForm instance
+    forms = {friend.id: RemoveFriendForm() for friend in friends}
+
+    return render_template('manage_friends.html', friends=friends, forms=forms)
 
 # Route for friend requests page
 @main.route('/friend-requests')
@@ -76,8 +87,6 @@ def friend_requests():
     form = FlaskForm()  
     return render_template('friend_request.html', form=form)
 
-
-# Route for find friends page
 @main.route('/find-friends', methods=['GET', 'POST'])
 @login_required
 def find_friends():
@@ -90,6 +99,11 @@ def find_friends():
         friend = current_user.find_friend_by_email(search_email)
         
         if friend:
+            # Check if the users are already friends
+            if friend in current_user.friends:
+                # If already friends, disable the friend request button
+                return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=True)
+            
             # Check if a friend request already exists
             existing_request = FriendRequest.query.filter(
                 ((FriendRequest.sender_id == current_user.id) & (FriendRequest.receiver_id == friend.id)) |
@@ -98,10 +112,13 @@ def find_friends():
             
             if existing_request:
                 flash("Friend request already exists.")
-            else:
-                return render_template('find_friends.html', form=form, friend=friend, is_found=True)
+                return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=False)
+            
+            # If not friends and no existing request, show friend request button
+            return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=False)
+        
         else:
             flash("No user found with that email.")
-            return render_template('find_friends.html', form=form, is_found=False)
+            return render_template('find_friends.html', form=form, is_found=False, is_already_friends=False)
 
-    return render_template('find_friends.html', form=form, is_found=None)
+    return render_template('find_friends.html', form=form, is_found=None, is_already_friends=False)
