@@ -20,7 +20,7 @@ def send_request(user_id):
         flash("Friend request sent.")
     except ValueError as e:
         flash(str(e))
-    return redirect(url_for('main.friend_requests'))
+    return redirect(url_for('main.find_friends'))
 
 @main.route('/friend-request/<int:request_id>/deny', methods=['POST'])
 @login_required

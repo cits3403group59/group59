@@ -99,10 +99,14 @@ def find_friends():
         friend = current_user.find_friend_by_email(search_email)
         
         if friend:
+            # Check ig the friend is the current user
+            if friend.id == current_user.id:
+                return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=False, request_exists=False, is_self=True)
+                            
             # Check if the users are already friends
             if friend in current_user.friends:
                 # If already friends, disable the friend request button
-                return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=True)
+                return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=True, request_exists=False)
             
             # Check if a friend request already exists
             existing_request = FriendRequest.query.filter(
@@ -112,13 +116,13 @@ def find_friends():
             
             if existing_request:
                 flash("Friend request already exists.")
-                return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=False)
+                return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=False, request_exists=True)
             
             # If not friends and no existing request, show friend request button
-            return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=False)
+            return render_template('find_friends.html', form=form, friend=friend, is_found=True, is_already_friends=False, request_exists=False)
         
         else:
             flash("No user found with that email.")
-            return render_template('find_friends.html', form=form, is_found=False, is_already_friends=False)
+            return render_template('find_friends.html', form=form, is_found=False, is_already_friends=False, request_exists=False)
 
-    return render_template('find_friends.html', form=form, is_found=None, is_already_friends=False)
+    return render_template('find_friends.html', form=form, is_found=None, is_already_friends=False, request_exists=False)
