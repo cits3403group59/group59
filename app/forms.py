@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, DateField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, InputRequired
 from datetime import date
 from wtforms.fields import DateField
 
@@ -29,3 +29,10 @@ class SignUpForm(FlaskForm):
             raise ValidationError('Date of birth cannot be in the future.')
         if field.data < date(today.year - 120, today.month, today.day):
             raise ValidationError('Date of birth must be within the last 120 years.')
+
+class FindFriendForm(FlaskForm):
+    email = StringField('Email', validators=[InputRequired(), Email()])
+    submit = SubmitField('Search')
+    
+class RemoveFriendForm(FlaskForm):
+    submit = SubmitField('Remove Friend')

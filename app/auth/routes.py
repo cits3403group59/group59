@@ -57,7 +57,8 @@ def login():
     return render_template('login_page.html', form=form)
 
 @auth.route('/logout')
-def logout():
-    logout_user()
-    flash('You have been logged out.', 'info')
-    return redirect(url_for('main.introductory'))
+def logout():  
+    if 'user_id' in session: 
+        logout_user()
+        flash('You have been logged out.', 'info')
+        return redirect(url_for('auth.login'))

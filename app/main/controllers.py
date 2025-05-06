@@ -1,75 +1,57 @@
-from flask import render_template, redirect, url_for, session
-from app import application
-from flask import send_from_directory
+from flask import redirect, url_for, flash, request
 from flask_login import login_required, current_user
-from app.models import db, User, FriendRequest 
-import os
+from app.models import User, FriendRequest
+from . import main  # Import the Blueprint
 
-
-########################### Share Data With Friends ############################
-# Share link route
-# This route generates a shareable link for the user to send to their friends
-@application.route('/share_link')
+@main.route('/friend-request/<int:request_id>/accept', methods=['POST'])
 @login_required
-def share_link():
-    link = url_for('send_request', user_id=current_user.id, _external=True)
-    return render_template('share_link.html', link=link)
+def accept_request(request_id):
+    request = FriendRequest.query.get_or_404(request_id)
+    current_user.accept_friend_request(request)
+    flash("Friend request accepted.")
+    return redirect(url_for('main.friend_requests'))
 
-# Route to send a friend request
-# This route allows a user to send a friend request to another user
-@application.route('/send_request/<int:user_id>', methods=['GET'])
+@main.route('/friend-request/send/<int:user_id>', methods=['POST'])
 @login_required
 def send_request(user_id):
-    if user_id == current_user.id:
-        return "You can't send a friend request to yourself!"
+    receiver = User.query.get_or_404(user_id)
+    try:
+        current_user.send_friend_request(receiver)
+        flash("Friend request sent.")
+    except ValueError as e:
+        flash(str(e))
+    return redirect(url_for('main.find_friends'))
 
-    # Check if request already exists
-    existing = FriendRequest.query.filter_by(sender_id=current_user.id, receiver_id=user_id).first()
-    if existing:
-        return "Friend request already sent or pending!"
-
-    new_request = FriendRequest(sender_id=current_user.id, receiver_id=user_id)
-    db.session.add(new_request)
-    db.session.commit()
-    return "Friend request sent!"
-
-# Route to accept a friend request
-# This route allows a user to accept or deny a friend request
-@application.route('/respond_request/<int:request_id>/<action>')
+@main.route('/friend-request/<int:request_id>/deny', methods=['POST'])
 @login_required
-def respond_request(request_id, action):
-    req = FriendRequest.query.get_or_404(request_id)
+def deny_request(request_id):
+    request = FriendRequest.query.get_or_404(request_id)
+    try:
+        current_user.deny_friend_request(request)
+        flash('Friend request denied.')
+    except ValueError as e:
+        flash(str(e))
+    return redirect(url_for('main.friend_requests'))
 
-    if req.receiver_id != current_user.id:
-        return "Not authorized"
+@main.route('/friend-request/<int:request_id>/cancel', methods=['POST'])
+@login_required
+def cancel_request(request_id):
+    request = FriendRequest.query.get_or_404(request_id)
+    try:
+        current_user.cancel_friend_request(request)
+        flash('Friend request canceled.')
+    except ValueError as e:
+        flash(str(e))
+    return redirect(url_for('main.friend_requests'))
 
-    if action == 'accept':
-        req.status = 'accepted'
-        # Add each other as friends if your app supports it
-        # create mutual Friendship entries if needed
-    elif action == 'deny':
-        req.status = 'denied'
+@main.route('/friend/remove/<int:user_id>', methods=['POST'])
+@login_required
+def remove_friend(user_id):
+    friend = User.query.get_or_404(user_id)
+    try:
+        current_user.remove_friend(friend)
+        flash('Friend removed.')
+    except ValueError as e:
+        flash(str(e))
+    return redirect(url_for('main.manage_friends'))
 
-    db.session.commit()
-    return redirect(url_for('friend_requests'))
-
-################# THIS ISNT BEING USED ATM #######################
-# Basic routes for serving HTML pages
-@application.route('/')
-def home():
-    # Check if user is logged in
-    if 'user_id' in session:
-        # User is logged in, serve logged-in version
-        return send_from_directory('.', 'static-introductory-loggedin.html')
-    else:
-        # User is not logged in, serve not-logged-in version
-        return send_from_directory('.', 'static-introductory-notloggedin.html')
-    
-@application.route('/dashboard')
-def dashboard():
-    # Only allow access if user is logged in
-    if 'user_id' not in session:
-        return redirect(url_for('login_page'))
-    return send_from_directory('.', 'static-introductory-loggedin.html')
-
-#######################################################################
