@@ -17,11 +17,13 @@ def introductory():
 
 # Route for the visualise data page
 @main.route('/visualise-my-data')
+@login_required
 def vis_my_data():
     return render_template('visualise_my_data.html')
 
 # Route for the visualise twin data page
 @main.route('/visualise-twin-data')
+@login_required
 def vis_twin_data():
     return render_template('visualise_twin_data.html')
 
@@ -30,6 +32,7 @@ TOOD: Do this using ORM User.query.all() instead of raw SQL
 """
 ########################## Display SQL data in html page ##########################
 @main.route('/visualise-friend-data', methods=['GET'])
+@login_required
 def vis_friend_data():
     # db_path = os.path.join(application.instance_path, 'carbon_copy.db')
     # conn = sqlite3.connect(db_path)
@@ -46,21 +49,25 @@ def vis_friend_data():
 
 # Route for upload data page
 @main.route('/upload-data')
+@login_required
 def upload_data():
     return render_template('upload-data-page.html')
 
 # Route for manual data page
 @main.route('/manual-data')
+@login_required
 def manual_data():
     return render_template('manual-data.html')
 
 # Route for settings page
 @main.route('/settings')
+@login_required
 def settings():
     return render_template('settings.html')
 
 # Route for share data page
 @main.route('/share-data')
+@login_required
 def share_data():
     return render_template('share-data.html')
 

@@ -42,7 +42,7 @@
                             <ul>
                                 <!--Visualise Data-->
                                 <li class="dropdown">
-                                    <a href="{{url_for('main.introductory')}}" class="">Visualise Data <i class="fa-solid fa-caret-down"></i></a>
+                                    <a href="#" class="">Visualise Data <i class="fa-solid fa-caret-down"></i></a>
                                     <div class="dropdown-content">
                                     <div class="dropdown-item">
                                         <a href="{{url_for('main.vis_my_data')}}">
@@ -96,15 +96,22 @@
                                         <div class="dropdown-item">
                                             <a href="{{url_for('main.find_friends')}}">
                                                 <span role="button" aria-label="Friends"><i class="fa-solid fa-user-group"></i></span>
-                                                <strong>Friends</strong><br>
+                                                <strong>Find Friends</strong><br>
                                                 <small>Find friends to compare with</small>
                                             </a>
                                         </div>
                                         <div class="dropdown-item">
                                             <a href="{{url_for('main.friend_requests')}}">
                                                 <span role="button" aria-label="Requests"><i class="fa-solid fa-bell"></i></span>
-                                                <strong>Requests</strong><br>
+                                                <strong>Friend Requests</strong><br>
                                                 <small>Manage share requests</small>
+                                            </a>
+                                        </div>
+                                        <div class="dropdown-item">
+                                            <a href="{{url_for('main.manage_friends')}}">
+                                                <span role="button" aria-label="Requests"><i class="fa-solid fa-user-pen"></i></span>
+                                                <strong>Manage Friends</strong><br>
+                                                <small>Manage who has access to your data</small>
                                             </a>
                                         </div>
                                     </div>
@@ -172,7 +179,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="block pl-4 hover:text-[#FA3980]">
+                            <a href="{{url_for('main.vis_friend_data')}}" class="block pl-4 hover:text-[#FA3980]">
                                 <i class="fa-solid fa-user-group mr-2"></i> Friends Data
                             </a>
                         </li>
@@ -195,13 +202,18 @@
                         <!-- Share Data -->
                         <li class="font-semibold text-[#FA3980] mt-4 mb-2">Share Data</li>
                         <li>
-                            <a href="#" class="block pl-4 hover:text-[#FA3980]">
-                                <i class="fa-solid fa-user-group mr-2"></i> Friends
+                            <a href="{{url_for('main.find_friends')}}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-user-group mr-2"></i> Find Friends
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="block pl-4 hover:text-[#FA3980]">
-                                <i class="fa-solid fa-bell mr-2"></i> Requests
+                            <a href="{{url_for('main.friend_requests')}}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-bell mr-2"></i> Friend Requests
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('main.manage_friends')}}" class="block pl-4 hover:text-[#FA3980]">
+                                <i class="fa-solid fa-user-pen mr-2"></i> Manage Friends
                             </a>
                         </li>
                         <hr class="my-3 border-gray-300">
