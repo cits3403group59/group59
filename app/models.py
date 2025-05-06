@@ -5,6 +5,7 @@ It defines the User and UserData models, which are used to store user informatio
 from app import db, login_manager  # Import SQLAlchemy instance from __init__.py
 from datetime import datetime
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash  # For password hashing
 
 # This function is used by Flask-Login to load the user from the database
 @login_manager.user_loader
@@ -43,6 +44,14 @@ class User(db.Model, UserMixin):
     # Outgoing and incoming friend requests
     sent_requests = db.relationship('FriendRequest', foreign_keys='FriendRequest.sender_id', backref='sender', lazy=True)
     received_requests = db.relationship('FriendRequest', foreign_keys='FriendRequest.receiver_id', backref='receiver', lazy=True)
+    
+    def set_password(self, password: str):
+        """Generate and store the password hash."""
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password: str) -> bool:
+        """Check if provided password matches stored hash."""
+        return check_password_hash(self.password_hash, password)
     
     # Getter method to retrieve the user's friends
     def get_user_friends(self):

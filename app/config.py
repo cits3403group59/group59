@@ -16,3 +16,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or default_db_path
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REMEMBER_COOKIE_DURATION = timedelta(hours=1)  # Keep user logged in for 1 hour
+    
+    # File upload settings
+    UPLOAD_FOLDER = os.path.join(basedir, 'static', 'profile_pics')
+    MAX_CONTENT_LENGTH = 2 * 1024 * 1024  # Limit upload size to 2MB
