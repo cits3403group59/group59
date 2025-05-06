@@ -4,11 +4,15 @@ A python file containing the routes for the Flask main.
 Contains all request handlers.
 """
 from . import main  # Import the blueprint
-from flask import render_template, flash, request
+from flask import render_template, flash, request, redirect, url_for
 from flask_login import login_required, current_user
-from app.models import FriendRequest
-from app.forms import FindFriendForm, RemoveFriendForm
+from app.models import FriendRequest, User
+from app.forms import FindFriendForm, RemoveFriendForm, SettingsForm
 from flask_wtf import FlaskForm
+from .controllers import (
+    accept_request, send_request, deny_request, cancel_request,
+    remove_friend, settings_controller
+)
 
 # Route for the introductory page
 @main.route('/')
@@ -55,9 +59,11 @@ def manual_data():
     return render_template('manual-data.html')
 
 # Route for settings page
-@main.route('/settings')
+@main.route('/settings', methods=['GET', 'POST'])
+@login_required
 def settings():
-    return render_template('settings.html')
+    # Pass to logic handler in controllers.py
+    return settings_controller()
 
 # Route for share data page
 @main.route('/share-data')
