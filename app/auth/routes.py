@@ -3,7 +3,7 @@ Routes for authentication.
 """
 from . import auth
 
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from app.forms import SignUpForm
 from app.models import User
 from app import db
@@ -35,27 +35,30 @@ def register():
     return render_template('signup_page.html', form=form)
 
 
+from flask import render_template, redirect, url_for, flash, request  # Add request import if missing
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = SignInForm()
+    
     if form.validate_on_submit():
         email = form.email.data
         password = form.password.data
         remember = form.remember.data
-
+        
         # Find user by email
         user = User.query.filter_by(email=email).first()
-
+        
         # Check if user exists and password is correct
         if user and check_password_hash(user.password_hash, password):
             # Log the user in and set the remember option
             login_user(user, remember=remember)
             flash('Login successful!', 'success')
             return redirect(url_for('main.introductory'))
+        
         flash('Invalid email or password.', 'danger')
-
+    
     return render_template('login_page.html', form=form)
-
 @auth.route('/logout')
 
 def logout():  

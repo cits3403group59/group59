@@ -20,6 +20,24 @@
                 <div class="h-2 w-2 rounded-full bg-white" data-question="3"></div>
                 <div class="h-2 w-2 rounded-full bg-white" data-question="4"></div>
                 <div class="h-2 w-2 rounded-full bg-white" data-question="5"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="6"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="7"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="8"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="9"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="10"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="11"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="12"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="13"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="14"></div>
+            </div>
+
+            <div class="form-group text-center">
+                <label class="form-label block mb-2" for="survey-date">
+                    Forgot to log in your data for yesterday or any other day? No Worries!<br>
+                    <span class="inline-block mt-2">Select Date to add/change data on a specific date:</span>
+                </label>
+                <input type="date" id="survey-date" name="survey-date" class="date-picker mx-auto"
+                    value="{{ today_date }}">
             </div>
 
             <!-- All Questions -->
@@ -27,7 +45,7 @@
                 <!-- Question 1 -->
                 <div class="question" data-question="1">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How long do you sleep per day?
+                        How long did you sleep today?
                     </div>
 
                     <div class="space-y-3">
@@ -57,7 +75,7 @@
                 <!-- Question 2 -->
                 <div class="question" data-question="2" style="display: none;">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How many cups of coffee do you drink per day?
+                        How many cups of coffee do you drink today?
                     </div>
                     <div class="space-y-3">
                         <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
@@ -79,6 +97,11 @@
                             data-value="4">
                             <strong>Option 4</strong><br>
                             <span class="text-gray-600">More than 3 cups</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">I did not drink any coffee at all today!</span>
                         </div>
                     </div>
                 </div>
@@ -130,7 +153,7 @@
                 <!-- Question 4 -->
                 <div class="question" data-question="4" style="display: none;">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How many steps do you take per day?
+                        How many steps did you take today?
                     </div>
                     <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
                         <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
@@ -224,249 +247,617 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="flex justify-between px-8 py-6">
-                <button id="prev-btn" class="btn bg-white hover:bg-gray-400 text-gray-700">Previous</button>
-                <button id="next-btn" class="btn bg-pink-500 hover:bg-pink-600">Next</button>
+                <!-- Question 6 -->
+                <div class="question" data-question="6" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How much was your screen time today?
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 1 Hour</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">1 - 2 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">2 - 3 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">3 - 4 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">4 - 5 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="6">
+                            <strong>Option 6</strong><br>
+                            <span class="text-gray-600">More than 5 hours</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question" data-question="7" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How much time did you spend at work today??
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 2 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">2 - 4 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">4 - 6 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">6 - 8 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">More than 8 hours!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question" data-question="8" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How much time did you spend studying today??
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 1 Hour</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">1 - 2 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">2 - 3 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">3 - 4 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">4 - 5 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="6">
+                            <strong>Option 6</strong><br>
+                            <span class="text-gray-600">5 - 6 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="7">
+                            <strong>Option 7</strong><br>
+                            <span class="text-gray-600">6 - 7 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="8">
+                            <strong>Option 8</strong><br>
+                            <span class="text-gray-600">7 - 8 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="9">
+                            <strong>Option 9</strong><br>
+                            <span class="text-gray-600">More than 8 hours?!?</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question" data-question="9" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How much time did you spend with your family and friends today??
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 1 Hour</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">1 - 2 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">2 - 3 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">More than 3 hours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question" data-question="10" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        Did you consume any alcohol today??
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">Yes</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">No</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question" data-question="11" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6">What time did you wake up today?</h2>
+                    <div class="mb-4">
+                        <input type="time" id="wake-up-time" class="text-input form-input"
+                            placeholder="Enter wake up time">
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question" data-question="12" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6">What was your main mode of transportation today?
+                    </h2>
+                    <div class="mb-4">
+                        <input type="text" id="transportation" class="text-input form-input"
+                            placeholder="E.g. Car, Bus, Walking, etc.">
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question" data-question="13" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6">What was your mood throughout the day?</h2>
+                    <div class="mb-4">
+                        <textarea id="mood" class="text-input form-input" rows="3"
+                            placeholder="Describe your mood today..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question" data-question="14" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6">What time did you go to bed today?</h2>
+                    <div class="mb-4">
+                        <input type="time" id="bed-time" class="text-input form-input" placeholder="Enter bed time">
+                    </div>
+                </div>
+
+                <div class="flex justify-between px-8 py-6">
+                    <button id="prev-btn" class="btn bg-white hover:bg-gray-400 text-gray-700">Previous</button>
+                    <button id="next-btn" class="btn bg-pink-500 hover:bg-pink-600">Next</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-    /* Remove the fixed height constraints and add fullscreen styling */
-    body {
-        min-height: 100vh;
-    }
+    <style>
+        /* Remove the fixed height constraints and add fullscreen styling */
+        body {
+            min-height: 100vh;
+        }
 
-    /* Styling for the page background */
-    .bg-pink-50 {
-        background-color: #fdf2f8;
-    }
+        /* Styling for the page background */
+        .bg-pink-50 {
+            background-color: #fdf2f8;
+        }
 
-    /* Selected option styling */
-    .option.selected {
-        background-color: #f3f4f6;
-        /* Light gray background */
-        border-left: 4px solid #FA3980;
-    }
+        /* Selected option styling */
+        .option.selected {
+            background-color: #f3f4f6;
+            /* Light gray background */
+            border-left: 4px solid #FA3980;
+        }
 
-    /* Button styling */
-    .btn {
-        background-color: #FA3980;
-        color: white;
-        border: none;
-        border-radius: 9999px;
-        padding: 10px 25px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.2s;
-    }
+        /* Button styling */
+        .btn {
+            background-color: #FA3980;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            padding: 10px 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
 
-    .btn:hover {
-        opacity: 0.9;
-    }
+        .btn:hover {
+            opacity: 0.9;
+        }
 
-    .btn:disabled {
-        background-color: #E5E7EB;
-        cursor: not-allowed;
-    }
+        .btn:disabled {
+            background-color: #E5E7EB;
+            cursor: not-allowed;
+        }
 
-    /* Progress dots styling */
-    .progress-dot.completed {
-        background-color: #a1e1a1;
-    }
-</style>
+        /* Progress dots styling */
+        .progress-dot.completed {
+            background-color: #a1e1a1;
+        }
 
-<script>
-    // Variables to track current question and selections
-    let currentQuestion = 1;
-    const totalQuestions = 5;
-    const userSelections = {};
+        /* Date picker styling */
+        .date-picker {
+            display: block;
+            margin: 0 auto;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            max-width: 200px;
+            text-align: center;
+        }
 
-    // DOM Elements
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const questions = document.querySelectorAll('.question');
-    const progressDots = document.querySelectorAll('.progress-dot');
+        .form-group {
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+    </style>
 
-    // Initialize
-    function init() {
-        // Set initial button state
-        updateButtonState();
+    <script>
+        // Variables to track current question and selections
+        let currentQuestion = 1;
+        const totalQuestions = 14;
+        const userSelections = {};
 
-        // Set initial progress indicator
-        updateProgressIndicator();
+        // DOM Elements
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const questions = document.querySelectorAll('.question');
+        const progressDots = document.querySelectorAll('.progress-dot');
 
-        // Add event listeners for options
-        document.querySelectorAll('.option').forEach(option => {
-            option.addEventListener('click', function () {
-                const questionNumber = parseInt(this.closest('.question').dataset.question);
-                const value = this.dataset.value;
+        // Initialize
+        function init() {
+            // Set initial button state
+            updateButtonState();
 
-                // Save selection
-                userSelections[questionNumber] = value;
+            // Set initial progress indicator
+            updateProgressIndicator();
 
-                // Mark as selected
-                this.closest('.question').querySelectorAll('.option').forEach(opt => {
-                    opt.classList.remove('selected');
+            // Set default date to today and add event listeners for date changes
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('survey-date');
+            if (dateInput) {
+                dateInput.value = today;
+
+                // Set max date to today to prevent future date selection
+                dateInput.setAttribute('max', today);
+
+                // Add change listener for date picker
+                dateInput.addEventListener('change', function () {
+                    // Validate the selected date isn't in the future
+                    const selectedDate = new Date(this.value);
+                    const currentDate = new Date();
+
+                    // Reset time portion for accurate comparison
+                    currentDate.setHours(0, 0, 0, 0);
+
+                    if (selectedDate > currentDate) {
+                        alert("You cannot select future dates. Please select today or a past date.");
+                        this.value = today;
+                    } else {
+                        checkExistingData(this.value);
+                    }
                 });
-                this.classList.add('selected');
 
-                // If this is the last question, change Next to Submit
+                // Check for existing data on page load
+                checkExistingData(dateInput.value);
+            }
+
+            // Add event listeners for options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function () {
+                    const questionNumber = parseInt(this.closest('.question').dataset.question);
+                    const value = this.dataset.value;
+
+                    // Save selection
+                    userSelections[questionNumber] = value;
+
+                    // Mark as selected
+                    this.closest('.question').querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+
+                    // If this is the last question, change Next to Submit
+                    if (currentQuestion === totalQuestions) {
+                        nextBtn.textContent = 'Submit';
+                    }
+                });
+            });
+
+            // Add event listeners for text inputs (for questions 11-14)
+            document.querySelectorAll('.text-input').forEach(input => {
+                input.addEventListener('input', function () {
+                    const questionNumber = parseInt(this.closest('.question').dataset.question);
+                    userSelections[questionNumber] = this.value;
+                });
+            });
+
+            // Add click event for next button
+            nextBtn.addEventListener('click', function () {
                 if (currentQuestion === totalQuestions) {
-                    nextBtn.textContent = 'Submit';
+                    // This is the submit action
+                    submitForm();
+                } else {
+                    // Move to next question
+                    moveToQuestion(currentQuestion + 1);
                 }
             });
-        });
 
-        // Add click event for next button
-        nextBtn.addEventListener('click', function () {
-            if (currentQuestion === totalQuestions) {
-                // This is the submit action
-                submitForm();
-            } else {
-                // Move to next question
-                moveToQuestion(currentQuestion + 1);
-            }
-        });
-
-        // Add click event for previous button
-        prevBtn.addEventListener('click', function () {
-            if (currentQuestion > 1) {
-                moveToQuestion(currentQuestion - 1);
-            }
-        });
-
-        // Close button
-        document.querySelector('.close-btn').addEventListener('click', function () {
-            if (confirm('Are you sure you want to exit? Your progress will be lost.')) {
-                window.location.href = '{{url_for("main.introductory")}}';
-            }
-        });
-
-        // Progress dots click
-        progressDots.forEach(dot => {
-            dot.addEventListener('click', function () {
-                const questionNum = parseInt(this.dataset.question);
-                moveToQuestion(questionNum);
+            // Add click event for previous button
+            prevBtn.addEventListener('click', function () {
+                if (currentQuestion > 1) {
+                    moveToQuestion(currentQuestion - 1);
+                }
             });
-        });
-    }
 
-    // Move to a specific question
-    function moveToQuestion(questionNumber) {
-        // Hide current question
-        document.querySelector(`.question[data-question="${currentQuestion}"]`).style.display = 'none';
+            // Close button
+            document.querySelector('.close-btn').addEventListener('click', function () {
+                if (confirm('Are you sure you want to exit? Your progress will be lost.')) {
+                    window.location.href = '{{url_for("main.introductory")}}';
+                }
+            });
 
-        // Show new question
-        document.querySelector(`.question[data-question="${questionNumber}"]`).style.display = 'block';
+            // Progress dots click
+            progressDots.forEach(dot => {
+                dot.addEventListener('click', function () {
+                    const questionNum = parseInt(this.dataset.question);
+                    moveToQuestion(questionNum);
+                });
+            });
+        }
 
-        // Update current question
-        currentQuestion = questionNumber;
+        // Move to a specific question
+        function moveToQuestion(questionNumber) {
+            // Hide current question
+            document.querySelector(`.question[data-question="${currentQuestion}"]`).style.display = 'none';
+
+            // Show new question
+            document.querySelector(`.question[data-question="${questionNumber}"]`).style.display = 'block';
+
+            // Update current question
+            currentQuestion = questionNumber;
+
+            // Update progress indicator
+            updateProgressIndicator();
+
+            // Update button state
+            updateButtonState();
+        }
 
         // Update progress indicator
-        updateProgressIndicator();
+        function updateProgressIndicator() {
+            // First reset all dots to gray
+            document.querySelectorAll('[data-question]').forEach(dot => {
+                dot.classList.remove('bg-pink-500');
+                dot.classList.add('bg-white');
+            });
 
-        // Update button state
-        updateButtonState();
-    }
+            // Set the current question dot to pink
+            const currentDot = document.querySelector(`[data-question="${currentQuestion}"]`);
+            if (currentDot) {
+                currentDot.classList.remove('bg-white');
+                currentDot.classList.add('bg-pink-500');
+            }
 
-    // Update progress indicator
-    function updateProgressIndicator() {
-        // First reset all dots to gray
-        document.querySelectorAll('[data-question]').forEach(dot => {
-            dot.classList.remove('bg-pink-500');
-            dot.classList.add('bg-white');
-        });
-
-        // Set the current question dot to pink
-        const currentDot = document.querySelector(`[data-question="${currentQuestion}"]`);
-        if (currentDot) {
-            currentDot.classList.remove('bg-white');
-            currentDot.classList.add('bg-pink-500');
-        }
-
-        // Mark previous questions as completed (optional)
-        for (let i = 1; i < currentQuestion; i++) {
-            const completedDot = document.querySelector(`[data-question="${i}"]`);
-            if (completedDot && userSelections[i]) {
-                completedDot.classList.remove('bg-white');
-                completedDot.classList.add('bg-green-300');
+            // Mark previous questions as completed (optional)
+            for (let i = 1; i < currentQuestion; i++) {
+                const completedDot = document.querySelector(`[data-question="${i}"]`);
+                if (completedDot && userSelections[i]) {
+                    completedDot.classList.remove('bg-white');
+                    completedDot.classList.add('bg-green-300');
+                }
             }
         }
-    }
 
-    // Update button state
-    function updateButtonState() {
-        // Disable Previous button on first question
-        if (currentQuestion === 1) {
-            prevBtn.disabled = true;
-            prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
-        } else {
-            prevBtn.disabled = false;
-            prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        // Update button state
+        function updateButtonState() {
+            // Disable Previous button on first question
+            if (currentQuestion === 1) {
+                prevBtn.disabled = true;
+                prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                prevBtn.disabled = false;
+                prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            // Change Next to Submit on last question
+            if (currentQuestion === totalQuestions) {
+                nextBtn.textContent = 'Submit';
+                nextBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                nextBtn.classList.remove('bg-pink-500', 'hover:bg-pink-600');
+            } else {
+                nextBtn.textContent = 'Next';
+                nextBtn.classList.add('bg-pink-500', 'hover:bg-pink-600');
+                nextBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+            }
         }
 
-        // Change Next to Submit on last question
-        if (currentQuestion === totalQuestions) {
-            nextBtn.textContent = 'Submit';
-            nextBtn.classList.add('bg-green-500', 'hover:bg-green-600');
-            nextBtn.classList.remove('bg-pink-500', 'hover:bg-pink-600');
-        } else {
-            nextBtn.textContent = 'Next';
-            nextBtn.classList.add('bg-pink-500', 'hover:bg-pink-600');
-            nextBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+        // Process form submission
+        function submitForm() {
+            // Check if all questions have been answered
+            let allAnswered = true;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (userSelections[i] === undefined || userSelections[i] === '') {
+                    allAnswered = false;
+                    alert(`Please answer question ${i} before submitting.`);
+                    moveToQuestion(i);
+                    return;
+                }
+            }
+
+            if (allAnswered) {
+                // Get the selected date
+                const dateInput = document.getElementById('survey-date');
+                const selectedDate = dateInput ? dateInput.value : new Date().toISOString().split('T')[0];
+
+                // Add date to the data being sent
+                const formData = {
+                    ...userSelections,
+                    date: selectedDate
+                };
+
+                // Send data to server via fetch API
+                fetch('{{ url_for("main.submit_survey") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token() if csrf_token else "" }}'
+                    },
+                    body: JSON.stringify(formData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Show success message
+                            alert('Thank you for submitting your data!');
+                            // Redirect to introduction page
+                            window.location.href = '{{ url_for("main.introductory") }}';
+                        } else {
+                            // Show error message
+                            alert('Error: ' + (data.message || 'Something went wrong.'));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while submitting your data.');
+                    });
+            }
         }
-    }
 
-    // Process form submission
-    // Process form submission
-    function submitForm() {
-        // Check if all questions have been answered
-        const answeredAll = Object.keys(userSelections).length === totalQuestions;
-
-        if (answeredAll) {
-            // Send data to server via fetch API
-            fetch('{{ url_for("main.submit_survey") }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Include CSRF token if your app uses it
-                    'X-CSRFToken': '{{ csrf_token() if csrf_token else "" }}'
-                },
-                body: JSON.stringify(userSelections)
-            })
+        // Function to check if data exists for a date
+        function checkExistingData(date) {
+            fetch(`/check-survey-data?date=${date}`)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        // Show success message
-                        alert('Thank you for submitting your data!');
-                        // Redirect to introduction page
-                        window.location.href = '{{ url_for("main.introductory") }}';
+                    if (data.exists) {
+                        // Populate form with existing data
+                        for (let i = 1; i <= totalQuestions; i++) {
+                            if (data.survey[i] !== null) {
+                                userSelections[i] = data.survey[i].toString();
+                            }
+                        }
+
+                        // Update the UI to reflect loaded data
+                        updateSelectedOptions();
+                        updateTextInputs();
                     } else {
-                        // Show error message
-                        alert('Error: ' + (data.message || 'Something went wrong.'));
+                        // Reset form for new entry
+                        resetForm();
                     }
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while submitting your data.');
+                    console.error('Error checking existing data:', error);
                 });
-        } else {
-            // Find first unanswered question
-            for (let i = 1; i <= totalQuestions; i++) {
-                if (!userSelections[i]) {
-                    alert(`Please answer question ${i} before submitting.`);
-                    moveToQuestion(i);
-                    break;
+        }
+
+        // Function to update the UI for selected options
+        function updateSelectedOptions() {
+            // First, deselect all options
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Then mark selected options based on userSelections
+            for (const questionNum in userSelections) {
+                if (parseInt(questionNum) <= 10) { // Only for multiple choice questions
+                    const selectedValue = userSelections[questionNum];
+                    const question = document.querySelector(`.question[data-question="${questionNum}"]`);
+
+                    if (question) {
+                        const option = question.querySelector(`.option[data-value="${selectedValue}"]`);
+                        if (option) {
+                            option.classList.add('selected');
+                        }
+                    }
                 }
             }
         }
-    }
 
-    // Initialize the form
-    document.addEventListener('DOMContentLoaded', init);
-</script>
-{% endblock %}
+        // Function to update text inputs with loaded data
+        function updateTextInputs() {
+            // Update wake-up time
+            const wakeUpInput = document.getElementById('wake-up-time');
+            if (wakeUpInput && userSelections[11]) {
+                wakeUpInput.value = userSelections[11];
+            }
+
+            // Update transportation
+            const transportationInput = document.getElementById('transportation');
+            if (transportationInput && userSelections[12]) {
+                transportationInput.value = userSelections[12];
+            }
+
+            // Update mood
+            const moodInput = document.getElementById('mood');
+            if (moodInput && userSelections[13]) {
+                moodInput.value = userSelections[13];
+            }
+
+            // Update bed time
+            const bedTimeInput = document.getElementById('bed-time');
+            if (bedTimeInput && userSelections[14]) {
+                bedTimeInput.value = userSelections[14];
+            }
+        }
+
+        // Function to reset the form
+        function resetForm() {
+            // Clear userSelections
+            for (let i = 1; i <= totalQuestions; i++) {
+                delete userSelections[i];
+            }
+
+            // Deselect all options
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Clear all text inputs
+            document.querySelectorAll('.text-input').forEach(input => {
+                input.value = '';
+            });
+        }
+
+        // Initialize the form
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+    {% endblock %}
