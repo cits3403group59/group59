@@ -133,37 +133,10 @@ class UserData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    #carbon_footprint = db.Column(db.Float, nullable=False)
-    
-    
-    # Survey data
-    sleep_hours = db.Column(db.Integer, nullable=True)  # Question 1
-    coffee_intake = db.Column(db.Integer, nullable=True)  # Question 2
-    social_media = db.Column(db.Integer, nullable=True)  # Question 3
-    daily_steps = db.Column(db.Integer, nullable=True)  # Question 4
-    exercise_minutes = db.Column(db.Integer, nullable=True)  # Question 5
+    carbon_footprint = db.Column(db.Float, nullable=False)
     
     def __repr__(self):
         return f'<UserData {self.date} - {self.carbon_footprint}>'
-    
-    @classmethod
-    def from_form_data(cls,user_id, form_data):
-        """
-        Creates a new UserData instance from the questionnaire from data
-        which is a dictionary from JavaScript.
-        """
-        return cls(
-            user_id = user_id,
-            date=datetime.now().date(),
-            #carbon_footprint=0.0,
-            sleep_hours = int(form_data.get('1')),
-            coffee_intake = int(form_data.get('2')),
-            social_media = int(form_data.get('3')),
-            daily_steps = int(form_data.get('4')),
-            exercise_minutes = int(form_data.get('5'))
-        )
-    
-    
 
 # New model for pending friend requests
 class FriendRequest(db.Model):
