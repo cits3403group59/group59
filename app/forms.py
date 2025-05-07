@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, DateField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, InputRequired
+from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, InputRequired, Optional
 from datetime import date
 from wtforms.fields import DateField
+from flask_wtf.file import FileField, FileAllowed
 
 
 class SignInForm(FlaskForm):
@@ -36,3 +37,33 @@ class FindFriendForm(FlaskForm):
     
 class RemoveFriendForm(FlaskForm):
     submit = SubmitField('Remove Friend')
+
+class SettingsForm(FlaskForm):
+    # Personal Info
+    first_name = StringField(
+        'First Name',
+        validators=[DataRequired(message='Please enter your first name')]
+    )
+    last_name = StringField(
+        'Last Name',
+        validators=[DataRequired(message='Please enter your last name')]
+    )
+    profile_image = FileField(
+        'Profile Picture',
+        validators=[
+            Optional(), FileAllowed(['jpg', 'png'], message='Only JPG and PNG files are allowed')
+        ]
+    )
+    email = StringField(
+        'Email',
+        validators=[
+            DataRequired(message='Please enter your email address'),
+            Email(message='Please enter a valid email address')
+        ]
+    )
+    password = PasswordField('New Password', validators=[Optional()])
+    confirm_password = PasswordField(
+        'Confirm Password',
+        validators=[Optional(), EqualTo('password', message='Passwords must match')]
+    )
+    submit = SubmitField('Update Settings')

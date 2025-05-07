@@ -115,10 +115,23 @@
                         <!--Right: Navigate to Sign In and Settings Page-->
                         <div class="flex space-x-4 text-xl hidden md:block">
                             <ul>
-                                {% if current_user.is_authenticated %}
-                                <!-- User is logged in -->
-                                <li class="dropdown" style="margin-left:auto">
-                                    <a href="{{ url_for('main.settings') }}">{{ current_user.first_name }} {{ current_user.last_name }}<i class="fa-solid fa-caret-down"></i></a>
+                            {% if current_user.is_authenticated %}
+                                <li class="dropdown list-none">
+                                    <a href="{{ url_for('main.settings') }}" class="flex items-center space-x-2">
+                                    {% if current_user.profile_image and current_user.profile_image != 'default.png' %}
+                                       <img src="{{ url_for('static', filename='profile_pics/' ~ current_user.profile_image) }}"
+                                           alt="Avatar"
+                                           class="w-8 h-8 rounded-full object-cover">
+                                    {% else %}
+                                       <div class="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white font-bold">
+                                        {{ current_user.first_name[0] }}{{ current_user.last_name[0] }}
+                                       </div>
+                                    {% endif %}
+                                      <span class="font-medium">{{ current_user.first_name }} {{  current_user.last_name }}</span>
+                                      <i class="fa-solid fa-caret-down"></i>
+                                    </a>
+
+
                                     <div class="dropdown-content">
                                         <a href="{{ url_for('main.settings') }}#account" class="dropdown-item">
                                             <strong>Manage Account</strong><br>
@@ -128,10 +141,10 @@
                                             <strong>Manage Profile</strong><br>
                                             <small>Update profile picture and profile settings</small>
                                         </a>
-                                        <a href="{{ url_for('main.settings') }}#connections" class="dropdown-item">
+                                        {# <a href="{{ url_for('main.settings') }}#connections" class="dropdown-item">
                                             <strong>Manage Connections</strong><br>
                                             <small>Manage connected applications and devices</small>
-                                        </a>
+                                        </a> #}
                                         <a href="{{ url_for('auth.logout') }}" class="dropdown-item">
                                             <span role="button" aria-label="Logout"><i class="fa-solid fa-sign-out-alt"></i></span>
                                             <strong>Logout</strong><br>
