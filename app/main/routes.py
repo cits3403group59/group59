@@ -4,9 +4,9 @@ A python file containing the routes for the Flask main.
 Contains all request handlers.
 """
 from . import main  # Import the blueprint
-from flask import render_template, flash, request, redirect, url_for
+from flask import render_template, flash, request, redirect, url_for, jsonify
 from flask_login import login_required, current_user
-from app.models import FriendRequest, User
+from app.models import FriendRequest, User, UserData
 from app.forms import FindFriendForm, RemoveFriendForm, SettingsForm
 from flask_wtf import FlaskForm
 from .controllers import (
@@ -57,6 +57,25 @@ def upload_data():
 @main.route('/manual-data')
 def manual_data():
     return render_template('manual-data.html')
+
+
+@main.route('/submit-survey', methods=['POST'])
+@login_required
+def submit_survey():
+    """Handle submission of the manual data entry survey"""
+    # Get the form data from the JavaScript
+    form_data = request.get_json()
+    
+    # Create a new survey record
+    survey = UserData.from_form_data(current_user.id, form_data)
+    
+    # Save to database
+    from app import db
+    db.session.add(survey)
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "Survey data saved successfully"})
+
 
 # Route for settings page
 @main.route('/settings', methods=['GET', 'POST'])
