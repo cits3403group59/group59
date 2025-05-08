@@ -148,11 +148,13 @@ class UserData(db.Model):
     social_time = db.Column(db.Integer, nullable=True) # Question 9
     alcohol = db.Column(db.Integer, nullable=True) # Question 10
     
-    # New text input fields (questions 11-14)
+    # New text input fields (questions 11-15)
     wake_up_time = db.Column(db.String(10), nullable=True)
     transportation = db.Column(db.String(100), nullable=True)
     mood = db.Column(db.Text, nullable=True)
-    bed_time = db.Column(db.String(10), nullable=True)    
+    bed_time = db.Column(db.String(10), nullable=True)
+    money_spent = db.Column(db.Float, nullable=True)
+    
     
     
     def __repr__(self):
@@ -165,6 +167,15 @@ class UserData(db.Model):
         which is a dictionary from JavaScript.
         """
         selected_date = datetime.strptime(form_data.get('date', datetime.now().strftime('%Y-%m-%d')), '%Y-%m-%d').date()
+        
+        money_spent_value = form_data.get('15')
+        if money_spent_value:
+            try:
+                money_spent = float(money_spent_value)
+            except ValueError:
+                money_spent = None
+        else:
+            money_spent = None
         
         return cls(
             user_id=user_id,
@@ -182,7 +193,8 @@ class UserData(db.Model):
             wake_up_time=form_data.get('11'),
             transportation=form_data.get('12'),
             mood=form_data.get('13'),
-            bed_time=form_data.get('14')       
+            bed_time=form_data.get('14'),
+            money_spent=money_spent
         )
     
     

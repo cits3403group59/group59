@@ -1,0 +1,173 @@
+/* Remove the fixed height constraints and add fullscreen styling */
+body {
+    min-height: 100vh;
+}
+
+/* Styling for the page background */
+.bg-pink-50 {
+    background-color: #fdf2f8;
+}
+
+/* Button styling for Next/Previous buttons */
+.btn {
+    padding: 10px 25px;
+    cursor: pointer;
+    font-weight: 600; /* Semibold */
+    transition: all 0.2s;
+    border-radius: 9999px;
+    border: none;
+    font-size: 0.9375rem; /* 15px */
+    min-width: 100px; /* Ensure consistent width */
+}
+
+/* Previous button styles - white with gray text */
+#prev-btn {
+    background-color: white;
+    color: #4B5563; /* gray-700 */
+    border: 1px solid #E5E7EB; /* gray-200 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#prev-btn:hover {
+    background-color: #F9FAFB; /* gray-50 */
+}
+
+/* Next button styles - pink with white text */
+#next-btn {
+    background-color: #FA3980; /* Bright pink color from screenshots */
+    color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#next-btn:hover {
+    background-color: #f81d72; /* Slightly darker on hover */
+}
+
+/* Button container styling */
+.flex.justify-between.px-8.py-6 {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Submit button (when Next becomes Submit) */
+#next-btn.submit {
+    background-color: #FA3980;
+}
+
+/* Disabled button state */
+.btn:disabled {
+    background-color: #E5E7EB;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Tab button styling (for Manual/From Device) */
+.tab-buttons {
+    display: flex;
+    border-radius: 9999px;
+    overflow: hidden;
+    background-color: #F3F4F6; /* gray-100 */
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.tab-button {
+    padding: 10px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    transition: all 0.2s;
+}
+
+.tab-button.active {
+    background-color: #FA3980;
+    color: white;
+    border-radius: 9999px;
+}
+
+/* Progress dots styling */
+[data-question].bg-pink-500 {
+    background-color: #FA3980;
+}
+
+.progress-dot.completed {
+    background-color: #a1e1a1;
+}
+
+/* Highlight selected options with pink left border */
+.option.selected {
+    background-color: #f3f4f6 !important;
+    border-left: 4px solid #FA3980 !important;
+    font-weight: bold !important;
+}
+
+/* Date picker styling */
+.date-picker {
+    display: block;
+    margin: 0 auto;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    max-width: 200px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+}
+
+/* Text input styling */
+.text-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+}
+
+/* Question styling */
+.question {
+    margin-bottom: 1rem;
+}
+
+/* Option hover effect */
+.option:hover {
+    background-color: #f9fafb;
+}
+
+/* Centered input container styling */
+.mb-4.flex.justify-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Styling for all text inputs */
+.text-input.form-input {
+    width: 80%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid #d1d5db;
+    font-size: 1rem;
+}
+
+/* Additional styling for textareas */
+textarea.text-input.form-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Focus state for inputs */
+.text-input.form-input:focus {
+    outline: none;
+    border-color: #FF4D94;
+    box-shadow: 0 0 0 3px rgba(255, 77, 148, 0.2);
+}
