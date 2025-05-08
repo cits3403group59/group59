@@ -34,9 +34,6 @@ def register():
         return redirect(url_for('auth.login'))
     return render_template('signup_page.html', form=form)
 
-
-from flask import render_template, redirect, url_for, flash, request  # Add request import if missing
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = SignInForm()
