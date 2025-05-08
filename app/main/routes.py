@@ -13,6 +13,7 @@ from .controllers import (
     accept_request, send_request, deny_request, cancel_request,
     remove_friend, settings_controller
 )
+from datetime import datetime
 
 # Route for the introductory page
 @main.route('/')
@@ -66,15 +67,87 @@ def submit_survey():
     # Get the form data from the JavaScript
     form_data = request.get_json()
     
-    # Create a new survey record
-    survey = UserData.from_form_data(current_user.id, form_data)
+    # Parse the date from form data or use current date
+    date_str = form_data.get('date', datetime.now().strftime('%Y-%m-%d'))
+    selected_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    
+    # Validate that the selected date is not in the future
+    if selected_date > datetime.now().date():
+        return jsonify({
+            "success": False, 
+            "message": "Cannot submit data for future dates."
+        }), 400
+    
+    # Check if entry already exists for this user and date
+    existing_entry = UserData.query.filter_by(
+        user_id=current_user.id,
+        date=selected_date
+    ).first()
+    
+    from app import db
+    
+    if existing_entry:
+        # Update existing entry
+        existing_entry.sleep_hours = int(form_data.get('1'))
+        existing_entry.coffee_intake = int(form_data.get('2'))
+        existing_entry.social_media = int(form_data.get('3'))
+        existing_entry.daily_steps = int(form_data.get('4'))
+        existing_entry.exercise_minutes = int(form_data.get('5'))
+        existing_entry.screen_time = int(form_data.get('6'))
+        existing_entry.work_time = int(form_data.get('7'))
+        existing_entry.study_time = int(form_data.get('8'))
+        existing_entry.social_time = int(form_data.get('9'))
+        existing_entry.alcohol = int(form_data.get('10'))
+        
+        # Update text input fields
+        existing_entry.wake_up_time = form_data.get('11')
+        existing_entry.transportation = form_data.get('12')
+        existing_entry.mood = form_data.get('13')
+        existing_entry.bed_time = form_data.get('14')
+    else:
+        # Create a new survey record
+        survey = UserData.from_form_data(current_user.id, form_data)
+        db.session.add(survey)
     
     # Save to database
-    from app import db
-    db.session.add(survey)
     db.session.commit()
     
     return jsonify({"success": True, "message": "Survey data saved successfully"})
+
+@main.route('/check-survey-data')
+@login_required
+def check_survey_data():
+    date_str = request.args.get('date', datetime.now().strftime('%Y-%m-%d'))
+    selected_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    
+    # Check if entry exists for this user and date
+    existing_entry = UserData.query.filter_by(
+        user_id=current_user.id,
+        date=selected_date
+    ).first()
+    
+    if existing_entry:
+        return jsonify({
+            "exists": True,
+            "survey": {
+                "1": existing_entry.sleep_hours,
+                "2": existing_entry.coffee_intake,
+                "3": existing_entry.social_media,
+                "4": existing_entry.daily_steps,
+                "5": existing_entry.exercise_minutes,
+                "6": existing_entry.screen_time,
+                "7": existing_entry.work_time,
+                "8": existing_entry.study_time,
+                "9": existing_entry.social_time,
+                "10": existing_entry.alcohol,
+                "11": existing_entry.wake_up_time,
+                "12": existing_entry.transportation,
+                "13": existing_entry.mood,
+                "14": existing_entry.bed_time
+            }
+        })
+    else:
+        return jsonify({"exists": False})
 
 
 # Route for settings page

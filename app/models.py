@@ -142,6 +142,18 @@ class UserData(db.Model):
     social_media = db.Column(db.Integer, nullable=True)  # Question 3
     daily_steps = db.Column(db.Integer, nullable=True)  # Question 4
     exercise_minutes = db.Column(db.Integer, nullable=True)  # Question 5
+    screen_time = db.Column(db.Integer, nullable=True) # Question 6
+    work_time = db.Column(db.Integer, nullable=True) # Question 7
+    study_time = db.Column(db.Integer, nullable=True) # Question 8
+    social_time = db.Column(db.Integer, nullable=True) # Question 9
+    alcohol = db.Column(db.Integer, nullable=True) # Question 10
+    
+    # New text input fields (questions 11-14)
+    wake_up_time = db.Column(db.String(10), nullable=True)
+    transportation = db.Column(db.String(100), nullable=True)
+    mood = db.Column(db.Text, nullable=True)
+    bed_time = db.Column(db.String(10), nullable=True)    
+    
     
     def __repr__(self):
         return f'<UserData {self.date} - {self.carbon_footprint}>'
@@ -152,15 +164,25 @@ class UserData(db.Model):
         Creates a new UserData instance from the questionnaire from data
         which is a dictionary from JavaScript.
         """
+        selected_date = datetime.strptime(form_data.get('date', datetime.now().strftime('%Y-%m-%d')), '%Y-%m-%d').date()
+        
         return cls(
-            user_id = user_id,
-            date=datetime.now().date(),
-            #carbon_footprint=0.0,
-            sleep_hours = int(form_data.get('1')),
-            coffee_intake = int(form_data.get('2')),
-            social_media = int(form_data.get('3')),
-            daily_steps = int(form_data.get('4')),
-            exercise_minutes = int(form_data.get('5'))
+            user_id=user_id,
+            date=selected_date,
+            sleep_hours=int(form_data.get('1')),
+            coffee_intake=int(form_data.get('2')),
+            social_media=int(form_data.get('3')),
+            daily_steps=int(form_data.get('4')),
+            exercise_minutes=int(form_data.get('5')),
+            screen_time=int(form_data.get('6')),
+            work_time=int(form_data.get('7')),
+            study_time=int(form_data.get('8')),
+            social_time=int(form_data.get('9')),
+            alcohol=int(form_data.get('10')),
+            wake_up_time=form_data.get('11'),
+            transportation=form_data.get('12'),
+            mood=form_data.get('13'),
+            bed_time=form_data.get('14')       
         )
     
     
