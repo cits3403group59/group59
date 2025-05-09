@@ -104,6 +104,13 @@ def submit_survey():
         existing_entry.transportation = form_data.get('12')
         existing_entry.mood = form_data.get('13')
         existing_entry.bed_time = form_data.get('14')
+        money_spent_value = form_data.get('15')
+        if money_spent_value:
+            try:
+                existing_entry.money_spent = float(money_spent_value)
+            except ValueError:
+                existing_entry.money_spent = None
+        
     else:
         # Create a new survey record
         survey = UserData.from_form_data(current_user.id, form_data)
@@ -143,7 +150,8 @@ def check_survey_data():
                 "11": existing_entry.wake_up_time,
                 "12": existing_entry.transportation,
                 "13": existing_entry.mood,
-                "14": existing_entry.bed_time
+                "14": existing_entry.bed_time,
+                "15": existing_entry.money_spent
             }
         })
     else:
