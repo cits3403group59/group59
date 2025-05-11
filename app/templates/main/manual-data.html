@@ -458,14 +458,72 @@
                     </div>
                 </div>
 
-                <!-- Question 13 -->
+                <!-- Question 13 - Mood with options -->
                 <div class="question" data-question="13" style="display: none;">
                     <h2 class="text-center text-2xl font-bold mb-6">What was your mood throughout the day?<i
                             class="fa-solid fa-face-laugh-beam" aria-hidden="true"></i>
                     </h2>
-                    <div class="mb-4 flex justify-center">
-                        <textarea id="mood" class="text-input form-input w-4/5 max-w-md mx-auto" rows="3"
-                            placeholder="Describe your mood today..."></textarea>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Happy</strong><br>
+                            <span class="text-gray-600">Feeling joyful, content, and positive</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Calm</strong><br>
+                            <span class="text-gray-600">Peaceful, relaxed, and at ease</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Energetic</strong><br>
+                            <span class="text-gray-600">Full of energy, motivated, and enthusiastic</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                        data-value="4">
+                            <strong>Neutral</strong><br>
+                            <span class="text-gray-600">Neither particularly good nor bad</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Tired</strong><br>
+                            <span class="text-gray-600">Feeling exhausted or lacking energy</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="6">
+                            <strong>Stressed</strong><br>
+                            <span class="text-gray-600">Feeling overwhelmed or under pressure</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="7">
+                            <strong>Anxious</strong><br>
+                            <span class="text-gray-600">Feeling worried or nervous</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="8">
+                            <strong>Sad</strong><br>
+                            <span class="text-gray-600">Feeling down, disappointed, or melancholy</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="9">
+                            <strong>Angry</strong><br>
+                            <span class="text-gray-600">Feeling frustrated, irritated, or upset</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="10">
+                            <strong>Focused</strong><br>
+                            <span class="text-gray-600">Concentrated, productive, and clear-minded</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="11">
+                            <strong>Grateful</strong><br>
+                            <span class="text-gray-600">Feeling thankful and appreciative</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="12">
+                            <strong>Mixed</strong><br>
+                            <span class="text-gray-600">Various emotions throughout the day</span>
+                        </div>
                     </div>
                 </div>
 
@@ -485,10 +543,16 @@
                             class="fa-solid fa-money-bill" aria-hidden="true"></i>
                     </h2>
                     <div class="mb-4 flex justify-center">
-                        <input type="money" id="money-spent" class="text-input form-input w-4/5 max-w-md mx-auto"
-                            placeholder="Enter your total spending for the day in AUS$">
+                        <input type="text" id="money-spent" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter your total spending for the day in AUS$" 
+                            autocomplete="off"
+                            inputmode="decimal">
+                    </div>
+                    <div class="text-center text-sm text-gray-500">
+                        * Enter amount in Australian dollars (e.g., 45.50)
                     </div>
                 </div>
+
 
                 <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
                     <!-- Previous button: white oval with border (pink on hover) -->
