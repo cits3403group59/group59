@@ -2,17 +2,22 @@
 
 {% block title %}Carbon Copy - Manual Data Entry{% endblock %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+{% endblock %}
+
 {% block content %}
 <!-- Main Content - Questions -->
 <div class="min-h-screen bg-pink-50 pt-8 pb-16">
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold mb-2">Upload Data</h1>
         <p class="text-gray-600 mb-8">Enter your data - we will do the rest!</p>
-        
+
         <!-- Question Container -->
         <div class="question-container relative bg-white shadow-lg rounded-lg max-w-2xl mx-auto">
             <span class="close-btn absolute right-4 top-4 text-gray-500 hover:text-gray-900 text-2xl">&times;</span>
-            
+
             <!-- Progress Indicator -->
             <div class="flex justify-center space-x-2 py-4">
                 <div class="h-2 w-2 rounded-full bg-white" data-question="1"></div>
@@ -20,397 +25,489 @@
                 <div class="h-2 w-2 rounded-full bg-white" data-question="3"></div>
                 <div class="h-2 w-2 rounded-full bg-white" data-question="4"></div>
                 <div class="h-2 w-2 rounded-full bg-white" data-question="5"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="6"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="7"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="8"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="9"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="10"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="11"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="12"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="13"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="14"></div>
+                <div class="h-2 w-2 rounded-full bg-white" data-question="15"></div>
             </div>
-            
+
+            <div class="form-group text-center">
+                <label class="form-label block mb-2" for="survey-date">
+                    Forgot to log in your data for yesterday or any other day? No Worries!<br>
+                    <span class="inline-block mt-2">Select Date to add/change data on a specific date:</span>
+                </label>
+                <input type="date" id="survey-date" name="survey-date" class="date-picker mx-auto"
+                    value="{{ today_date }}">
+            </div>
+
             <!-- All Questions -->
             <div id="questions-wrapper" class="px-8 py-4">
                 <!-- Question 1 -->
                 <div class="question" data-question="1">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How long do you sleep per day?
+                        How long did you sleep today? <i class="fa-solid fa-bed" aria-hidden="true"></i>
                     </div>
-                    
+
                     <div class="space-y-3">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="1">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
                             <strong>Option 1</strong><br>
                             <span class="text-gray-600">Less than 6 hours</span>
                         </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="2">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
                             <strong>Option 2</strong><br>
                             <span class="text-gray-600">6 - 8 Hours</span>
                         </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
                             <strong>Option 3</strong><br>
                             <span class="text-gray-600">8 - 10 Hours</span>
                         </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="4">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
                             <strong>Option 4</strong><br>
                             <span class="text-gray-600">More than 10 hours</span>
                         </div>
                     </div>
                 </div>
-            
-            <!-- Question 2 -->
-            <div class="question" data-question="2" style="display: none;">
-                <div class="text-center text-2xl font-bold mb-6">
-                    How many cups of coffee do you drink per day?
+
+                <!-- Question 2 -->
+                <div class="question" data-question="2" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How many cups of coffee do you drink today? <i class="fa-solid fa-mug-saucer"
+                            aria-hidden="true"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">1 Cup</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">2 Cups</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">3 Cups</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">More than 3 cups</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">I did not drink any coffee at all today!</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="space-y-3">
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="1">
-                        <strong>Option 1</strong><br>
-                        <span class="text-gray-600">1 Cup</span>
+
+                <!-- Question 3 -->
+                <div class="question" data-question="3" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        Which social media platform do you use the most? <i class="fa-solid fa-share-nodes"
+                            aria-hidden="true"></i>
                     </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="2">
-                        <strong>Option 2</strong><br>
-                        <span class="text-gray-600">2 Cups</span>
+                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">Instagram</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">Youtube</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">Whatsapp</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">Snapchat</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">Twitter / X</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="6">
+                            <strong>Option 6</strong><br>
+                            <span class="text-gray-600">Facebook</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="7">
+                            <strong>Option 7</strong><br>
+                            <span class="text-gray-600">Others</span>
+                        </div>
                     </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="3">
-                        <strong>Option 3</strong><br>
-                        <span class="text-gray-600">3 Cups</span>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question" data-question="4" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How many steps did you take today? <i class="fa-solid fa-shoe-prints" aria-hidden="true"></i>
                     </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="4">
-                        <strong>Option 4</strong><br>
-                        <span class="text-gray-600">More than 3 cups</span>
+                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 1000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">1001 - 2000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">2001 - 3000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">3001 - 4000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">4001 - 5000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="6">
+                            <strong>Option 6</strong><br>
+                            <span class="text-gray-600">5001 - 6000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="7">
+                            <strong>Option 7</strong><br>
+                            <span class="text-gray-600">6001 - 7000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="8">
+                            <strong>Option 8</strong><br>
+                            <span class="text-gray-600">7001 - 8000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="9">
+                            <strong>Option 9</strong><br>
+                            <span class="text-gray-600">8001 - 9000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="10">
+                            <strong>Option 10</strong><br>
+                            <span class="text-gray-600">9001 - 10000</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="11">
+                            <strong>Option 11</strong><br>
+                            <span class="text-gray-600">More than 10000</span>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question" data-question="5" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        Hours of exercise? <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 30 Minutes</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">31 - 60 minutes</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">61 - 90 minutes</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">More than 1 hour and 30 minutes</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">No exercise</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question" data-question="6" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How much was your screen time today? <i class="fa-solid fa-mobile-screen-button"
+                            aria-hidden="true"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 1 Hour</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">1 - 2 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">
+                                <span class="text-gray-600">2 - 3 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">3 - 4 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">4 - 5 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="6">
+                            <strong>Option 6</strong><br>
+                            <span class="text-gray-600">More than 5 hours</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question" data-question="7" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How much time did you spend at work today?? <i class="fa-solid fa-briefcase"
+                            aria-hidden="true"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 2 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">2 - 4 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">4 - 6 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">6 - 8 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">More than 8 hours!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question" data-question="8" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How much time did you spend studying today?? <i class="fa-solid fa-book" aria-hidden="true"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 1 Hour</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">1 - 2 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">2 - 3 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">3 - 4 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="5">
+                            <strong>Option 5</strong><br>
+                            <span class="text-gray-600">4 - 5 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="6">
+                            <strong>Option 6</strong><br>
+                            <span class="text-gray-600">5 - 6 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="7">
+                            <strong>Option 7</strong><br>
+                            <span class="text-gray-600">6 - 7 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="8">
+                            <strong>Option 8</strong><br>
+                            <span class="text-gray-600">7 - 8 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="9">
+                            <strong>Option 9</strong><br>
+                            <span class="text-gray-600">More than 8 hours?!?</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question" data-question="9" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        How much time did you spend with your family and friends today?? <i class="fa-solid fa-users"
+                            aria-hidden="true"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">0 - 1 Hour</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">1 - 2 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="3">
+                            <strong>Option 3</strong><br>
+                            <span class="text-gray-600">2 - 3 Hours</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="4">
+                            <strong>Option 4</strong><br>
+                            <span class="text-gray-600">More than 3 hours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question" data-question="10" style="display: none;">
+                    <div class="text-center text-2xl font-bold mb-6">
+                        Did you consume any alcohol today?? <i class="fa-solid fa-whiskey-glass" aria-hidden="true"></i>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="1">
+                            <strong>Option 1</strong><br>
+                            <span class="text-gray-600">Yes</span>
+                        </div>
+                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                            data-value="2">
+                            <strong>Option 2</strong><br>
+                            <span class="text-gray-600">No</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question" data-question="11" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6">What time did you wake up today? <i
+                            class="fa-solid fa-clock" aria-hidden="true"></i>
+                    </h2>
+                    <div class="mb-4">
+                        <input type="time" id="wake-up-time" class="text-input form-input"
+                            placeholder="Enter wake up time">
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question" data-question="12" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6">What was your main mode of transportation today? <i
+                            class="fa-solid fa-route" aria-hidden="true"></i>
+                    </h2>
+                    <div class="mb-4 flex justify-center">
+                        <input type="text" id="transportation" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="E.g. Car, Bus, Walking, etc.">
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question" data-question="13" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6">What was your mood throughout the day?<i
+                            class="fa-solid fa-face-laugh-beam" aria-hidden="true"></i>
+                    </h2>
+                    <div class="mb-4 flex justify-center">
+                        <textarea id="mood" class="text-input form-input w-4/5 max-w-md mx-auto" rows="3"
+                            placeholder="Describe your mood today..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question" data-question="14" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6">What time did you go to bed today? <i
+                            class="fa-solid fa-person-booth" aria-hidden="true"></i>
+                    </h2>
+                    <div class="mb-4">
+                        <input type="time" id="bed-time" class="text-input form-input" placeholder="Enter bed time">
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question" data-question="15" style="display: none;">
+                    <h2 class="text-center text-2xl font-bold mb-6"> How much did you spend today? <i
+                            class="fa-solid fa-money-bill" aria-hidden="true"></i>
+                    </h2>
+                    <div class="mb-4 flex justify-center">
+                        <input type="money" id="money-spent" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter your total spending for the day in AUS$">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+                    <!-- Previous button: white oval with border (pink on hover) -->
+                    <button id="prev-btn" style="background-color: white; color: #4B5563; border: 1px solid #E5E7EB; font-weight: 600; font-size: 1rem; cursor: pointer; padding: 0.5rem 2rem; border-radius: 50px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#FF4D94'; this.style.color='white'; this.style.borderColor='#FF4D94';" onmouseout="this.style.backgroundColor='white'; this.style.color='#4B5563'; this.style.borderColor='#E5E7EB';">Previous</button>
+                    
+                    <!-- Next button: solid pink oval -->
+                    <button id="next-btn" style="background-color: #FF4D94; color: white; border: none; padding: 0.5rem 2rem; font-weight: 600; border-radius: 50px; font-size: 1rem; cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Next</button>
                 </div>
             </div>
-            
-            <!-- Question 3 -->
-            <div class="question" data-question="3" style="display: none;">
-                <div class="text-center text-2xl font-bold mb-6">
-                    Which social media platform do you use the most?
-                </div>
-                <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="1">
-                        <strong>Option 1</strong><br>
-                        <span class="text-gray-600">Instagram</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="2">
-                        <strong>Option 2</strong><br>
-                        <span class="text-gray-600">Youtube</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="3">
-                        <strong>Option 3</strong><br>
-                        <span class="text-gray-600">Whatsapp</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="4">
-                        <strong>Option 4</strong><br>
-                        <span class="text-gray-600">Snapchat</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="5">
-                        <strong>Option 5</strong><br>
-                        <span class="text-gray-600">Twitter / X</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="6">
-                        <strong>Option 6</strong><br>
-                        <span class="text-gray-600">Facebook</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="7">
-                        <strong>Option 7</strong><br>
-                        <span class="text-gray-600">Others</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Question 4 -->
-            <div class="question" data-question="4" style="display: none;">
-                <div class="text-center text-2xl font-bold mb-6">
-                    How many steps do you take per day?
-                </div>
-                <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="1">
-                        <strong>Option 1</strong><br>
-                        <span class="text-gray-600">0 - 1000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="2">
-                        <strong>Option 2</strong><br>
-                        <span class="text-gray-600">1001 - 2000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="3">
-                        <strong>Option 3</strong><br>
-                        <span class="text-gray-600">2001 - 3000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="4">
-                        <strong>Option 4</strong><br>
-                        <span class="text-gray-600">3001 - 4000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="5">
-                        <strong>Option 5</strong><br>
-                        <span class="text-gray-600">4001 - 5000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="6">
-                        <strong>Option 6</strong><br>
-                        <span class="text-gray-600">5001 - 6000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="7">
-                        <strong>Option 7</strong><br>
-                        <span class="text-gray-600">6001 - 7000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="8">
-                        <strong>Option 8</strong><br>
-                        <span class="text-gray-600">7001 - 8000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="9">
-                        <strong>Option 9</strong><br>
-                        <span class="text-gray-600">8001 - 9000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="10">
-                        <strong>Option 10</strong><br>
-                        <span class="text-gray-600">9001 - 10000</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="11">
-                        <strong>Option 11</strong><br>
-                        <span class="text-gray-600">More than 10000</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Question 5 -->
-            <div class="question" data-question="5" style="display: none;">
-                <div class="text-center text-2xl font-bold mb-6">
-                    Hours of exercise?
-                </div>
-                <div class="space-y-3">
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="1">
-                        <strong>Option 1</strong><br>
-                        <span class="text-gray-600">0 - 30 Minutes</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="2">
-                        <strong>Option 2</strong><br>
-                        <span class="text-gray-600">31 - 60 minutes</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="3">
-                        <strong>Option 3</strong><br>
-                        <span class="text-gray-600">61 - 90 minutes</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="4">
-                        <strong>Option 4</strong><br>
-                        <span class="text-gray-600">More than 1 hour and 30 minutes</span>
-                    </div>
-                    <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer" data-value="5">
-                        <strong>Option 5</strong><br>
-                        <span class="text-gray-600">No exercise</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="flex justify-between px-8 py-6">
-            <button id="prev-btn" class="btn bg-white hover:bg-gray-400 text-gray-700">Previous</button>
-            <button id="next-btn" class="btn bg-pink-500 hover:bg-pink-600">Next</button>
         </div>
     </div>
 </div>
+
+<!-- Hidden div to store Flask template variables for JavaScript -->
+<div id="app-data" data-submit-url="{{ url_for('main.submit_survey') }}"
+    data-csrf-token="{{ csrf_token() if csrf_token else '' }}"
+    data-introductory-url="{{ url_for('main.introductory') }}">
 </div>
 
-<style>
-    /* Remove the fixed height constraints and add fullscreen styling */
-    body {
-        min-height: 100vh;
-    }
-    
-    /* Styling for the page background */
-    .bg-pink-50 {
-        background-color: #fdf2f8;
-    }
-    
-    /* Selected option styling */
-    .option.selected {
-        background-color: #f3f4f6; /* Light gray background */
-        border-left: 4px solid #FA3980;
-    }
-    
-    /* Button styling */
-    .btn {
-        background-color: #FA3980;
-        color: white;
-        border: none;
-        border-radius: 9999px;
-        padding: 10px 25px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.2s;
-    }
-    
-    .btn:hover {
-        opacity: 0.9;
-    }
-    
-    .btn:disabled {
-        background-color: #E5E7EB;
-        cursor: not-allowed;
-    }
-    
-    /* Progress dots styling */
-    .progress-dot.completed {
-        background-color: #a1e1a1;
-    }
-</style>
 
-<script>
-    // Variables to track current question and selections
-    let currentQuestion = 1;
-    const totalQuestions = 5;
-    const userSelections = {};
-    
-    // DOM Elements
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const questions = document.querySelectorAll('.question');
-    const progressDots = document.querySelectorAll('.progress-dot');
-    
-    // Initialize
-    function init() {
-        // Set initial button state
-        updateButtonState();
-        
-        // Set initial progress indicator
-        updateProgressIndicator();
-        
-        // Add event listeners for options
-        document.querySelectorAll('.option').forEach(option => {
-            option.addEventListener('click', function() {
-                const questionNumber = parseInt(this.closest('.question').dataset.question);
-                const value = this.dataset.value;
-                
-                // Save selection
-                userSelections[questionNumber] = value;
-                
-                // Mark as selected
-                this.closest('.question').querySelectorAll('.option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                this.classList.add('selected');
-                
-                // If this is the last question, change Next to Submit
-                if (currentQuestion === totalQuestions) {
-                    nextBtn.textContent = 'Submit';
-                }
-            });
-        });
-        
-        // Add click event for next button
-        nextBtn.addEventListener('click', function() {
-            if (currentQuestion === totalQuestions) {
-                // This is the submit action
-                submitForm();
-            } else {
-                // Move to next question
-                moveToQuestion(currentQuestion + 1);
-            }
-        });
-        
-        // Add click event for previous button
-        prevBtn.addEventListener('click', function() {
-            if (currentQuestion > 1) {
-                moveToQuestion(currentQuestion - 1);
-            }
-        });
-        
-        // Close button
-        document.querySelector('.close-btn').addEventListener('click', function() {
-            if (confirm('Are you sure you want to exit? Your progress will be lost.')) {
-                window.location.href = '{{url_for("main.introductory")}}';
-            }
-        });
-        
-        // Progress dots click
-        progressDots.forEach(dot => {
-            dot.addEventListener('click', function() {
-                const questionNum = parseInt(this.dataset.question);
-                moveToQuestion(questionNum);
-            });
-        });
-    }
-    
-    // Move to a specific question
-    function moveToQuestion(questionNumber) {
-        // Hide current question
-        document.querySelector(`.question[data-question="${currentQuestion}"]`).style.display = 'none';
-        
-        // Show new question
-        document.querySelector(`.question[data-question="${questionNumber}"]`).style.display = 'block';
-        
-        // Update current question
-        currentQuestion = questionNumber;
-        
-        // Update progress indicator
-        updateProgressIndicator();
-        
-        // Update button state
-        updateButtonState();
-    }
-    
-    // Update progress indicator
-    function updateProgressIndicator() {
-        // First reset all dots to gray
-        document.querySelectorAll('[data-question]').forEach(dot => {
-            dot.classList.remove('bg-pink-500');
-            dot.classList.add('bg-white');
-        });
-        
-        // Set the current question dot to pink
-        const currentDot = document.querySelector(`[data-question="${currentQuestion}"]`);
-        if (currentDot) {
-            currentDot.classList.remove('bg-white');
-            currentDot.classList.add('bg-pink-500');
-        }
-        
-        // Mark previous questions as completed (optional)
-        for (let i = 1; i < currentQuestion; i++) {
-            const completedDot = document.querySelector(`[data-question="${i}"]`);
-            if (completedDot && userSelections[i]) {
-                completedDot.classList.remove('bg-white');
-                completedDot.classList.add('bg-green-300');
-            }
-        }
-    }
-    
-    // Update button state
-    function updateButtonState() {
-        // Disable Previous button on first question
-        if (currentQuestion === 1) {
-            prevBtn.disabled = true;
-            prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
-        } else {
-            prevBtn.disabled = false;
-            prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-        }
-        
-        // Change Next to Submit on last question
-        if (currentQuestion === totalQuestions) {
-            nextBtn.textContent = 'Submit';
-            nextBtn.classList.add('bg-green-500', 'hover:bg-green-600');
-            nextBtn.classList.remove('bg-pink-500', 'hover:bg-pink-600');
-        } else {
-            nextBtn.textContent = 'Next';
-            nextBtn.classList.add('bg-pink-500', 'hover:bg-pink-600');
-            nextBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
-        }
-    }
-    
-    // Process form submission
-    function submitForm() {
-        // Check if all questions have been answered
-        const answeredAll = Object.keys(userSelections).length === totalQuestions;
-        
-        if (answeredAll) {
-            alert('Thank you for submitting your data!\n\nYour selections: ' + JSON.stringify(userSelections));
-            // In a real app, you would send this data to your server
-            // window.location.href = '{{url_for("main.introductory")}}';
-        } else {
-            // Find first unanswered question
-            for (let i = 1; i <= totalQuestions; i++) {
-                if (!userSelections[i]) {
-                    alert(`Please answer question ${i} before submitting.`);
-                    moveToQuestion(i);
-                    break;
-                }
-            }
-        }
-    }
-    
-    // Initialize the form
-    document.addEventListener('DOMContentLoaded', init);
-</script>
+<script src="{{ url_for('static', filename='form.js') }}"></script>
 {% endblock %}

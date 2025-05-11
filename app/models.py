@@ -133,10 +133,71 @@ class UserData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    carbon_footprint = db.Column(db.Float, nullable=False)
+    #carbon_footprint = db.Column(db.Float, nullable=False)
+    
+    
+    # Survey data
+    sleep_hours = db.Column(db.Integer, nullable=True)  # Question 1
+    coffee_intake = db.Column(db.Integer, nullable=True)  # Question 2
+    social_media = db.Column(db.Integer, nullable=True)  # Question 3
+    daily_steps = db.Column(db.Integer, nullable=True)  # Question 4
+    exercise_minutes = db.Column(db.Integer, nullable=True)  # Question 5
+    screen_time = db.Column(db.Integer, nullable=True) # Question 6
+    work_time = db.Column(db.Integer, nullable=True) # Question 7
+    study_time = db.Column(db.Integer, nullable=True) # Question 8
+    social_time = db.Column(db.Integer, nullable=True) # Question 9
+    alcohol = db.Column(db.Integer, nullable=True) # Question 10
+    
+    # New text input fields (questions 11-15)
+    wake_up_time = db.Column(db.String(10), nullable=True)
+    transportation = db.Column(db.String(100), nullable=True)
+    mood = db.Column(db.Text, nullable=True)
+    bed_time = db.Column(db.String(10), nullable=True)
+    money_spent = db.Column(db.Float, nullable=True)
+    
+    
     
     def __repr__(self):
         return f'<UserData {self.date} - {self.carbon_footprint}>'
+    
+    @classmethod
+    def from_form_data(cls,user_id, form_data):
+        """
+        Creates a new UserData instance from the questionnaire from data
+        which is a dictionary from JavaScript.
+        """
+        selected_date = datetime.strptime(form_data.get('date', datetime.now().strftime('%Y-%m-%d')), '%Y-%m-%d').date()
+        
+        money_spent_value = form_data.get('15')
+        if money_spent_value:
+            try:
+                money_spent = float(money_spent_value)
+            except ValueError:
+                money_spent = None
+        else:
+            money_spent = None
+        
+        return cls(
+            user_id=user_id,
+            date=selected_date,
+            sleep_hours=int(form_data.get('1')),
+            coffee_intake=int(form_data.get('2')),
+            social_media=int(form_data.get('3')),
+            daily_steps=int(form_data.get('4')),
+            exercise_minutes=int(form_data.get('5')),
+            screen_time=int(form_data.get('6')),
+            work_time=int(form_data.get('7')),
+            study_time=int(form_data.get('8')),
+            social_time=int(form_data.get('9')),
+            alcohol=int(form_data.get('10')),
+            wake_up_time=form_data.get('11'),
+            transportation=form_data.get('12'),
+            mood=form_data.get('13'),
+            bed_time=form_data.get('14'),
+            money_spent=money_spent
+        )
+    
+    
 
 # New model for pending friend requests
 class FriendRequest(db.Model):
