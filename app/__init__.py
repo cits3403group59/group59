@@ -19,7 +19,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = 'auth.login' # automatically redirect to login page if user is not logged in
     csrf = CSRFProtect(app)
 
     from .auth import auth as auth_blueprint
