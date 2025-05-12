@@ -123,6 +123,16 @@ class User(db.Model, UserMixin):
             db.session.commit()
         else:
             raise ValueError("This user is not your friend.")
+        
+    def get_data_between(self, start_date=None, end_date=None):
+        query = UserData.query.filter_by(user_id=self.id)
+
+        if start_date:
+            query = query.filter(UserData.date >= start_date)
+        if end_date:
+            query = query.filter(UserData.date <= end_date)
+
+        return query.order_by(UserData.date.asc()).all()
 
     def __repr__(self):
         return f'<User {self.email}>'
