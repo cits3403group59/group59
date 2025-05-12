@@ -15,20 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const options = document.querySelectorAll('.option');
     const closeBtn = document.querySelector('.close-btn');
 
-    // Force the styles in case they're not being picked up from CSS
-    if (prevBtn) {
-        prevBtn.style.backgroundColor = 'white';
-        prevBtn.style.color = '#4B5563';
-        prevBtn.style.border = '1px solid #E5E7EB';
-        prevBtn.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
-    }
-
-    if (nextBtn) {
-        nextBtn.style.backgroundColor = '#FA3980';
-        nextBtn.style.color = 'white';
-        nextBtn.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
-    }
-
     // --------- Add click handlers to options ---------
     if (options && options.length > 0) {
         console.log('Found', options.length, 'options - adding click handlers');
