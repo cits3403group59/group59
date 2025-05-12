@@ -34,9 +34,7 @@ def vis_my_data():
 def vis_twin_data():
     return render_template('visualise_twin_data.html')
 
-"""
-TOOD: Do this using ORM User.query.all() instead of raw SQL
-"""
+# Route for the visualise friend data page
 @main.route('/visualise-friend-data')
 @login_required
 def vis_friend_data():
