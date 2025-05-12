@@ -120,51 +120,55 @@
                         </div>
 
                         <!--Right: Navigate to Sign In and Settings Page-->
-                        <div class="flex space-x-4 text-xl hidden md:block">
-                            <ul>
-                            {% if current_user.is_authenticated %}
-                                <li class="dropdown list-none">
-                                    <a href="{{ url_for('main.settings') }}" class="flex items-center space-x-2">
-                                    {% if current_user.profile_image and current_user.profile_image != 'default.png' %}
-                                       <img src="{{ url_for('static', filename='profile_pics/' ~ current_user.profile_image) }}"
-                                           alt="Avatar"
-                                           class="w-8 h-8 rounded-full object-cover">
-                                    {% else %}
-                                       <div class="w-8 h-8 rounded-full bg-gray-400 flex items-center justify-center text-white font-bold">
-                                        {{ current_user.first_name[0] }}{{ current_user.last_name[0] }}
-                                       </div>
-                                    {% endif %}
-                                      <span class="font-medium">{{ current_user.first_name }} {{  current_user.last_name }}</span>
-                                      <i class="fa-solid fa-caret-down"></i>
-                                    </a>
-
-
-                                    <div class="dropdown-content">
-                                        <a href="{{ url_for('main.settings') }}#account" class="dropdown-item">
-                                            <strong>Manage Account</strong><br>
-                                            <small>Update contact information</small>
+                        <div class="hidden md:flex items-center space-x-4 text-xl">
+                            <ul class="flex items-center space-x-0 m-0 p-0 list-none">
+                                {% if current_user.is_authenticated %}
+                                    <!-- Username + Dropdown -->
+                                    <li class="dropdown list-none whitespace-nowrap">
+                                        <a href="{{ url_for('main.settings') }}" class="flex items-center space-x-0 whitespace-nowrap">
+                                            <span class="font-medium text-xl">
+                                                {{ current_user.first_name }} {{ current_user.last_name }}
+                                            </span>
+                                            <i class="fa-solid fa-caret-down"></i>
                                         </a>
-                                        <a href="{{ url_for('main.settings') }}#profile" class="dropdown-item">
-                                            <strong>Manage Profile</strong><br>
-                                            <small>Update profile picture and profile settings</small>
-                                        </a>
-                                        {# <a href="{{ url_for('main.settings') }}#connections" class="dropdown-item">
-                                            <strong>Manage Connections</strong><br>
-                                            <small>Manage connected applications and devices</small>
-                                        </a> #}
-                                        <a href="{{ url_for('auth.logout') }}" class="dropdown-item">
-                                            <span role="button" aria-label="Logout"><i class="fa-solid fa-sign-out-alt"></i></span>
-                                            <strong>Logout</strong><br>
-                                            <small>Sign out of your account</small>
-                                        </a>
-                                        <a href="{{ url_for('main.settings') }}#delete" class="dropdown-item text-red-600">
-                                            <span role="button" aria-label="Requests"><i class="fa-solid fa-trash"></i></span>
-                                            <strong>Delete Account</strong><br>
-                                            <small>Permanently delete account</small>
-                                        </a>
-                                    </div>
-                                </li>
-                            {% endif %}
+                                        <div class="dropdown-content">
+                                            <a href="{{ url_for('main.settings') }}#account" class="dropdown-item">
+                                                <strong>Manage Account</strong><br>
+                                                <small>Update contact information</small>
+                                            </a>
+                                            <a href="{{ url_for('main.settings') }}#profile" class="dropdown-item">
+                                                <strong>Manage Profile</strong><br>
+                                                <small>Update profile picture and profile settings</small>
+                                            </a>
+                                            {# <a href="{{ url_for('main.settings') }}#connections" class="dropdown-item">
+                                                <strong>Manage Connections</strong><br>
+                                                <small>Manage connected applications and devices</small>
+                                            </a> #}
+                                            <a href="{{ url_for('auth.logout') }}" class="dropdown-item">
+                                                <span role="button" aria-label="Logout"><i class="fa-solid fa-sign-out-alt"></i></span>
+                                                <strong>Logout</strong><br>
+                                                <small>Sign out of your account</small>
+                                            </a>
+                                            <a href="{{ url_for('main.settings') }}#delete" class="dropdown-item text-red-600">
+                                                <span role="button" aria-label="Delete Account"><i class="fa-solid fa-trash"></i></span>
+                                                <strong>Delete Account</strong><br>
+                                                <small>Permanently delete account</small>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <!-- Avatar separate -->
+                                    <li class="list-none">
+                                        {% if current_user.profile_image and current_user.profile_image != 'default.png' %}
+                                            <img src="{{ url_for('static', filename='profile_pics/' ~ current_user.profile_image) }}"
+                                                 alt="Avatar"
+                                                 class="h-13 w-13 rounded-full object-cover">
+                                        {% else %}
+                                            <div class="h-13 w-13 rounded-full bg-gray-400 flex items-center justify-center text-white font-bold text-sm">
+                                                {{ current_user.first_name[0] }}{{ current_user.last_name[0] }}
+                                            </div>
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
