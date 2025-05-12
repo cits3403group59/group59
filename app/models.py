@@ -136,24 +136,24 @@ class UserData(db.Model):
     #carbon_footprint = db.Column(db.Float, nullable=False)
     
     
-    # Survey data
-    sleep_hours = db.Column(db.Integer, nullable=True)  # Question 1
-    coffee_intake = db.Column(db.Integer, nullable=True)  # Question 2
-    social_media = db.Column(db.Integer, nullable=True)  # Question 3
-    daily_steps = db.Column(db.Integer, nullable=True)  # Question 4
-    exercise_minutes = db.Column(db.Integer, nullable=True)  # Question 5
-    screen_time = db.Column(db.Integer, nullable=True) # Question 6
-    work_time = db.Column(db.Integer, nullable=True) # Question 7
-    study_time = db.Column(db.Integer, nullable=True) # Question 8
-    social_time = db.Column(db.Integer, nullable=True) # Question 9
-    alcohol = db.Column(db.Integer, nullable=True) # Question 10
+     # Survey data - changed to String to store actual text values like "6-8 Hours", "Happy", etc.
+    sleep_hours = db.Column(db.String(100), nullable=True)  # Question 1 - stores text like "6-8 Hours"
+    coffee_intake = db.Column(db.String(100), nullable=True)  # Question 2 - stores text like "2 Cups"
+    social_media = db.Column(db.String(100), nullable=True)  # Question 3 - stores text like "Instagram"
+    daily_steps = db.Column(db.String(100), nullable=True)  # Question 4 - stores text like "5001-6000"
+    exercise_minutes = db.Column(db.String(100), nullable=True)  # Question 5 - stores text like "31-60 minutes"
+    screen_time = db.Column(db.String(100), nullable=True)  # Question 6 - stores text like "2-3 Hours"
+    work_time = db.Column(db.String(100), nullable=True)  # Question 7 - stores text like "6-8 Hours"
+    study_time = db.Column(db.String(100), nullable=True)  # Question 8 - stores text like "3-4 Hours"
+    social_time = db.Column(db.String(100), nullable=True)  # Question 9 - stores text like "1-2 Hours"
+    alcohol = db.Column(db.String(100), nullable=True)  # Question 10 - stores text like "Yes" or "No"
     
     # New text input fields (questions 11-15)
-    wake_up_time = db.Column(db.String(10), nullable=True)
-    transportation = db.Column(db.String(100), nullable=True)
-    mood = db.Column(db.Text, nullable=True)
-    bed_time = db.Column(db.String(10), nullable=True)
-    money_spent = db.Column(db.Float, nullable=True)
+    wake_up_time = db.Column(db.String(10), nullable=True)  # Question 11 - time format
+    transportation = db.Column(db.String(100), nullable=True)  # Question 12 - text input
+    mood = db.Column(db.String(100), nullable=True)  # Question 13 - now stores mood option like "Happy", "Stressed"
+    bed_time = db.Column(db.String(10), nullable=True)  # Question 14 - time format
+    money_spent = db.Column(db.Float, nullable=True)  # Question 15 - float with 2 decimal places
     
     
     
@@ -161,17 +161,21 @@ class UserData(db.Model):
         return f'<UserData {self.date} - {self.carbon_footprint}>'
     
     @classmethod
-    def from_form_data(cls,user_id, form_data):
+    def from_form_data(cls, user_id, form_data):
         """
-        Creates a new UserData instance from the questionnaire from data
+        Creates a new UserData instance from the questionnaire form data
         which is a dictionary from JavaScript.
+        
+        Now handles the text values properly for all questions.
         """
         selected_date = datetime.strptime(form_data.get('date', datetime.now().strftime('%Y-%m-%d')), '%Y-%m-%d').date()
         
+        # Handle money spent - ensure it's a float with 2 decimal places
         money_spent_value = form_data.get('15')
         if money_spent_value:
             try:
                 money_spent = float(money_spent_value)
+                money_spent = round(money_spent, 2)  # Ensure exactly 2 decimal places
             except ValueError:
                 money_spent = None
         else:
@@ -180,23 +184,25 @@ class UserData(db.Model):
         return cls(
             user_id=user_id,
             date=selected_date,
-            sleep_hours=int(form_data.get('1')),
-            coffee_intake=int(form_data.get('2')),
-            social_media=int(form_data.get('3')),
-            daily_steps=int(form_data.get('4')),
-            exercise_minutes=int(form_data.get('5')),
-            screen_time=int(form_data.get('6')),
-            work_time=int(form_data.get('7')),
-            study_time=int(form_data.get('8')),
-            social_time=int(form_data.get('9')),
-            alcohol=int(form_data.get('10')),
+            # All these now store the actual text values
+            sleep_hours=str(form_data.get('1', '')) if form_data.get('1') else None,
+            coffee_intake=str(form_data.get('2', '')) if form_data.get('2') else None,
+            social_media=str(form_data.get('3', '')) if form_data.get('3') else None,
+            daily_steps=str(form_data.get('4', '')) if form_data.get('4') else None,
+            exercise_minutes=str(form_data.get('5', '')) if form_data.get('5') else None,
+            screen_time=str(form_data.get('6', '')) if form_data.get('6') else None,
+            work_time=str(form_data.get('7', '')) if form_data.get('7') else None,
+            study_time=str(form_data.get('8', '')) if form_data.get('8') else None,
+            social_time=str(form_data.get('9', '')) if form_data.get('9') else None,
+            alcohol=str(form_data.get('10', '')) if form_data.get('10') else None,
             wake_up_time=form_data.get('11'),
             transportation=form_data.get('12'),
-            mood=form_data.get('13'),
+            mood=str(form_data.get('13', '')) if form_data.get('13') else None,  # Now stores mood text like "Happy"
             bed_time=form_data.get('14'),
             money_spent=money_spent
         )
-    
+
+
     
 
 # New model for pending friend requests

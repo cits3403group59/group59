@@ -171,3 +171,11 @@ textarea.text-input.form-input {
     border-color: #FF4D94;
     box-shadow: 0 0 0 3px rgba(255, 77, 148, 0.2);
 }
+
+/* Remove spinners/arrows from number input */
+#money-spent::-webkit-outer-spin-button,
+#money-spent::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+

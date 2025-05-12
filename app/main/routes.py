@@ -14,6 +14,8 @@ from .controllers import (
     remove_friend, settings_controller
 )
 from datetime import datetime
+from app import db
+
 
 # Route for the introductory page
 @main.route('/')
@@ -35,21 +37,9 @@ def vis_twin_data():
 """
 TOOD: Do this using ORM User.query.all() instead of raw SQL
 """
-########################## Display SQL data in html page ##########################
-@main.route('/visualise-friend-data', methods=['GET'])
+@main.route('/visualise-friend-data')
 @login_required
 def vis_friend_data():
-    # db_path = os.path.join(application.instance_path, 'carbon_copy.db')
-    # conn = sqlite3.connect(db_path)
-    # conn.row_factory = sqlite3.Row
-    # cursor = conn.cursor() # create a cursor object
-    # cursor.execute("SELECT * FROM user") # query the database
-    # data = cursor.fetchall() # fetch all results
-    # conn.close() # close the databse 
-    
-    # print(data)  # Add this temporarily
-
-    # return render_template('visualise_friend_data.html', data=data) # render page by passing data 
     return render_template('visualise_friend_data.html')
 
 # Route for upload data page
@@ -88,31 +78,30 @@ def submit_survey():
         user_id=current_user.id,
         date=selected_date
     ).first()
-    
-    from app import db
-    
+        
     if existing_entry:
-        # Update existing entry
-        existing_entry.sleep_hours = int(form_data.get('1'))
-        existing_entry.coffee_intake = int(form_data.get('2'))
-        existing_entry.social_media = int(form_data.get('3'))
-        existing_entry.daily_steps = int(form_data.get('4'))
-        existing_entry.exercise_minutes = int(form_data.get('5'))
-        existing_entry.screen_time = int(form_data.get('6'))
-        existing_entry.work_time = int(form_data.get('7'))
-        existing_entry.study_time = int(form_data.get('8'))
-        existing_entry.social_time = int(form_data.get('9'))
-        existing_entry.alcohol = int(form_data.get('10'))
+        # Update existing entry - CHANGED: Now stores strings instead of ints
+        existing_entry.sleep_hours = str(form_data.get('1', '')) if form_data.get('1') else None
+        existing_entry.coffee_intake = str(form_data.get('2', '')) if form_data.get('2') else None
+        existing_entry.social_media = str(form_data.get('3', '')) if form_data.get('3') else None
+        existing_entry.daily_steps = str(form_data.get('4', '')) if form_data.get('4') else None
+        existing_entry.exercise_minutes = str(form_data.get('5', '')) if form_data.get('5') else None
+        existing_entry.screen_time = str(form_data.get('6', '')) if form_data.get('6') else None
+        existing_entry.work_time = str(form_data.get('7', '')) if form_data.get('7') else None
+        existing_entry.study_time = str(form_data.get('8', '')) if form_data.get('8') else None
+        existing_entry.social_time = str(form_data.get('9', '')) if form_data.get('9') else None
+        existing_entry.alcohol = str(form_data.get('10', '')) if form_data.get('10') else None
         
         # Update text input fields
         existing_entry.wake_up_time = form_data.get('11')
         existing_entry.transportation = form_data.get('12')
-        existing_entry.mood = form_data.get('13')
+        existing_entry.mood = str(form_data.get('13', '')) if form_data.get('13') else None  # CHANGED: Now stores text value like "Happy"
         existing_entry.bed_time = form_data.get('14')
         money_spent_value = form_data.get('15')
         if money_spent_value:
             try:
-                existing_entry.money_spent = float(money_spent_value)
+                # CHANGED: Added rounding to ensure 2 decimal places
+                existing_entry.money_spent = round(float(money_spent_value), 2)
             except ValueError:
                 existing_entry.money_spent = None
         
@@ -156,7 +145,7 @@ def check_survey_data():
                 "12": existing_entry.transportation,
                 "13": existing_entry.mood,
                 "14": existing_entry.bed_time,
-                "15": existing_entry.money_spent
+                "15": str(existing_entry.money_spent) if existing_entry.money_spent is not None else None  # CHANGED: Convert to string
             }
         })
     else:
