@@ -5,5 +5,48 @@
 {% set slogan = "Track your habits over time!" %}
 {% set call = "See your progress!" %}
 
+
 {% block graphs %}
-{% endblock %}
+<div class="mx-auto p-4 md:p-6">
+    <div class="grid grid-cols-12 gap-4 md:gap-6 gap-y-4">
+        <div class="col-span-12">
+            <!-- Metric Group Two -->
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3">
+                <!-- First Chart: Sleep Hours -->
+                <div class="col-span-1">
+                    <div
+                        class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+                        <h3 class="text-xl font-medium mb-4">Sleep Hours</h3>
+                        <!-- Chart for Sleep Hours (Replace with actual chart code) -->
+                        <canvas id="sleepHoursChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Second Chart: Coffee Intake -->
+                <div class="col-span-1">
+                    <div
+                        class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+                        <h3 class="text-xl font-medium mb-4">Coffee Intake</h3>
+                        <!-- Chart for Coffee Intake (Replace with actual chart code) -->
+                        <canvas id="coffeeIntakeChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Third Chart: Daily Steps -->
+                <div class="col-span-1">
+                    <div
+                        class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03]">
+                        <h3 class="text-xl font-medium mb-4">Daily Steps</h3>
+                        <!-- Chart for Daily Steps (Replace with actual chart code) -->
+                        <canvas id="dailyStepsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userId = {{ current_user.id }};
+    </script>
+    <script src="{{url_for('static', filename='my_data.js')}}"></script>
+    {% endblock %}

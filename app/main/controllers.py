@@ -7,7 +7,7 @@ from app import db
 from app.forms import SettingsForm
 from app.models import User, FriendRequest, UserData
 from datetime import datetime
-from flask import jsonify
+from flask import jsonify, session
 from . import main  # Import the Blueprint
 
 @main.route('/friend-request/<int:request_id>/accept', methods=['POST'])
@@ -132,16 +132,27 @@ def settings_controller():
 @main.route('/api/userdata/<int:user_id>', methods=['GET'])
 @login_required
 def get_user_data(user_id):
-    user = User.query.get_or_404(user_id)
+    # Use user_id from the URL or session, here we assume user_id from session for the logged-in user
+    if current_user.id != user_id:
+        return jsonify({"error": "Unauthorized access"}), 403
 
+    # Parse start and end dates from the query parameters
     start_str = request.args.get('start')
     end_str = request.args.get('end')
 
-    start_date = datetime.strptime(start_str, '%Y-%m-%d').date() if start_str else None
-    end_date = datetime.strptime(end_str, '%Y-%m-%d').date() if end_str else None
+    try:
+        start_date = datetime.strptime(start_str, '%Y-%m-%d').date() if start_str else None
+        end_date = datetime.strptime(end_str, '%Y-%m-%d').date() if end_str else None
+    except ValueError:
+        return jsonify({"error": "Invalid date format. Please use YYYY-MM-DD."}), 400
 
+    # Fetch user data between the given dates
+    user = User.query.get_or_404(user_id)  # Fetch the user from the database
+    
+    # Get the data between the dates
     data = user.get_data_between(start_date, end_date)
 
+    # Return the data in the required format
     return jsonify([
         {
             'date': d.date.strftime('%Y-%m-%d'),

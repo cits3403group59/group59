@@ -51,13 +51,17 @@ def login():
             # Log the user in and set the remember option
             login_user(user, remember=remember)
             flash('Login successful!', 'success')
+            
+            # Store user ID in session
+            session['user_id'] = user.id  
+            
             return redirect(url_for('main.introductory'))
         
         flash('Invalid email or password.', 'danger')
     
     return render_template('login_page.html', form=form)
-@auth.route('/logout')
 
+@auth.route('/logout')
 def logout():  
     if 'user_id' in session: 
         logout_user()

@@ -16,12 +16,25 @@
         <p class="slogan">{{ slogan }}</p>
     </div>
 
+    <!-- Select Date Range -->
+    <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+      <p class="text-lg font-medium mb-2 text-center">Choose your date range</p>
+      <div class="flex flex-row gap-4">
+      <div class="flex flex-col">
+        <label for="startDate" class="block text-sm font-medium">Start Date</label>
+        <input type="date" id="startDate" class="mt-1 p-2 border rounded">
+      </div>
+      <div class="flex flex-col">
+        <label for="endDate" class="block text-sm font-medium">End Date</label>
+        <input type="date" id="endDate" class="mt-1 p-2 border rounded">
+      </div>
+      </div>
+    </div>
+
     <!-- Call to Action -->
-    <div class="flex flex-col items-center mb-4">
-        {% block call_to_action %}
-        <p class="text-lg font-medium">{{ call }}</p>
+    <div class="flex flex-col items-center">
+        <p class="text-lg font-medium">{{call}}</p>
         <span class="text-2xl animate-bounce mt-2">↓</span>
-        {% endblock %}
     </div>
 </div>
 <!-- Graphs / Dashboard Section -->
