@@ -53,62 +53,28 @@
                     <div class="text-center text-2xl font-bold mb-6">
                         How long did you sleep today? <i class="fa-solid fa-bed" aria-hidden="true"></i>
                     </div>
-
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">Less than 6 hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">6 - 8 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="3">
-                            <strong>Option 3</strong><br>
-                            <span class="text-gray-600">8 - 10 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="4">
-                            <strong>Option 4</strong><br>
-                            <span class="text-gray-600">More than 10 hours</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="sleep-hours" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter hours of sleep (e.g., 7.5)" 
+                            min="0" max="24" step="0.1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a value between 0 and 24 hours
                         </div>
                     </div>
                 </div>
+                
 
                 <!-- Question 2 -->
                 <div class="question hidden" data-question="2">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How many cups of coffee do you drink today? <i class="fa-solid fa-mug-saucer"
-                            aria-hidden="true"></i>
+                        How many cups of coffee did you drink today? <i class="fa-solid fa-mug-saucer" aria-hidden="true"></i>
                     </div>
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">1 Cup</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">2 Cups</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="3">
-                            <strong>Option 3</strong><br>
-                            <span class="text-gray-600">3 Cups</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="4">
-                            <strong>Option 4</strong><br>
-                            <span class="text-gray-600">More than 3 cups</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="5">
-                            <strong>Option 5</strong><br>
-                            <span class="text-gray-600">I did not drink any coffee at all today!</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="coffee-cups" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter number of cups (e.g., 2)" 
+                            min="0" max="20" step="1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a whole number between 0 and 20
                         </div>
                     </div>
                 </div>
@@ -159,279 +125,108 @@
                 </div>
 
                 <!-- Question 4 -->
-                <div class="question hidden" data-question="4" >
+                <div class="question hidden" data-question="4">
                     <div class="text-center text-2xl font-bold mb-6">
                         How many steps did you take today? <i class="fa-solid fa-shoe-prints" aria-hidden="true"></i>
                     </div>
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">0 - 1000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">1001 - 2000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="3">
-                            <strong>Option 3</strong><br>
-                            <span class="text-gray-600">2001 - 3000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="4">
-                            <strong>Option 4</strong><br>
-                            <span class="text-gray-600">3001 - 4000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="5">
-                            <strong>Option 5</strong><br>
-                            <span class="text-gray-600">4001 - 5000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="6">
-                            <strong>Option 6</strong><br>
-                            <span class="text-gray-600">5001 - 6000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="7">
-                            <strong>Option 7</strong><br>
-                            <span class="text-gray-600">6001 - 7000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="8">
-                            <strong>Option 8</strong><br>
-                            <span class="text-gray-600">7001 - 8000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="9">
-                            <strong>Option 9</strong><br>
-                            <span class="text-gray-600">8001 - 9000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="10">
-                            <strong>Option 10</strong><br>
-                            <span class="text-gray-600">9001 - 10000</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="11">
-                            <strong>Option 11</strong><br>
-                            <span class="text-gray-600">More than 10000</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="daily-steps" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter number of steps (e.g., 5000)" 
+                            min="0" max="100000" step="1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a whole number between 0 and 100,000
                         </div>
                     </div>
                 </div>
+                
 
                 <!-- Question 5 -->
-                <div class="question hidden" data-question="5" >
+                <div class="question hidden" data-question="5">
                     <div class="text-center text-2xl font-bold mb-6">
-                        Hours of exercise? <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
+                        How long did you exercise today? <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
                     </div>
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">0 - 30 Minutes</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">31 - 60 minutes</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="3">
-                            <strong>Option 3</strong><br>
-                            <span class="text-gray-600">61 - 90 minutes</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="4">
-                            <strong>Option 4</strong><br>
-                            <span class="text-gray-600">More than 1 hour and 30 minutes</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="5">
-                            <strong>Option 5</strong><br>
-                            <span class="text-gray-600">No exercise</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="exercise-hours" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter hours of exercise (e.g., 1.5)" 
+                            min="0" max="24" step="0.1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a value between 0 and 24 hours
                         </div>
                     </div>
                 </div>
+                
 
                 <!-- Question 6 -->
-                <div class="question hidden" data-question="6" >
+                <div class="question hidden" data-question="6">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How much was your screen time today? <i class="fa-solid fa-mobile-screen-button"
-                            aria-hidden="true"></i>
+                        How much was your screen time today? <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
                     </div>
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">0 - 1 Hour</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="screen-time" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter hours of screen time (e.g., 3.5)" 
+                            min="0" max="24" step="0.1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a value between 0 and 24 hours
                         </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">1 - 2 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="3">
-                            <strong>Option 3</strong><br>
-                            <span class="text-gray-600">
-                                <span class="text-gray-600">2 - 3 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="4">
-                            <strong>Option 4</strong><br>
-                            <span class="text-gray-600">3 - 4 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="5">
-                            <strong>Option 5</strong><br>
-                            <span class="text-gray-600">4 - 5 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="6">
-                            <strong>Option 6</strong><br>
-                            <span class="text-gray-600">More than 5 hours</span>
-                        </div>
-
                     </div>
                 </div>
 
                 <!-- Question 7 -->
-                <div class="question hidden" data-question="7" >
+                <div class="question hidden" data-question="7">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How much time did you spend at work today?? <i class="fa-solid fa-briefcase"
-                            aria-hidden="true"></i>
+                        How much time did you spend at work today? <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
                     </div>
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">0 - 2 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">2 - 4 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="3">
-                            <strong>Option 3</strong><br>
-                            <span class="text-gray-600">4 - 6 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="4">
-                            <strong>Option 4</strong><br>
-                            <span class="text-gray-600">6 - 8 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="5">
-                            <strong>Option 5</strong><br>
-                            <span class="text-gray-600">More than 8 hours!</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="work-time" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter hours at work (e.g., 8.0)" 
+                            min="0" max="24" step="0.1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a value between 0 and 24 hours
                         </div>
                     </div>
                 </div>
 
                 <!-- Question 8 -->
-                <div class="question hidden" data-question="8" >
+                <div class="question hidden" data-question="8">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How much time did you spend studying today?? <i class="fa-solid fa-book" aria-hidden="true"></i>
+                        How much time did you spend studying today? <i class="fa-solid fa-book" aria-hidden="true"></i>
                     </div>
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">0 - 1 Hour</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">1 - 2 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="3">
-                            <strong>Option 3</strong><br>
-                            <span class="text-gray-600">2 - 3 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="4">
-                            <strong>Option 4</strong><br>
-                            <span class="text-gray-600">3 - 4 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="5">
-                            <strong>Option 5</strong><br>
-                            <span class="text-gray-600">4 - 5 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="6">
-                            <strong>Option 6</strong><br>
-                            <span class="text-gray-600">5 - 6 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="7">
-                            <strong>Option 7</strong><br>
-                            <span class="text-gray-600">6 - 7 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="8">
-                            <strong>Option 8</strong><br>
-                            <span class="text-gray-600">7 - 8 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="9">
-                            <strong>Option 9</strong><br>
-                            <span class="text-gray-600">More than 8 hours?!?</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="study-time" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter hours of studying (e.g., 2.5)" 
+                            min="0" max="24" step="0.1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a value between 0 and 24 hours
                         </div>
                     </div>
                 </div>
 
                 <!-- Question 9 -->
-                <div class="question hidden" data-question="9" >
+                <div class="question hidden" data-question="9">
                     <div class="text-center text-2xl font-bold mb-6">
-                        How much time did you spend with your family and friends today?? <i class="fa-solid fa-users"
-                            aria-hidden="true"></i>
+                        How much time did you spend with family and friends today? <i class="fa-solid fa-users" aria-hidden="true"></i>
                     </div>
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">0 - 1 Hour</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">1 - 2 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="3">
-                            <strong>Option 3</strong><br>
-                            <span class="text-gray-600">2 - 3 Hours</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="4">
-                            <strong>Option 4</strong><br>
-                            <span class="text-gray-600">More than 3 hours</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="social-time" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter hours of social time (e.g., 1.5)" 
+                            min="0" max="24" step="0.1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a value between 0 and 24 hours
                         </div>
                     </div>
                 </div>
 
                 <!-- Question 10 -->
-                <div class="question hidden" data-question="10" >
+                <div class="question hidden" data-question="10">
                     <div class="text-center text-2xl font-bold mb-6">
-                        Did you consume any alcohol today?? <i class="fa-solid fa-whiskey-glass" aria-hidden="true"></i>
+                        How many cups/glasses of alcohol did you consume today? <i class="fa-solid fa-whiskey-glass" aria-hidden="true"></i>
                     </div>
-                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="1">
-                            <strong>Option 1</strong><br>
-                            <span class="text-gray-600">Yes</span>
-                        </div>
-                        <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-                            data-value="2">
-                            <strong>Option 2</strong><br>
-                            <span class="text-gray-600">No</span>
+                    <div class="mb-4 flex flex-col items-center">
+                        <input type="number" id="alcohol-cups" class="text-input form-input w-4/5 max-w-md mx-auto"
+                            placeholder="Enter number of drinks (e.g., 2)" 
+                            min="0" max="20" step="1">
+                        <div class="text-center text-sm text-gray-500 mt-2">
+                            * Enter a whole number between 0 and 20 (0 if none)
                         </div>
                     </div>
                 </div>
@@ -459,7 +254,7 @@
                 </div> -->
                 <div class="question hidden" data-question="12" >
                     <h2 class="text-center text-2xl font-bold mb-6">What was your main mode of transportation today? <i
-                            class="fa-solid fa-face-laugh-beam" aria-hidden="true"></i>
+                            class="fa-solid fa-route" aria-hidden="true"></i>
                     </h2>
                     <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
                         <div class="option bg-white border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"

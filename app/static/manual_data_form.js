@@ -3,6 +3,19 @@ let currentQuestion = 1;
 const totalQuestions = 15;
 const userSelections = {};
 
+// Define which questions use numeric inputs
+const numericInputs = {
+    1: 'sleep-hours',
+    2: 'coffee-cups',
+    4: 'daily-steps',
+    5: 'exercise-hours',
+    6: 'screen-time',
+    7: 'work-time',
+    8: 'study-time',
+    9: 'social-time',
+    10: 'alcohol-cups'
+};
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM loaded - initializing form');
@@ -14,6 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const progressDots = document.querySelectorAll('.progress-dot');
     const options = document.querySelectorAll('.option');
     const closeBtn = document.querySelector('.close-btn');
+
+    // Show first question
+    questions[0].style.display = 'block';
 
     // --------- Add click handlers to options ---------
     if (options && options.length > 0) {
@@ -74,11 +90,77 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     } else {
-        console.error('No options found on the page!');
+        console.warn('No option elements found - this is okay if using direct input fields');
     }
 
-    // --------- Add event listeners for text inputs ---------
-    const textInputs = document.querySelectorAll('.text-input');
+    // --------- Set up numeric input fields for questions 1, 2, 4, 5, 6, 7, 8, 9, 10 ---------
+    for (const questionNum in numericInputs) {
+        const inputId = numericInputs[questionNum];
+        const inputElement = document.getElementById(inputId);
+        
+        if (inputElement) {
+            console.log(`Found numeric input for question ${questionNum}: ${inputId}`);
+            
+            // Store value in userSelections when input changes
+            inputElement.addEventListener('input', function() {
+                // Parse as float for decimal-allowing fields, int otherwise
+                let value;
+                if (questionNum == 2 || questionNum == 4 || questionNum == 10) {
+                    // Integer only fields (coffee, steps, alcohol)
+                    value = this.value ? parseInt(this.value) : '';
+                } else {
+                    // Decimal-allowing fields (time)
+                    value = this.value ? parseFloat(this.value) : '';
+                }
+                
+                // Store in userSelections
+                userSelections[questionNum] = this.value;
+                console.log(`Updated question ${questionNum} with value: ${this.value}`);
+            });
+
+            // Validate on blur
+            inputElement.addEventListener('blur', function() {
+                if (this.value === '') return; // Skip validation if empty
+                
+                let value = parseFloat(this.value);
+                let min = parseFloat(this.min);
+                let max = parseFloat(this.max);
+                
+                // Check if value is a number
+                if (isNaN(value)) {
+                    alert("Please enter a valid number");
+                    this.value = '';
+                    userSelections[questionNum] = '';
+                    return;
+                }
+                
+                // Enforce min/max constraints
+                if (value < min) {
+                    this.value = min;
+                    userSelections[questionNum] = min.toString();
+                    alert(`Value must be at least ${min}`);
+                } else if (value > max) {
+                    this.value = max;
+                    userSelections[questionNum] = max.toString();
+                    alert(`Value cannot exceed ${max}`);
+                }
+                
+                // Format numbers appropriately
+                if (questionNum == 2 || questionNum == 4 || questionNum == 10) {
+                    // For integer fields, ensure we have a whole number
+                    this.value = Math.round(value);
+                    userSelections[questionNum] = this.value;
+                } else {
+                    // Format to 1 decimal place for time-based fields
+                    this.value = parseFloat(this.value).toFixed(1);
+                    userSelections[questionNum] = this.value;
+                }
+            });
+        }
+    }
+
+    // --------- Add event listeners for regular text inputs ---------
+    const textInputs = document.querySelectorAll('.text-input:not([type="number"])');
     if (textInputs && textInputs.length > 0) {
         console.log('Found', textInputs.length, 'text inputs - adding input handlers');
 
@@ -433,6 +515,7 @@ function checkExistingData(date) {
                 // Update the UI to reflect loaded data
                 updateSelectedOptions();
                 updateTextInputs();
+                updateNumericInputs();
             } else {
                 console.log('No existing data for', date);
 
@@ -458,8 +541,11 @@ function updateSelectedOptions() {
     });
 
     // Then mark selected options based on userSelections
-    for (const questionNum in userSelections) {
-        if (parseInt(questionNum) <= 13 && userSelections[questionNum]) { // Up to question 13 are now multiple choice
+    // Only process questions that still use options: 3, 12, 13
+    const optionQuestions = [3, 12, 13];
+    
+    for (const questionNum of optionQuestions) {
+        if (userSelections[questionNum]) {
             const selectedText = userSelections[questionNum];
             const question = document.querySelector(`.question[data-question="${questionNum}"]`);
 
@@ -492,6 +578,63 @@ function updateSelectedOptions() {
     }
 }
 
+// Function to update numeric inputs with loaded data
+function updateNumericInputs() {
+    console.log('Updating numeric inputs with loaded data');
+    
+    // Update all numeric inputs
+    for (const questionNum in numericInputs) {
+        if (userSelections[questionNum]) {
+            const inputId = numericInputs[questionNum];
+            const inputElement = document.getElementById(inputId);
+            
+            if (inputElement) {
+                // Handle special case for alcohol (question 10) legacy data
+                if (questionNum == 10 && typeof userSelections[questionNum] === 'string') {
+                    // If it was a text value like "Yes" or "No"
+                    if (userSelections[questionNum].toLowerCase() === 'yes') {
+                        inputElement.value = 1;  // Default to 1 drink if they selected "Yes" before
+                    } else {
+                        inputElement.value = 0;  // Set to 0 if they selected "No" before
+                    }
+                    userSelections[questionNum] = inputElement.value;
+                    continue;
+                }
+                
+                // Handle legacy data format (text descriptions) by extracting numeric values
+                let value = userSelections[questionNum];
+                
+                // Try to extract numbers from text formats like "6-8 Hours"
+                if (isNaN(value)) {
+                    const matches = value.match(/(\d+(\.\d+)?)/g);
+                    if (matches && matches.length > 0) {
+                        // If range like "6-8 Hours", take the average
+                        if (matches.length >= 2) {
+                            value = (parseFloat(matches[0]) + parseFloat(matches[1])) / 2;
+                        } else {
+                            value = parseFloat(matches[0]);
+                        }
+                    } else {
+                        // If no numbers found, set default value
+                        value = 0;
+                    }
+                }
+                
+                // Format appropriately
+                if (questionNum == 2 || questionNum == 4 || questionNum == 10) {
+                    // Integer fields
+                    inputElement.value = Math.round(parseFloat(value));
+                } else {
+                    // Decimal fields
+                    inputElement.value = parseFloat(value).toFixed(1);
+                }
+                
+                console.log(`Set numeric input ${inputId} to ${inputElement.value}`);
+            }
+        }
+    }
+}
+
 // Function to update text inputs with loaded data
 function updateTextInputs() {
     console.log('Updating text inputs with loaded data');
@@ -502,9 +645,9 @@ function updateTextInputs() {
         wakeUpInput.value = userSelections[11];
     }
 
-    // Update transportation
+    // Update transportation - only if using text input
     const transportationInput = document.getElementById('transportation');
-    if (transportationInput && userSelections[12]) {
+    if (transportationInput && userSelections[12] && !document.querySelector('.question[data-question="12"] .option')) {
         transportationInput.value = userSelections[12];
     }
 
@@ -543,4 +686,13 @@ function resetForm() {
     document.querySelectorAll('.text-input').forEach(input => {
         input.value = '';
     });
+    
+    // Clear all numeric inputs
+    for (const questionNum in numericInputs) {
+        const inputId = numericInputs[questionNum];
+        const inputElement = document.getElementById(inputId);
+        if (inputElement) {
+            inputElement.value = '';
+        }
+    }
 }
