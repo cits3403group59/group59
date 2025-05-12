@@ -1,4 +1,4 @@
-Remove the fixed height constraints and add fullscreen styling
+/*Remove the fixed height constraints and add fullscreen styling*/
 body {
     min-height: 100vh;
 }
