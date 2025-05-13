@@ -52,6 +52,7 @@ def upload_data():
 def manual_data():
     return render_template('manual-data.html')
 
+
 # Route for settings page
 @main.route('/settings', methods=['GET', 'POST'])
 @login_required

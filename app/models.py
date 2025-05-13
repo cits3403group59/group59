@@ -145,27 +145,24 @@ class UserData(db.Model):
     date = db.Column(db.Date, nullable=False)
     #carbon_footprint = db.Column(db.Float, nullable=False)
     
+    # Numeric fields with appropriate data types
+    sleep_hours = db.Column(db.Float, nullable=True)  # Question 1 - decimal hours (0-24)
+    coffee_intake = db.Column(db.Integer, nullable=True)  # Question 2 - integer cups
+    social_media = db.Column(db.String(100), nullable=True)  # Question 3 - categorical (Instagram, YouTube, etc.)
+    daily_steps = db.Column(db.Integer, nullable=True)  # Question 4 - integer steps
+    exercise_hours = db.Column(db.Float, nullable=True)  # Question 5 - decimal hours (renamed from exercise_minutes)
+    screen_time = db.Column(db.Float, nullable=True)  # Question 6 - decimal hours
+    work_time = db.Column(db.Float, nullable=True)  # Question 7 - decimal hours
+    study_time = db.Column(db.Float, nullable=True)  # Question 8 - decimal hours
+    social_time = db.Column(db.Float, nullable=True)  # Question 9 - decimal hours
+    alcohol = db.Column(db.Integer, nullable=True)  # Question 10 - integer drinks
     
-     # Survey data - changed to String to store actual text values like "6-8 Hours", "Happy", etc.
-    sleep_hours = db.Column(db.String(100), nullable=True)  # Question 1 - stores text like "6-8 Hours"
-    coffee_intake = db.Column(db.String(100), nullable=True)  # Question 2 - stores text like "2 Cups"
-    social_media = db.Column(db.String(100), nullable=True)  # Question 3 - stores text like "Instagram"
-    daily_steps = db.Column(db.String(100), nullable=True)  # Question 4 - stores text like "5001-6000"
-    exercise_minutes = db.Column(db.String(100), nullable=True)  # Question 5 - stores text like "31-60 minutes"
-    screen_time = db.Column(db.String(100), nullable=True)  # Question 6 - stores text like "2-3 Hours"
-    work_time = db.Column(db.String(100), nullable=True)  # Question 7 - stores text like "6-8 Hours"
-    study_time = db.Column(db.String(100), nullable=True)  # Question 8 - stores text like "3-4 Hours"
-    social_time = db.Column(db.String(100), nullable=True)  # Question 9 - stores text like "1-2 Hours"
-    alcohol = db.Column(db.String(100), nullable=True)  # Question 10 - stores text like "Yes" or "No"
-    
-    # New text input fields (questions 11-15)
+    # Text input fields
     wake_up_time = db.Column(db.String(10), nullable=True)  # Question 11 - time format
-    transportation = db.Column(db.String(100), nullable=True)  # Question 12 - text input
-    mood = db.Column(db.String(100), nullable=True)  # Question 13 - now stores mood option like "Happy", "Stressed"
+    transportation = db.Column(db.String(100), nullable=True)  # Question 12 - categorical
+    mood = db.Column(db.String(100), nullable=True)  # Question 13 - categorical
     bed_time = db.Column(db.String(10), nullable=True)  # Question 14 - time format
-    money_spent = db.Column(db.Float, nullable=True)  # Question 15 - float with 2 decimal places
-    
-    
+    money_spent = db.Column(db.Float, nullable=True)  # Question 15 - decimal currency    
     
     def __repr__(self):
         return f'<UserData {self.date} - {self.carbon_footprint}>'
@@ -176,9 +173,37 @@ class UserData(db.Model):
         Creates a new UserData instance from the questionnaire form data
         which is a dictionary from JavaScript.
         
-        Now handles the text values properly for all questions.
+        Properly converts input to appropriate data types based on the updated schema.
         """
         selected_date = datetime.strptime(form_data.get('date', datetime.now().strftime('%Y-%m-%d')), '%Y-%m-%d').date()
+        
+        # Process numeric fields
+        numeric_fields = {
+            '1': 'float',    # sleep_hours (decimal hours)
+            '2': 'int',      # coffee_cups (integer)
+            '4': 'int',      # daily_steps (integer)
+            '5': 'float',    # exercise_hours (decimal hours)
+            '6': 'float',    # screen_time (decimal hours)
+            '7': 'float',    # work_time (decimal hours)
+            '8': 'float',    # study_time (decimal hours)
+            '9': 'float',    # social_time (decimal hours)
+            '10': 'int'      # alcohol (integer cups)
+        }
+        
+        # Convert fields to proper types
+        processed_data = {}
+        
+        for field, field_type in numeric_fields.items():
+            if field in form_data and form_data[field]:
+                try:
+                    if field_type == 'int':
+                        processed_data[field] = int(float(form_data[field]))
+                    elif field_type == 'float':
+                        processed_data[field] = round(float(form_data[field]), 1)  # 1 decimal place
+                except (ValueError, TypeError):
+                    processed_data[field] = None
+            else:
+                processed_data[field] = None
         
         # Handle money spent - ensure it's a float with 2 decimal places
         money_spent_value = form_data.get('15')
@@ -194,24 +219,22 @@ class UserData(db.Model):
         return cls(
             user_id=user_id,
             date=selected_date,
-            # All these now store the actual text values
-            sleep_hours=str(form_data.get('1', '')) if form_data.get('1') else None,
-            coffee_intake=str(form_data.get('2', '')) if form_data.get('2') else None,
-            social_media=str(form_data.get('3', '')) if form_data.get('3') else None,
-            daily_steps=str(form_data.get('4', '')) if form_data.get('4') else None,
-            exercise_minutes=str(form_data.get('5', '')) if form_data.get('5') else None,
-            screen_time=str(form_data.get('6', '')) if form_data.get('6') else None,
-            work_time=str(form_data.get('7', '')) if form_data.get('7') else None,
-            study_time=str(form_data.get('8', '')) if form_data.get('8') else None,
-            social_time=str(form_data.get('9', '')) if form_data.get('9') else None,
-            alcohol=str(form_data.get('10', '')) if form_data.get('10') else None,
+            sleep_hours=processed_data.get('1'),
+            coffee_intake=processed_data.get('2'),
+            social_media=form_data.get('3'),
+            daily_steps=processed_data.get('4'),
+            exercise_hours=processed_data.get('5'),  # Now using exercise_hours instead of exercise_minutes
+            screen_time=processed_data.get('6'),
+            work_time=processed_data.get('7'),
+            study_time=processed_data.get('8'),
+            social_time=processed_data.get('9'),
+            alcohol=processed_data.get('10'),
             wake_up_time=form_data.get('11'),
             transportation=form_data.get('12'),
-            mood=str(form_data.get('13', '')) if form_data.get('13') else None,  # Now stores mood text like "Happy"
+            mood=form_data.get('13'),
             bed_time=form_data.get('14'),
             money_spent=money_spent
         )
-
 
     
 
