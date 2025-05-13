@@ -5,7 +5,9 @@ from flask_login import login_required, current_user,logout_user
 from werkzeug.datastructures import FileStorage
 from app import db
 from app.forms import SettingsForm
-from app.models import User, FriendRequest
+from app.models import User, FriendRequest, UserData
+from datetime import datetime
+from flask import jsonify, session
 from . import main  # Import the Blueprint
 
 @main.route('/friend-request/<int:request_id>/accept', methods=['POST'])
@@ -126,3 +128,145 @@ def settings_controller():
             flash('Please correct the errors in the form.', 'danger')
 
     return render_template('settings.html', form=form)
+
+@main.route('/api/userdata/<int:user_id>', methods=['GET'])
+@login_required
+def get_user_data(user_id):
+    # Use user_id from the URL or session, here we assume user_id from session for the logged-in user
+    if current_user.id != user_id:
+        return jsonify({"error": "Unauthorized access"}), 403
+
+    # Parse start and end dates from the query parameters
+    start_str = request.args.get('start')
+    end_str = request.args.get('end')
+
+    try:
+        start_date = datetime.strptime(start_str, '%Y-%m-%d').date() if start_str else None
+        end_date = datetime.strptime(end_str, '%Y-%m-%d').date() if end_str else None
+    except ValueError:
+        return jsonify({"error": "Invalid date format. Please use YYYY-MM-DD."}), 400
+
+    # Fetch user data between the given dates
+    user = User.query.get_or_404(user_id)  # Fetch the user from the database
+    
+    # Get the data between the dates
+    data = user.get_data_between(start_date, end_date)
+
+    # Return the data in the required format
+    return jsonify([
+        {
+            'date': d.date.strftime('%Y-%m-%d'),
+            'sleep_hours': d.sleep_hours,
+            'coffee_intake': d.coffee_intake,
+            'social_media': d.social_media,
+            'daily_steps': d.daily_steps,
+            'exercise_minutes': d.exercise_minutes,
+            'screen_time': d.screen_time,
+            'work_time': d.work_time,
+            'study_time': d.study_time,
+            'social_time': d.social_time,
+            'alcohol': d.alcohol,
+            'wake_up_time': d.wake_up_time,
+            'transportation': d.transportation,
+            'mood': d.mood,
+            'bed_time': d.bed_time,
+            'money_spent': d.money_spent
+        }
+        for d in data
+    ])
+    
+@main.route('/submit-survey', methods=['POST'])
+@login_required
+def submit_survey():
+    """Handle submission of the manual data entry survey"""
+    # Get the form data from the JavaScript
+    form_data = request.get_json()
+    
+    # Parse the date from form data or use current date
+    date_str = form_data.get('date', datetime.now().strftime('%Y-%m-%d'))
+    selected_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    
+    # Validate that the selected date is not in the future
+    if selected_date > datetime.now().date():
+        return jsonify({
+            "success": False, 
+            "message": "Cannot submit data for future dates."
+        }), 400
+    
+    # Check if entry already exists for this user and date
+    existing_entry = UserData.query.filter_by(
+        user_id=current_user.id,
+        date=selected_date
+    ).first()
+        
+    if existing_entry:
+        # Update existing entry - CHANGED: Now stores strings instead of ints
+        existing_entry.sleep_hours = str(form_data.get('1', '')) if form_data.get('1') else None
+        existing_entry.coffee_intake = str(form_data.get('2', '')) if form_data.get('2') else None
+        existing_entry.social_media = str(form_data.get('3', '')) if form_data.get('3') else None
+        existing_entry.daily_steps = str(form_data.get('4', '')) if form_data.get('4') else None
+        existing_entry.exercise_minutes = str(form_data.get('5', '')) if form_data.get('5') else None
+        existing_entry.screen_time = str(form_data.get('6', '')) if form_data.get('6') else None
+        existing_entry.work_time = str(form_data.get('7', '')) if form_data.get('7') else None
+        existing_entry.study_time = str(form_data.get('8', '')) if form_data.get('8') else None
+        existing_entry.social_time = str(form_data.get('9', '')) if form_data.get('9') else None
+        existing_entry.alcohol = str(form_data.get('10', '')) if form_data.get('10') else None
+        
+        # Update text input fields
+        existing_entry.wake_up_time = form_data.get('11')
+        existing_entry.transportation = form_data.get('12')
+        existing_entry.mood = str(form_data.get('13', '')) if form_data.get('13') else None  # CHANGED: Now stores text value like "Happy"
+        existing_entry.bed_time = form_data.get('14')
+        money_spent_value = form_data.get('15')
+        if money_spent_value:
+            try:
+                # CHANGED: Added rounding to ensure 2 decimal places
+                existing_entry.money_spent = round(float(money_spent_value), 2)
+            except ValueError:
+                existing_entry.money_spent = None
+        
+    else:
+        # Create a new survey record
+        survey = UserData.from_form_data(current_user.id, form_data)
+        db.session.add(survey)
+    
+    # Save to database
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "Survey data saved successfully"})
+
+@main.route('/check-survey-data')
+@login_required
+def check_survey_data():
+    date_str = request.args.get('date', datetime.now().strftime('%Y-%m-%d'))
+    selected_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+    
+    # Check if entry exists for this user and date
+    existing_entry = UserData.query.filter_by(
+        user_id=current_user.id,
+        date=selected_date
+    ).first()
+    
+    if existing_entry:
+        return jsonify({
+            "exists": True,
+            "survey": {
+                "1": existing_entry.sleep_hours,
+                "2": existing_entry.coffee_intake,
+                "3": existing_entry.social_media,
+                "4": existing_entry.daily_steps,
+                "5": existing_entry.exercise_minutes,
+                "6": existing_entry.screen_time,
+                "7": existing_entry.work_time,
+                "8": existing_entry.study_time,
+                "9": existing_entry.social_time,
+                "10": existing_entry.alcohol,
+                "11": existing_entry.wake_up_time,
+                "12": existing_entry.transportation,
+                "13": existing_entry.mood,
+                "14": existing_entry.bed_time,
+                "15": str(existing_entry.money_spent) if existing_entry.money_spent is not None else None  # CHANGED: Convert to string
+            }
+        })
+    else:
+        return jsonify({"exists": False})

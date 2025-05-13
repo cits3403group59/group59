@@ -5,31 +5,66 @@
 {% set slogan = "Compare your habits to your friends!" %}
 {% set call = "See how you compare!" %}
 
-{% block data_content %}
-<!-- Specific visualisation -->
-<h1>Data</h1> 
-<table> 
-    <thead> 
-        <tr> 
-            <th>id</th> 
-            <th>first</th> 
-            <th>last</th> 
-            <th>email</th> 
-            <th>password_hash</th>
-            <th>dob</th>
-            <th>profile_image</th>
-            <th>joined_date</th>
-            <th>terms accepted</th>
-        </tr> 
-    </thead> 
+{% block optional%}
+  <!-- Scrollable Friend List -->
+  <div id="friend-list" class="max-h-40 overflow-y-auto">
+    <!-- Friends will be dynamically inserted here -->
+  </div>
 
-    {% for row in data %}
-    <tr>
-      {% for col in row %}
-      <td>{{ col }}</td>
-      {% endfor %}
-    </tr>
-    {% endfor %}
-</table> 
+  <script>
+    async function fetchFriends() {
+      try {
+        const res = await fetch(`/get_friends`);
+        const friends = await res.json();
+
+        const listContainer = document.getElementById('friend-list');
+        listContainer.innerHTML = '';
+
+        if (friends.length === 0) {
+          listContainer.innerHTML = '<p class="text-gray-500 text-sm">No friends found.</p>';
+          return;
+        }
+
+        friends.forEach(friend => {
+          const friendHTML = `
+          <div class="flex flex-col w-80 bg-white border-4 border-gray-300 rounded-2xl p-6 shadow-md">
+                <div class="flex justify-between items-center mb-4 hover:bg-gray-100 p-2 rounded-lg group relative">
+                    <div>
+                        <p class="font-bold">${friend.first_name} ${friend.last_name}</p>
+                        <p class="text-sm text-gray-500">${friend.email}</p>
+                    </div>
+                    <button class="text-sm text-[#FA3980] hover:text-pink-600 font-semibold" onclick="toggleFriendData(${friend.id})">
+                        Get Data
+                    </button>
+                <div id="friend-data-${friend.id}" class="mt-2 hidden text-sm text-gray-700">
+                    <p><strong>ID:</strong> ${friend.id}</p>
+                    <p><strong>First Name:</strong> ${friend.first_name}</p>
+                    <p><strong>Last Name:</strong> ${friend.last_name}</p>
+                    <p><strong>Email:</strong> ${friend.email}</p>
+                </div>
+                </div>
+            </div>
+          `;
+          listContainer.insertAdjacentHTML('beforeend', friendHTML);
+        });
+      } catch (error) {
+        console.error("Failed to fetch friends:", error);
+        document.getElementById('friend-list').innerHTML = '<p class="text-red-500 text-sm">Failed to load friends.</p>';
+      }
+    }
+
+    function toggleFriendData(friendId) {
+      const dataDiv = document.getElementById('friend-data-' + friendId);
+      if (dataDiv) {
+        dataDiv.classList.toggle('hidden');
+      }
+    }
+
+    // Load friends on page load
+    fetchFriends();
+  </script>
+{% endblock %}
+
+{% block graphs %}
 {% endblock %}
 

@@ -5,9 +5,68 @@
 {% set slogan = "Track your habits over time!" %}
 {% set call = "See your progress!" %}
 
-{% block data_content %}
-<!-- Specific height visualisation -->
-<div>
-    
-</div>
-{% endblock %}
+
+{% block graphs %}
+<div class="mx-auto p-4 md:p-6">
+    <!-- Initalise grid -->
+    <div class="grid grid-cols-12 gap-4 md:gap-6 gap-y-4">
+        <!-- Row 1-->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3">
+                <!-- First Chart: Sleep Hours -->
+                <div class="col-span-1">
+                    <div
+                        class="rounded-2xl border border-gray-200 bg-white p-5">
+                        <h3 class="text-xl font-medium mb-4">Hours Slept</h3>
+                        <canvas id="sleepHoursChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Second Chart: Coffee Intake -->
+                <div class="col-span-1">
+                    <div
+                        class="rounded-2xl border border-gray-200 bg-white p-5">
+                        <h3 class="text-xl font-medium mb-4">Coffee Intake</h3>
+                        <canvas id="coffeeIntakeChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Third Chart: Daily Steps -->
+                <div class="col-span-1">
+                    <div
+                        class="rounded-2xl border border-gray-200 bg-white p-5">
+                        <h3 class="text-xl font-medium mb-4">Daily Steps</h3>
+                        <canvas id="dailyStepsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row 2 - Left (7/12 columns) -->
+        <div class="col-span-12 xl:col-span-7">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Standard Drinks Consumed</h3>
+                    <canvas id="alcoholChart"></canvas>
+                </div>
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Bed Time</h3>
+                    <canvas id="bedTimeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2 - Right (5/12 columns) -->
+        <div class="col-span-12 xl:col-span-5">
+            <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                <h3 class="text-xl font-medium mb-4">Hours Exercised</h3>
+                <canvas id="exerciseChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const userId = {{ current_user.id }};
+    </script>
+    <script src="{{url_for('static', filename='my_data.js')}}"></script>
+    {% endblock %}
