@@ -65,6 +65,19 @@ def settings():
 def share_data():
     return render_template('share-data.html')
 
+# Route to return list of friends
+@main.route('/get_friends', methods=['GET'])
+def get_friends():
+    friends = current_user.get_user_friends()  # or however your method is called
+    return jsonify([
+        {
+            'id': friend.id,
+            'first_name': friend.first_name,
+            'last_name': friend.last_name,
+            'email': friend.email
+        } for friend in friends
+    ])
+
 # Route for manage friends page
 @main.route('/manage-friends', methods=['GET'])
 @login_required
