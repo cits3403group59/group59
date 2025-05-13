@@ -73,6 +73,34 @@ def submit_survey():
             "message": "Cannot submit data for future dates."
         }), 400
     
+    # Process numeric fields - convert to appropriate type when possible
+    # Define which fields should be numeric
+    numeric_fields = {
+        '1': 'float',    # sleep_hours (decimal hours)
+        '2': 'int',      # coffee_cups (integer)
+        '4': 'int',      # daily_steps (integer)
+        '5': 'float',    # exercise_hours (decimal hours)
+        '6': 'float',    # screen_time (decimal hours)
+        '7': 'float',    # work_time (decimal hours)
+        '8': 'float',    # study_time (decimal hours)
+        '9': 'float',    # social_time (decimal hours)
+        '10': 'int'      # alcohol (integer cups)
+    }
+    
+    # Convert fields to proper types
+    for field, field_type in numeric_fields.items():
+        if field in form_data and form_data[field]:
+            try:
+                if field_type == 'int':
+                    form_data[field] = int(float(form_data[field]))
+                elif field_type == 'float':
+                    form_data[field] = round(float(form_data[field]), 1)  # 1 decimal place
+            except (ValueError, TypeError):
+                # If conversion fails, set to None
+                form_data[field] = None
+        else:
+            form_data[field] = None
+    
     # Check if entry already exists for this user and date
     existing_entry = UserData.query.filter_by(
         user_id=current_user.id,
@@ -80,27 +108,28 @@ def submit_survey():
     ).first()
         
     if existing_entry:
-        # Update existing entry - CHANGED: Now stores strings instead of ints
-        existing_entry.sleep_hours = str(form_data.get('1', '')) if form_data.get('1') else None
-        existing_entry.coffee_intake = str(form_data.get('2', '')) if form_data.get('2') else None
-        existing_entry.social_media = str(form_data.get('3', '')) if form_data.get('3') else None
-        existing_entry.daily_steps = str(form_data.get('4', '')) if form_data.get('4') else None
-        existing_entry.exercise_minutes = str(form_data.get('5', '')) if form_data.get('5') else None
-        existing_entry.screen_time = str(form_data.get('6', '')) if form_data.get('6') else None
-        existing_entry.work_time = str(form_data.get('7', '')) if form_data.get('7') else None
-        existing_entry.study_time = str(form_data.get('8', '')) if form_data.get('8') else None
-        existing_entry.social_time = str(form_data.get('9', '')) if form_data.get('9') else None
-        existing_entry.alcohol = str(form_data.get('10', '')) if form_data.get('10') else None
+        # Update existing entry with the new values
+        existing_entry.sleep_hours = form_data.get('1')
+        existing_entry.coffee_intake = form_data.get('2')
+        existing_entry.social_media = form_data.get('3')
+        existing_entry.daily_steps = form_data.get('4')
+        existing_entry.exercise_hours = form_data.get('5')  # Now using exercise_hours
+        existing_entry.screen_time = form_data.get('6')
+        existing_entry.work_time = form_data.get('7')
+        existing_entry.study_time = form_data.get('8')
+        existing_entry.social_time = form_data.get('9')
+        existing_entry.alcohol = form_data.get('10')
         
         # Update text input fields
         existing_entry.wake_up_time = form_data.get('11')
         existing_entry.transportation = form_data.get('12')
-        existing_entry.mood = str(form_data.get('13', '')) if form_data.get('13') else None  # CHANGED: Now stores text value like "Happy"
+        existing_entry.mood = form_data.get('13')
         existing_entry.bed_time = form_data.get('14')
+        
+        # Handle money spent
         money_spent_value = form_data.get('15')
         if money_spent_value:
             try:
-                # CHANGED: Added rounding to ensure 2 decimal places
                 existing_entry.money_spent = round(float(money_spent_value), 2)
             except ValueError:
                 existing_entry.money_spent = None
@@ -115,6 +144,7 @@ def submit_survey():
     
     return jsonify({"success": True, "message": "Survey data saved successfully"})
 
+
 @main.route('/check-survey-data')
 @login_required
 def check_survey_data():
@@ -128,30 +158,31 @@ def check_survey_data():
     ).first()
     
     if existing_entry:
+        # All values must be converted to strings for the frontend
         return jsonify({
             "exists": True,
             "survey": {
-                "1": existing_entry.sleep_hours,
-                "2": existing_entry.coffee_intake,
+                "1": str(existing_entry.sleep_hours) if existing_entry.sleep_hours is not None else None,
+                "2": str(existing_entry.coffee_intake) if existing_entry.coffee_intake is not None else None,
                 "3": existing_entry.social_media,
-                "4": existing_entry.daily_steps,
-                "5": existing_entry.exercise_minutes,
-                "6": existing_entry.screen_time,
-                "7": existing_entry.work_time,
-                "8": existing_entry.study_time,
-                "9": existing_entry.social_time,
-                "10": existing_entry.alcohol,
+                "4": str(existing_entry.daily_steps) if existing_entry.daily_steps is not None else None,
+                "5": str(existing_entry.exercise_hours) if existing_entry.exercise_hours is not None else None,  # Changed from exercise_minutes
+                "6": str(existing_entry.screen_time) if existing_entry.screen_time is not None else None,
+                "7": str(existing_entry.work_time) if existing_entry.work_time is not None else None,
+                "8": str(existing_entry.study_time) if existing_entry.study_time is not None else None,
+                "9": str(existing_entry.social_time) if existing_entry.social_time is not None else None,
+                "10": str(existing_entry.alcohol) if existing_entry.alcohol is not None else None,
                 "11": existing_entry.wake_up_time,
                 "12": existing_entry.transportation,
                 "13": existing_entry.mood,
                 "14": existing_entry.bed_time,
-                "15": str(existing_entry.money_spent) if existing_entry.money_spent is not None else None  # CHANGED: Convert to string
+                "15": str(existing_entry.money_spent) if existing_entry.money_spent is not None else None
             }
         })
     else:
         return jsonify({"exists": False})
-
-
+    
+    
 # Route for settings page
 @main.route('/settings', methods=['GET', 'POST'])
 @login_required
