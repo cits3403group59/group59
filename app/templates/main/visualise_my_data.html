@@ -12,7 +12,7 @@
     <div class="grid grid-cols-12 gap-4 md:gap-6 gap-y-4">
         <!-- Row 1-->
         <div class="col-span-12">
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
                 <!-- First Chart: Sleep Hours -->
                 <div class="col-span-1">
                     <div
@@ -41,12 +41,12 @@
                 </div>
             </div>
         </div>
-        <!-- Row 2 - Left (7/12 columns) -->
-        <div class="col-span-12 xl:col-span-7">
+        <!-- Row 2 -->
+        <div class="col-span-12">
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div class="rounded-2xl border border-gray-200 bg-white p-4">
-                    <h3 class="text-xl font-medium mb-4">Standard Drinks Consumed</h3>
-                    <canvas id="alcoholChart"></canvas>
+                    <h3 class="text-xl font-medium mb-4">Wake Up Time</h3>
+                    <canvas id="wakeUpTimeChart"></canvas>
                 </div>
                 <div class="rounded-2xl border border-gray-200 bg-white p-4">
                     <h3 class="text-xl font-medium mb-4">Bed Time</h3>
@@ -55,18 +55,90 @@
             </div>
         </div>
 
-        <!-- Row 2 - Right (5/12 columns) -->
-        <div class="col-span-12 xl:col-span-5">
-            <div class="rounded-2xl border border-gray-200 bg-white p-4">
-                <h3 class="text-xl font-medium mb-4">Hours Exercised</h3>
-                <canvas id="exerciseChart"></canvas>
+        <!-- Row 3 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Hours Exercised</h3>
+                        <canvas id="exerciseChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Money Spent</h3>
+                        <canvas id="moneyChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Screen Time</h3>
+                        <canvas id="screenTimeChart"></canvas>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Daily Mood</h3>
+                    <canvas id="moodChart"></canvas>
+                </div>
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Social Media App </h3>
+                    <canvas id="socialMediaChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Time Spent Socialising</h3>
+                        <canvas id="socialTimeChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Time Spent Studying</h3>
+                        <canvas id="studyTimeChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Standard Drinks Consumed</h3>
+                        <canvas id="alcoholChart"></canvas>
+                    </div> 
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 6 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Main Mode of Transport</h3>
+                    <canvas id="transportationChart"></canvas>
+                </div>
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Hours Spent Working</h3>
+                    <canvas id="workTimeChart"></canvas>
+                </div>
             </div>
         </div>
 
     </div>
+</div>
 
     <script>
         const userId = {{ current_user.id }};
     </script>
+    
     <script src="{{url_for('static', filename='my_data.js')}}"></script>
+
+
     {% endblock %}

@@ -1,18 +1,20 @@
 // Fetch data from your Flask API using the get_data_between route
 async function fetchData() {
   console.log(userId);
-  const startDate = document.getElementById("startDate").value;  // Assuming you have a date range input
-  const endDate = document.getElementById("endDate").value;
-  const url = `/api/userdata/${userId}?start=${startDate}&end=${endDate}`;
+  // const startDate = document.getElementById("startDate").value;  // Assuming you have a date range input
+  // const endDate = document.getElementById("endDate").value;
+  //const url = `/api/userdata/${userId}?start=${startDate}&end=${endDate}`;
+  const url = `/api/userdata/${userId}`
 
-  if (!startDate || !endDate) {
-    console.log("Please enter both start and end dates.");
-    return;  // Prevent fetching if either date is missing
-  }
+  // if (!startDate || !endDate) {
+  //   console.log("Please enter both start and end dates.");
+  //   return;  // Prevent fetching if either date is missing
+  // }
 
   try {
     const response = await fetch(url);
     const data = await response.json();
+    console.log(data)
     renderCharts(data);  // Once data is fetched, render the charts
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -20,8 +22,8 @@ async function fetchData() {
 }
 
 // Add event listeners to the start and end date fields
-document.getElementById("startDate").addEventListener('change', fetchData);
-document.getElementById("endDate").addEventListener('change', fetchData);
+// document.getElementById("startDate").addEventListener('change', fetchData);
+// document.getElementById("endDate").addEventListener('change', fetchData);
 
 // Render the charts using Chart.js
 function renderCharts(data) {
@@ -32,7 +34,7 @@ function renderCharts(data) {
   const stepsData = data.map(d => d.daily_steps);
   const alcoholData = data.map(d => d.alcohol);
   const bedTimeData = data.map(d => d.bed_time);
-  const exerciseData = data.map(d => d.exercise_minutes);
+  const exerciseData = data.map(d => d.exercise_hours);
   const moneyData = data.map(d => d.money_spent);
   const moodData = data.map(d => d.mood);
   const screenTimeData = data.map(d => d.screen_time);
@@ -43,10 +45,20 @@ function renderCharts(data) {
   const wakeUpTimeData = data.map(d => d.wake_up_time);
   const workTimeData = data.map(d => d.work_time);
 
+  // map time values into human readable values
+
+  function timeToMinutes(timeString) {
+  const [hours, minutes] = timeString.split(':').map(Number);
+  return hours * 60 + minutes;
+  }
+
+  const bedTimes = bedTimeData.map(timeToMinutes);
+  const wakeUpTimes = wakeUpTimeData.map(timeToMinutes);
+
   // Chart for Sleep Hours
   const sleepHoursCtx = document.getElementById('sleepHoursChart').getContext('2d');
   new Chart(sleepHoursCtx, {
-    type: 'line',  // You can use 'bar', 'line', etc.
+    type: 'line',  // You can use 'line', 'line', etc.
     data: {
       labels: dates,
       datasets: [{
@@ -55,13 +67,34 @@ function renderCharts(data) {
         borderColor: '#4CAF50',
         fill: false
       }]
+    }, 
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }, 
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Date'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Hours'
+        }
+      }
+    }
     }
   });
 
   // Chart for Coffee Intake
   const coffeeIntakeCtx = document.getElementById('coffeeIntakeChart').getContext('2d');
   new Chart(coffeeIntakeCtx, {
-    type: 'bar',  // Use bar chart
+    type: 'line',  // Use line chart
     data: {
       labels: dates,
       datasets: [{
@@ -69,13 +102,34 @@ function renderCharts(data) {
         data: coffeeData,
         backgroundColor: '#FF9800'
       }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }, 
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Date'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Coffee Intake (Shots)'
+        }
+      }
+    }
     }
   });
 
   // Chart for Daily Steps
   const dailyStepsCtx = document.getElementById('dailyStepsChart').getContext('2d');
   new Chart(dailyStepsCtx, {
-    type: 'bar',  // Use bar chart for daily steps
+    type: 'line',  // Use line chart for daily steps
     data: {
       labels: dates,
       datasets: [{
@@ -83,53 +137,212 @@ function renderCharts(data) {
         data: stepsData,
         backgroundColor: '#2196F3'
       }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }, 
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Date'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Steps'
+        }
+      }
+    }
     }
   });
 
   // Chart for Alcohol Consumption
   const alcoholCtx = document.getElementById('alcoholChart').getContext('2d');
   new Chart(alcoholCtx, {
-    type: 'bar',  // Use bar chart for alcohol consumption
+    type: 'line',  // Use line chart for alcohol consumption
     data: {
       labels: dates,
       datasets: [{
-        label: 'Alcohol Consumption (Units)',
+        label: 'Alcohol Consumption (Standard Drinks)',
         data: alcoholData,
         backgroundColor: '#F44336'
       }]
+    }, 
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }, 
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Dates'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Standard Drinks'
+        }
+      }
+    }
+    }
+  });
+
+// Chart for Wake Up Time
+  const wakeUpTimeCtx = document.getElementById('wakeUpTimeChart').getContext('2d');
+  new Chart(wakeUpTimeCtx, {
+    type: 'line',  // Use line chart for bed time
+    data: {
+      labels: dates,
+      datasets: [{
+        label: 'Wake Up Time',
+        data: wakeUpTimes,
+        borderColor: '#9C27B0',
+        fill: false
+      }]
+    }, 
+    options: {
+      plugins: {
+        legend: {
+          display:false
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const value = context.parsed.y;
+              const hours = Math.floor(value / 60);
+              const minutes = value % 60;
+              return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x:{
+          title: {
+            display: true,
+            text: 'Date'
+          }
+        },
+        y: {
+          type: 'linear',
+          title: {
+            display: true,
+            text: 'Time (24hr)',
+          },
+          ticks: {
+            stepsize: 10,
+            callback: function(value) {
+              const h = Math.floor(value / 60);
+              const m = value % 60;
+              return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+            }
+          }
+        }
+      }
     }
   });
   // Chart for Bed Time
   const bedTimeCtx = document.getElementById('bedTimeChart').getContext('2d');
   new Chart(bedTimeCtx, {
-    type: 'bar',  // Use line chart for bed time
+    type: 'line',  // Use line chart for bed time
     data: {
       labels: dates,
       datasets: [{
         label: 'Bed Time',
-        data: bedTimeData,
+        data: bedTimes,
         borderColor: '#9C27B0',
         fill: false
       }]
+    }, 
+    options: {
+      plugins: {
+        legend: {
+          display:false
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const value = context.parsed.y;
+              const hours = Math.floor(value / 60);
+              const minutes = value % 60;
+              return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x:{
+          title: {
+            display: true,
+            text: 'Date'
+          }
+        },
+        y: {
+          type: 'linear',
+          title: {
+            display: true,
+            text: 'Time (24hr)',
+          },
+          ticks: {
+            stepsize: 10,
+            callback: function(value) {
+              const h = Math.floor(value / 60);
+              const m = value % 60;
+              return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+            }
+          }
+        }
+      }
     }
   });
-  // Chart for Exercise Minutes
+
+  // Chart for Exercise Hours
   const exerciseCtx = document.getElementById('exerciseChart').getContext('2d');
   new Chart(exerciseCtx, {
-    type: 'line',  // Use bar chart for exercise minutes
+    type: 'line',  // Use line chart for exercise minutes
     data: {
       labels: dates,
       datasets: [{
-        label: 'Exercise Minutes',
+        label: 'Exercise Hours',
         data: exerciseData,
         backgroundColor: '#3F51B5'
       }]
+    }, 
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }, 
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Dates'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Hours'
+        }
+      }
+    }
     }
   });
   // Chart for Money Spent
   const moneyCtx = document.getElementById('moneyChart').getContext('2d');
   new Chart(moneyCtx, {
-    type: 'bar',  // Use bar chart for money spent
+    type: 'line',  // Use line chart for money spent
     data: {
       labels: dates,
       datasets: [{
@@ -137,26 +350,91 @@ function renderCharts(data) {
         data: moneyData,
         backgroundColor: '#FF5722'
       }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }, 
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Dates'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Amount Spent (AUD)'
+          }
+        }
+      }
     }
   });
-  // Chart for Mood
-  const moodCtx = document.getElementById('moodChart').getContext('2d');
+
+  // Card for Mood
+  const moodCounts = moodData.reduce((acc, app)=> {
+  acc[app] = (acc[app] || 0) + 1;
+  return acc;
+  }, {});
+
+  console.log(moodCounts);
+
+  const moodLabels = Object.keys(moodCounts); // app names
+  const moodFreq = Object.values(moodCounts); // frequency of most used app
+
+  const moodCtx = document.getElementById('moodChart');
   new Chart(moodCtx, {
-    type: 'line',  // Use line chart for mood
+    type: 'bar',  
     data: {
-      labels: dates,
+      labels: moodLabels,
       datasets: [{
-        label: 'Mood',
-        data: moodData,
-        borderColor: '#E91E63',
-        fill: false
+        label: '',
+        data: moodFreq,
+        backgroundColor: '#74dee1'
       }]
+    }, 
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false,  
+        },
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              // Customizing the tooltip message to show app frequency
+              return tooltipItem.label + ': ' + tooltipItem.raw + ' times';  // e.g., "Facebook: 2 times"
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Mood'
+          },
+          beginAtZero: true
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Frequency'
+          },
+          beginAtZero: true
+        }
+      }
     }
   });
+
+  console.log(screenTimeData);
   // Chart for Screen Time
   const screenTimeCtx = document.getElementById('screenTimeChart').getContext('2d');
   new Chart(screenTimeCtx, {
-    type: 'bar',  // Use bar chart for screen time
+    type: 'line',  
     data: {
       labels: dates,
       datasets: [{
@@ -164,25 +442,89 @@ function renderCharts(data) {
         data: screenTimeData,
         backgroundColor: '#009688'
       }]
+    }, 
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      }, 
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Dates'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Hours'
+          }
+        }
+      }
     }
   });
+
   // Chart for Social Media Usage
+  const appCounts = socialMediaData.reduce((acc, app)=> {
+  acc[app] = (acc[app] || 0) + 1;
+  return acc;
+  }, {});
+
+  console.log(appCounts);
+
+  const appLabels = Object.keys(appCounts); // app names
+  const appFreq = Object.values(appCounts); // frequency of most used app
+
   const socialMediaCtx = document.getElementById('socialMediaChart').getContext('2d');
   new Chart(socialMediaCtx, {
-    type: 'bar',  // Use bar chart for social media usage
+    type: 'bar',  
     data: {
-      labels: dates,
+      labels: appLabels,
       datasets: [{
-        label: 'Social Media Usage (Hours)',
-        data: socialMediaData,
-        backgroundColor: '#8BC34A'
+        label: 'Most Used App',
+        data: appFreq,
+        backgroundColor: '#fa3980'
       }]
+    }, 
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              // Customizing the tooltip message to show app frequency
+              return tooltipItem.label + ': ' + tooltipItem.raw + ' times';  // e.g., "Facebook: 2 times"
+            }
+          }
+        }
+      },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Social Media App'
+        },
+        beginAtZero: true
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Frequency'
+        },
+        beginAtZero: true
+      }
+    }
     }
   });
   // Chart for Social Time
   const socialTimeCtx = document.getElementById('socialTimeChart').getContext('2d');
   new Chart(socialTimeCtx, {
-    type: 'bar',  // Use bar chart for social time
+    type: 'line',  
     data: {
       labels: dates,
       datasets: [{
@@ -190,12 +532,33 @@ function renderCharts(data) {
         data: socialTimeData,
         backgroundColor: '#CDDC39'
       }]
+    }, 
+    options: {
+      scales: {
+        x: {
+          title:{
+            display: true, 
+            text: 'Date'
+          }
+        }, 
+        y: {
+          title:{
+            display: true,
+            text: 'Hours'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
     }
   });
   // Chart for Study Time
   const studyTimeCtx = document.getElementById('studyTimeChart').getContext('2d');
   new Chart(studyTimeCtx, {
-    type: 'bar',  // Use bar chart for study time
+    type: 'line',  // Use line chart for study time
     data: {
       labels: dates,
       datasets: [{
@@ -203,39 +566,86 @@ function renderCharts(data) {
         data: studyTimeData,
         backgroundColor: '#FFEB3B'
       }]
+    }, 
+    options: {
+      scales: {
+        x: {
+          title:{
+            display: true, 
+            text: 'Date'
+          }
+        }, 
+        y: {
+          title:{
+            display: true,
+            text: 'Hours'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
     }
   });
   // Chart for Transportation
+  const transportCounts = transportationData.reduce((acc, app)=> {
+  acc[app] = (acc[app] || 0) + 1;
+  return acc;
+  }, {});
+
+  console.log(transportCounts);
+
+  const transLabels = Object.keys(transportCounts); // app names
+  const transFreq = Object.values(transportCounts); // frequency of most used app
+
   const transportationCtx = document.getElementById('transportationChart').getContext('2d');
   new Chart(transportationCtx, {
-    type: 'bar',  // Use bar chart for transportation
+    type: 'bar', 
     data: {
-      labels: dates,
+      labels: transLabels,
       datasets: [{
-        label: 'Transportation (Hours)',
-        data: transportationData,
+        label: 'Mode of Transport',
+        data: transFreq,
         backgroundColor: '#FFC107'
       }]
+    }, 
+    options: {
+      scales: {
+        x: {
+          title:{
+            display: true, 
+            text: 'Mode of Transport'
+          }
+        }, 
+        y: {
+          title:{
+            display: true,
+            text: 'Freuquency'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }, 
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              // Customizing the tooltip message to show app frequency
+              return tooltipItem.label + ': ' + tooltipItem.raw + ' times';  // e.g., "Facebook: 2 times"
+            }
+          }
+        }
+      }
     }
   });
-  // Chart for Wake Up Time
-  const wakeUpTimeCtx = document.getElementById('wakeUpTimeChart').getContext('2d');
-  new Chart(wakeUpTimeCtx, {
-    type: 'line',  // Use line chart for wake up time
-    data: {
-      labels: dates,
-      datasets: [{
-        label: 'Wake Up Time',
-        data: wakeUpTimeData,
-        borderColor: '#FF9800',
-        fill: false
-      }]
-    }
-  });
+
   // Chart for Work Time
   const workTimeCtx = document.getElementById('workTimeChart').getContext('2d');
   new Chart(workTimeCtx, {
-    type: 'bar',  // Use bar chart for work time
+    type: 'line',  // Use line chart for work time
     data: {
       labels: dates,
       datasets: [{
@@ -243,6 +653,29 @@ function renderCharts(data) {
         data: workTimeData,
         backgroundColor: '#FF5722'
       }]
+    }, 
+    options: {
+      scales: {
+        x: {
+          title:{
+            display: true, 
+            text: 'Date'
+          }
+        }, 
+        y: {
+          title:{
+            display: true,
+            text: 'Hours'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
     }
   });
 }
+
+fetchData()
