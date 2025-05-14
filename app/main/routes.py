@@ -69,7 +69,7 @@ def share_data():
 # Route to return list of friends
 @main.route('/get_friends', methods=['GET'])
 def get_friends():
-    friends = current_user.get_user_friends()  # or however your method is called
+    friends = current_user.get_user_friends() 
     return jsonify([
         {
             'id': friend.id,

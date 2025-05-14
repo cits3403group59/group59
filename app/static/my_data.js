@@ -62,9 +62,9 @@ function renderCharts(data) {
     data: {
       labels: dates,
       datasets: [{
-        label: 'Sleep Hours',
+        label: 'Hours Slept',
         data: sleepData,
-        borderColor: '#4CAF50',
+        borderColor: '#fa3980',
         fill: false
       }]
     }, 
@@ -100,7 +100,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Coffee Intake (Cups)',
         data: coffeeData,
-        backgroundColor: '#FF9800'
+        borderColor: '#fa3980'
       }]
     },
     options: {
@@ -135,7 +135,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Daily Steps',
         data: stepsData,
-        backgroundColor: '#2196F3'
+        borderColor: '#fa3980'
       }]
     },
     options: {
@@ -170,7 +170,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Alcohol Consumption (Standard Drinks)',
         data: alcoholData,
-        backgroundColor: '#F44336'
+        borderColor: '#fa3980'
       }]
     }, 
     options: {
@@ -205,7 +205,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Wake Up Time',
         data: wakeUpTimes,
-        borderColor: '#9C27B0',
+        borderColor: '#fa3980',
         fill: false
       }]
     }, 
@@ -259,7 +259,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Bed Time',
         data: bedTimes,
-        borderColor: '#9C27B0',
+        borderColor: '#fa3980',
         fill: false
       }]
     }, 
@@ -314,7 +314,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Exercise Hours',
         data: exerciseData,
-        backgroundColor: '#3F51B5'
+        borderColor: '#fa3980'
       }]
     }, 
     options: {
@@ -348,7 +348,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Money Spent ($)',
         data: moneyData,
-        backgroundColor: '#FF5722'
+        borderColor: '#fa3980'
       }]
     },
     options: {
@@ -393,7 +393,7 @@ function renderCharts(data) {
       datasets: [{
         label: '',
         data: moodFreq,
-        backgroundColor: '#74dee1'
+        backgroundColor: '#fa3980'
       }]
     }, 
     options: {
@@ -440,7 +440,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Screen Time (Hours)',
         data: screenTimeData,
-        backgroundColor: '#009688'
+        borderColor: '#fa3980'
       }]
     }, 
     options: {
@@ -530,7 +530,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Social Time (Hours)',
         data: socialTimeData,
-        backgroundColor: '#CDDC39'
+        borderColor: '#fa3980'
       }]
     }, 
     options: {
@@ -564,7 +564,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Study Time (Hours)',
         data: studyTimeData,
-        backgroundColor: '#FFEB3B'
+        borderColor: '#fa3980'
       }]
     }, 
     options: {
@@ -608,7 +608,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Mode of Transport',
         data: transFreq,
-        backgroundColor: '#FFC107'
+        backgroundColor: '#fa3980'
       }]
     }, 
     options: {
@@ -651,7 +651,7 @@ function renderCharts(data) {
       datasets: [{
         label: 'Work Time (Hours)',
         data: workTimeData,
-        backgroundColor: '#FF5722'
+        borderColor: '#fa3980'
       }]
     }, 
     options: {
@@ -679,3 +679,5 @@ function renderCharts(data) {
 }
 
 fetchData()
+
+

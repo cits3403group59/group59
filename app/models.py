@@ -133,7 +133,13 @@ class User(db.Model, UserMixin):
             query = query.filter(UserData.date <= end_date)
 
         return query.order_by(UserData.date.asc()).all()
+    
+    def get_alltime_data(self):
+        return UserData.query.filter_by(user_id=self.id).order_by(UserData.date.asc()).all()
 
+    def is_a_friend(self, friend_id):
+        return any(friend.id == friend_id for friend in self.get_user_friends())
+    
     def __repr__(self):
         return f'<User {self.email}>'
 
