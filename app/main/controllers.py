@@ -129,28 +129,43 @@ def settings_controller():
 
     return render_template('settings.html', form=form)
 
+
 @main.route('/api/userdata/<int:user_id>', methods=['GET'])
 @login_required
 def get_user_data(user_id):
-    # Use user_id from the URL or session, here we assume user_id from session for the logged-in user
-    if current_user.id != user_id:
+    
+    cur_user_id = current_user.id
+    
+    if not cur_user_id:
+        return jsonify({"error": "Not logged in"}), 403
+    
+    cur_user = User.query.get_or_404(cur_user_id)
+    
+    if not cur_user.is_a_friend(user_id) and cur_user_id != user_id:
+        # user_id is not friend of current user and current user is not the user id 
         return jsonify({"error": "Unauthorized access"}), 403
+    
+    # # Use user_id from the URL or session, here we assume user_id from session for the logged-in user
+    # if current_user.id != user_id:
+    #     return jsonify({"error": "Unauthorized access"}), 403
 
-    # Parse start and end dates from the query parameters
-    start_str = request.args.get('start')
-    end_str = request.args.get('end')
+    # # Parse start and end dates from the query parameters
+    # start_str = request.args.get('start')
+    # end_str = request.args.get('end')
 
-    try:
-        start_date = datetime.strptime(start_str, '%Y-%m-%d').date() if start_str else None
-        end_date = datetime.strptime(end_str, '%Y-%m-%d').date() if end_str else None
-    except ValueError:
-        return jsonify({"error": "Invalid date format. Please use YYYY-MM-DD."}), 400
+    # try:
+    #     start_date = datetime.strptime(start_str, '%Y-%m-%d').date() if start_str else None
+    #     end_date = datetime.strptime(end_str, '%Y-%m-%d').date() if end_str else None
+    # except ValueError:
+    #     return jsonify({"error": "Invalid date format. Please use YYYY-MM-DD."}), 400
 
     # Fetch user data between the given dates
     user = User.query.get_or_404(user_id)  # Fetch the user from the database
     
     # Get the data between the dates
-    data = user.get_data_between(start_date, end_date)
+    #data = user.get_data_between(start_date, end_date)
+    
+    data = user.get_alltime_data()
 
     # Return the data in the required format
     return jsonify([
@@ -160,7 +175,7 @@ def get_user_data(user_id):
             'coffee_intake': d.coffee_intake,
             'social_media': d.social_media,
             'daily_steps': d.daily_steps,
-            'exercise_minutes': d.exercise_minutes,
+            'exercise_hours': d.exercise_hours,
             'screen_time': d.screen_time,
             'work_time': d.work_time,
             'study_time': d.study_time,
@@ -200,12 +215,11 @@ def submit_survey():
     ).first()
         
     if existing_entry:
-        # Update existing entry - CHANGED: Now stores strings instead of ints
         existing_entry.sleep_hours = str(form_data.get('1', '')) if form_data.get('1') else None
         existing_entry.coffee_intake = str(form_data.get('2', '')) if form_data.get('2') else None
         existing_entry.social_media = str(form_data.get('3', '')) if form_data.get('3') else None
         existing_entry.daily_steps = str(form_data.get('4', '')) if form_data.get('4') else None
-        existing_entry.exercise_minutes = str(form_data.get('5', '')) if form_data.get('5') else None
+        existing_entry.exercise_hours = str(form_data.get('5', '')) if form_data.get('5') else None
         existing_entry.screen_time = str(form_data.get('6', '')) if form_data.get('6') else None
         existing_entry.work_time = str(form_data.get('7', '')) if form_data.get('7') else None
         existing_entry.study_time = str(form_data.get('8', '')) if form_data.get('8') else None
@@ -255,7 +269,7 @@ def check_survey_data():
                 "2": existing_entry.coffee_intake,
                 "3": existing_entry.social_media,
                 "4": existing_entry.daily_steps,
-                "5": existing_entry.exercise_minutes,
+                "5": existing_entry.exercise_hours,
                 "6": existing_entry.screen_time,
                 "7": existing_entry.work_time,
                 "8": existing_entry.study_time,
@@ -265,7 +279,7 @@ def check_survey_data():
                 "12": existing_entry.transportation,
                 "13": existing_entry.mood,
                 "14": existing_entry.bed_time,
-                "15": str(existing_entry.money_spent) if existing_entry.money_spent is not None else None  # CHANGED: Convert to string
+                "15": existing_entry.money_spent
             }
         })
     else:
