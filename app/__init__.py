@@ -12,9 +12,17 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 migrate = Migrate()
 
-def create_app():
+def create_app(config_object=None):
     app = Flask(__name__)
-    app.config.from_object('app.config.Config')
+    #app.config.from_object('app.config.Config')
+    
+    # Use the provided config_object or default to Config
+    if config_object is None:
+        app.config.from_object('app.config.Config')
+    else:
+        app.config.from_object(config_object)
+    
+    
 
     db.init_app(app)
     migrate.init_app(app, db)
