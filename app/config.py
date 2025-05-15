@@ -20,3 +20,9 @@ class Config:
     # File upload settings
     UPLOAD_FOLDER = os.path.join(basedir, 'static', 'profile_pics')
     MAX_CONTENT_LENGTH = 2 * 1024 * 1024  # Limit upload size to 2MB
+    
+#my addition    
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'  # Use in-memory database
+    WTF_CSRF_ENABLED = False  # Disable CSRF for testing
