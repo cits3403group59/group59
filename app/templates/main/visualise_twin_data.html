@@ -6,4 +6,377 @@
 {% set call = "See how you compare!" %}
 
 {% block graphs %}
+<div class="p-6 rounded-2xl shadow-md bg-white mt-6">
+    <h2 class="text-xl font-bold mb-4">Your Data Twin</h2>
+
+    <p><strong>Name:</strong> {{ twin.first_name }} {{ twin.last_name }}</p>
+    <p><strong>Similarity Score:</strong> {{ similarity }}%</p>
+</div>
+
+<div class="mx-auto p-4 md:p-6">
+    <!-- Initalise grid -->
+    <div class="grid grid-cols-12 gap-4 md:gap-6 gap-y-4">
+        <!-- Row 1 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                <!-- First Card: Sleep Hours -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Hours Slept</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="sleep-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="sleep-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="sleep-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="sleep-diff" class="text-green-500"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Second Card: Coffee Intake -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Coffee Intake</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="coffee-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="coffee-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="coffee-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="coffee-diff" class="text-green-500"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Third Card: Daily Steps -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Daily Steps</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="steps-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="steps-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="steps-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="steps-diff" class="text-green-500"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row 2 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <!-- Fourth Card: Wake Up Time -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Wake Up Time</h3>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <span id="wakeup-you" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">You</span>
+                        </div>
+                        <div>
+                            <span id="wakeup-twin" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">Twin</span>
+                        </div>
+                        <div>
+                            <span id="wakeup-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                            <span class="text-sm text-gray-500">Match</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm">
+                        <span id="wakeup-diff" class="text-green-500"></span>
+                    </div>
+                </div>
+                <!-- Fifth Card: Bed Time -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Bed Time</h3>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <span id="bed-you" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">You</span>
+                        </div>
+                        <div>
+                            <span id="bed-twin" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">Twin</span>
+                        </div>
+                        <div>
+                            <span id="bed-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                            <span class="text-sm text-gray-500">Match</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-sm">
+                        <span id="bed-diff" class="text-green-500"></span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row 3 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                <!-- Sixth Card: Hours Exercised -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Hours Exercised</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="exercise-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="exercise-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="exercise-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="exercise-diff" class="text-green-500"></span>
+                        </div>
+                    </div> 
+                </div>
+                <!-- Seventh Card: Money Spent -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Money Spent</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="money-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="money-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="money-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="money-diff" class="text-green-500"></span>
+                        </div>
+                    </div> 
+                </div>
+                <!-- Eigth Card: Screen Time -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Screen Time</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="screen-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="screen-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="screen-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="screen-diff" class="text-green-500"></span>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <!-- Row 4 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <!-- Ninth Card: Daily Mood -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Daily Mood</h3>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <span id="mood-you" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">You</span>
+                        </div>
+                        <div>
+                            <span id="mood-twin" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">Twin</span>
+                        </div>
+                        <div>
+                            <span id="mood-match" class="block text-2xl font-bold text-blue-600">--</span>
+                            <span class="text-sm text-gray-500">Match</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tenth Card: Social Media App -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Social Media App </h3>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <span id="app-you" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">You</span>
+                        </div>
+                        <div>
+                            <span id="app-twin" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">Twin</span>
+                        </div>
+                        <div>
+                            <span id="app-match" class="block text-2xl font-bold text-blue-600">--</span>
+                            <span class="text-sm text-gray-500">Match</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row 5 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                <!-- Eleventh Card: Time Spent Socialising -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Time Spent Socialising</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="social-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="social-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="social-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="social-diff" class="text-green-500"></span>
+                        </div>
+                    </div> 
+                </div>
+                <!-- Twelfth Card: Time Spent Studying -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Time Spent Studying</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="study-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="study-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="study-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="study-diff" class="text-green-500"></span>
+                        </div>
+                    </div> 
+                </div>
+                <!-- Thirtheenth Card: Standard Drinks Consumed -->
+                <div class="col-span-1">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                        <h3 class="text-xl font-medium mb-4">Standard Drinks Consumed</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="alcohol-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="alcohol-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="alcohol-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="alcohol-diff" class="text-green-500"></span>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <!-- Row 6 -->
+        <div class="col-span-12">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <!-- Fourteenth Card: Main Mode of Transport -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Main Mode of Transport</h3>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <span id="transport-you" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">You</span>
+                        </div>
+                        <div>
+                            <span id="transport-twin" class="block text-2xl font-bold">--</span>
+                            <span class="text-sm text-gray-500">Twin</span>
+                        </div>
+                        <div>
+                            <span id="transport-match" class="block text-2xl font-bold text-blue-600">--</span>
+                            <span class="text-sm text-gray-500">Match</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fifthteenth Card: Hours Spent Working -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <h3 class="text-xl font-medium mb-4">Hours Spent Working</h3>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <span id="work-you" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">You</span>
+                            </div>
+                            <div>
+                                <span id="work-twin" class="block text-2xl font-bold">--</span>
+                                <span class="text-sm text-gray-500">Twin</span>
+                            </div>
+                            <div>
+                                <span id="work-match" class="block text-2xl font-bold text-blue-600">--%</span>
+                                <span class="text-sm text-gray-500">Match</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm">
+                            <span id="work-diff" class="text-green-500"></span>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        const userId = {{ current_user.id }};
+    </script>
+        
+    <script src="{{url_for('static', filename='twin_data.js')}}"></script>
+
 {% endblock %}
