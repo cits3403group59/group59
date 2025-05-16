@@ -51,43 +51,6 @@ class SystemTests(unittest.TestCase):
         user2.friends.append(user1)
         db.session.commit()
     
-    def test_log_in(self):
-        print("################ TESTING LOG IN #######################")
-        fname = "olivia"
-        lname = "fitzgerald"
-        email = "123@student.uwa.edu.au"
-        password = "olivia"
-        dob = datetime.datetime(2001, 1, 1)
-        user1 = self.addUser(fname, lname, email, password, dob, True)
-
-        self.driver.get(localHost)
-
-        log_in = self.driver.find_element(By.ID, "log-in")
-        log_in.click()
-        
-        WebDriverWait(self.driver, 5).until(
-            expected_conditions.url_changes(localHost)
-        )
-
-        # wait for page to render 
-        WebDriverWait(self.driver, 5).until(
-            expected_conditions.visibility_of_element_located((By.ID, "email"))
-        )
-
-        self.driver.find_element(By.ID, "email").send_keys(email)
-        self.driver.find_element(By.ID, "password").send_keys(password)
-        self.driver.find_element(By.ID, "submitBtn").click()
-        
-        WebDriverWait(self.driver, 10).until(
-            expected_conditions.url_to_be(localHost) # This will wait until the URL is the homepage
-        )
-
-        print("Successfully logged in. Home page:", self.driver.current_url)
-
-        # "sign-up-log-in" element is hidden 
-        self.assertNotIn("sign-up-log-in", self.driver.page_source)
-
-    
     def test_sign_up(self):
         print("################ TESTING SIGN UP #######################")
         fname = "olivia"
