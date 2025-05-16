@@ -16,7 +16,7 @@ class UserValidationTestCase(unittest.TestCase):
         self.app_context.push()
         
         # Verify we're using the in-memory database
-        self.assertTrue(self.app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///:memory:')
+        self.assertTrue(self.app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///:memory')
         
         db.create_all()
         
