@@ -682,6 +682,6 @@ function renderCharts(data) {
   });
 }
 
-if (fetchData){
+if (fetchData()){
   window.canvasDataReady = true;
 }
