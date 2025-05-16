@@ -79,13 +79,13 @@
                                                 <small>Enter and update data manually</small>
                                             </a>
                                         </div>
-                                        <div class="dropdown-item">
+                                        <!-- <div class="dropdown-item">
                                             <a href="{{url_for('main.upload_data')}}">
                                                 <span role="button" aria-label="From Device"><i class="fa-solid fa-mobile"></i></span>
                                                 <strong>From Device</strong><br>
                                                 <small>Connect and transfer data from API</small>
                                             </a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </li>
             
@@ -140,10 +140,10 @@
                                                 <strong>Manage Profile</strong><br>
                                                 <small>Update profile picture and profile settings</small>
                                             </a>
-                                            {# <a href="{{ url_for('main.settings') }}#connections" class="dropdown-item">
+                                            <!-- {# <a href="{{ url_for('main.settings') }}#connections" class="dropdown-item">
                                                 <strong>Manage Connections</strong><br>
                                                 <small>Manage connected applications and devices</small>
-                                            </a> #}
+                                            </a> #} -->
                                             <a href="{{ url_for('auth.logout') }}" class="dropdown-item">
                                                 <span role="button" aria-label="Logout"><i class="fa-solid fa-sign-out-alt"></i></span>
                                                 <strong>Logout</strong><br>
@@ -209,11 +209,11 @@
                                 <i class="fa-solid fa-hand mr-2"></i> Manual
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="{{ url_for('main.upload_data') }}" class="block pl-4 hover:text-[#FA3980]">
                                 <i class="fa-solid fa-mobile mr-2"></i> From Device
                             </a>
-                        </li>
+                        </li> -->
                         <hr class="my-3 border-gray-300">
 
                         <!-- Share Data -->
