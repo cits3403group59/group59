@@ -15,7 +15,7 @@ from .controllers import (
 )
 from datetime import datetime
 from app import db
-
+from .compare_dictionary import get_latest_data, find_data_twin, calculate_similarity, numerical_similarity, time_similarity
 
 # Route for the introductory page
 @main.route('/')
@@ -32,8 +32,38 @@ def vis_my_data():
 @main.route('/visualise-twin-data')
 @login_required
 def vis_twin_data():
-    return render_template('visualise_twin_data.html')
+    twin, similarity = find_data_twin(current_user)
+    return render_template('visualise_twin_data.html', twin=twin, similarity=round(similarity * 100, 1))
 
+# Route to make comparisons in the twin data page
+@main.route('/api/twin-comparison/<int:user_id>')
+def get_twin_comparison(user_id):
+    user_data = get_latest_data(user_id, date='today')
+    
+    twin_id = find_data_twin(user_id)
+    twin_data = get_latest_data(twin_id, date='today')
+    
+    comparison = {
+        'sleep': calculate_comparison(user_data.sleep_hours, twin_data.sleep_hours),
+        'coffee': calculate_comparison(user_data.coffee_intake, twin_data.coffee_intake),
+        'steps': calculate_comparison(user_data.daily_steps, twin_data.daily_steps),
+        'wakeup': calculate_comparison(user_data.wake_up_time, twin_data.wake_up_time),
+        'bed': calculate_comparison(user_data.bed_time, twin_data.bed_time),
+        # Need to add the rest
+    }
+    
+    return jsonify(comparison)
+
+def calculate_comparison(user_value, twin_value):
+    difference = user_value - twin_value
+    match_percent = 100 - (abs(difference) / ((user_value + twin_value) / 2)) * 100
+    
+    return {
+        'you': user_value,
+        'twin': twin_value,
+        'difference': difference,
+        'match': match_percent.toFixed(1)
+    }
 # Route for the visualise friend data page
 @main.route('/visualise-friend-data')
 @login_required
