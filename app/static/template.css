@@ -17,8 +17,15 @@
   text-align: center;
 }
 
+/* Adjust font size for small screens */
+@media (max-width: 650px) {
+  .main-title {
+    font-size: 75px;
+  }
+}
+
 .slogan {
-  font-size: 20px; /* Equivalent to text-xl */
+  font-size: 20px; 
 }
 
 /* Nav bar container */
