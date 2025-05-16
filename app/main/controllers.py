@@ -284,3 +284,4 @@ def check_survey_data():
         })
     else:
         return jsonify({"exists": False})
+

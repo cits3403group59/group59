@@ -42,10 +42,10 @@
                             <ul>
                                 <!--Visualise Data-->
                                 <li class="dropdown">
-                                    <a href="#" class="">Visualise Data <i class="fa-solid fa-caret-down"></i></a>
+                                    <a id="vis-dropdown">Visualise Data <i class="fa-solid fa-caret-down"></i></a>
                                     <div class="dropdown-content">
                                     <div class="dropdown-item">
-                                        <a href="{{url_for('main.vis_my_data')}}">
+                                        <a id="vis-my-data" href="{{url_for('main.vis_my_data')}}">
                                             <span role="button" aria-label="My Data"><i class="fa-solid fa-clock-rotate-left"></i></span>
                                             <strong>My Data</strong><br>
                                             <small>View personal data over time</small>
@@ -186,17 +186,17 @@
                         <!-- Visualise Data -->
                         <li class="font-semibold text-[#FA3980] mt-4 mb-2">Visualise Data</li>
                         <li>
-                            <a href="{{ url_for('main.vis_my_data') }}" class="block pl-4 hover:text-[#FA3980]">
+                            <a id = "side-vis-my-data" href="{{ url_for('main.vis_my_data') }}" class="block pl-4 hover:text-[#FA3980]">
                                 <i class="fa-solid fa-clock-rotate-left mr-2"></i> My Data
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url_for('main.vis_twin_data') }}" class="block pl-4 hover:text-[#FA3980]">
+                            <a id="side-vis-twin-data" href="{{ url_for('main.vis_twin_data') }}" class="block pl-4 hover:text-[#FA3980]">
                                 <i class="fa-solid fa-people-arrows mr-2"></i> Twin Data
                             </a>
                         </li>
                         <li>
-                            <a href="{{url_for('main.vis_friend_data')}}" class="block pl-4 hover:text-[#FA3980]">
+                            <a id="side-vis-friend-data" href="{{url_for('main.vis_friend_data')}}" class="block pl-4 hover:text-[#FA3980]">
                                 <i class="fa-solid fa-user-group mr-2"></i> Friends Data
                             </a>
                         </li>
