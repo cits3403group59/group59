@@ -21,10 +21,10 @@ Carbon Copy - Introductory Page
     {% if not current_user.is_authenticated %}
         <!-- Sign Up / Log In Buttons -->
         <div id="sign-up-log-in" class="space-x-6">
-            <a href="{{url_for('auth.login')}}" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition">
+            <a id="log-in" href="{{url_for('auth.login')}}" class="bg-white hover:bg-pink-600 text-black hover:text-white font-semibold py-2 px-6 rounded-full transition">
                 Log In
             </a>
-            <a href="{{url_for('auth.register')}}" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition">
+            <a id="sign-up" href="{{url_for('auth.register')}}" class="bg-[#FA3980] hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-full transition">
                 Sign Up
             </a>
         </div>

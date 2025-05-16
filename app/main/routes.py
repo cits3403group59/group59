@@ -141,3 +141,4 @@ def find_friends():
             return render_template('find_friends.html', form=form, is_found=False, is_already_friends=False, request_exists=False)
 
     return render_template('find_friends.html', form=form, is_found=None, is_already_friends=False, request_exists=False)
+

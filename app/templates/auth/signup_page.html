@@ -32,7 +32,7 @@
                 {{ form.last_name(class="form-input") }}
             </div>
         
-            <div class="form-group">
+            <div  class="form-group">
                 {{ form.email.label }}<br>
                 {{ form.email(class="form-input") }}
             </div>
@@ -56,7 +56,7 @@
                 {{ form.terms_accepted() }} {{ form.terms_accepted.label }}
             </div>
         
-            <button type="submit" class="submit-button">{{ form.submit.label.text }}</button>
+            <button id="submitBtn" type="submit" class="submit-button">{{ form.submit.label.text }}</button>
         </form>
         
         <div class="signin-link">

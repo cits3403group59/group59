@@ -1,3 +1,6 @@
+// set flag to false
+window.canvasDataReady = false;
+
 // Fetch data from your Flask API using the get_data_between route
 async function fetchData() {
   console.log(userId);
@@ -16,6 +19,7 @@ async function fetchData() {
     const data = await response.json();
     console.log(data)
     renderCharts(data);  // Once data is fetched, render the charts
+    return true;
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -678,6 +682,6 @@ function renderCharts(data) {
   });
 }
 
-fetchData()
-
-
+if (fetchData){
+  window.canvasDataReady = true;
+}

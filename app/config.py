@@ -24,5 +24,5 @@ class Config:
 #my addition    
 class TestConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'  # Use in-memory database
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory'  # Use in-memory database
     WTF_CSRF_ENABLED = False  # Disable CSRF for testing
