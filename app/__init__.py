@@ -21,8 +21,6 @@ def create_app(config_object=None):
         app.config.from_object('app.config.Config')
     else:
         app.config.from_object(config_object)
-    
-    
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -36,18 +34,3 @@ def create_app(config_object=None):
     app.register_blueprint(main_blueprint)
 
     return app
-
-
-# # Configure application
-# application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# application.config['SECRET_KEY'] = 'your_secret_key'  # Change this in production!
-# application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///carbon_copy.db'  # SQLite for simplicity
-# application.config['WERKZEUG_DEFAULT_PASSWORD_HASH'] = 'pbkdf2:sha256:150000'
-
-# # Setup CORS
-# CORS(application, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
-
-# # Initialize database
-# db = SQLAlchemy(application)
-# migrate = Migrate(application, db)
-

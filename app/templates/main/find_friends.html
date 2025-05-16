@@ -8,8 +8,8 @@
 <div class="mb-6 w-80">
     <form method="POST" action="{{ url_for('main.find_friends') }}" class="flex items-center">
         {{ form.hidden_tag() }}  <!-- CSRF token -->
-        <input type="email" name="email" placeholder="Search by Email" class="border p-2 w-full rounded-l-lg">
-        <button type="submit" class="bg-[#FA3980] border border-[#FA3980] text-white p-2 rounded-r-lg hover:bg-pink-600">Search</button>
+        <input id="email" type="email" name="email" placeholder="Search by Email" class="border p-2 w-full rounded-l-lg">
+        <button id="submitBtn" type="submit" class="bg-[#FA3980] border border-[#FA3980] text-white p-2 rounded-r-lg hover:bg-pink-600">Search</button>
     </form>
 </div>
 {% endblock %}
@@ -17,7 +17,7 @@
 {% block content_box %}
     {% if is_found %}
         {% if not is_self %}
-            <div class="flex items-center gap-4">
+            <div id="friend-card" class="flex items-center gap-4">
                 <p>{{ friend.first_name }} {{ friend.last_name }}</p>
                 <p class="text-sm text-gray-500">{{ friend.email }}</p>
             </div>
@@ -26,11 +26,11 @@
                 {{ form.hidden_tag() }}  <!-- CSRF token -->
                 
                 {% if is_already_friends %}
-                    <button type="button" class="bg-gray-400 text-white px-4 py-2 mt-4 rounded-lg cursor-not-allowed" disabled>Already Friends</button>
+                    <button id="already-friends" type="button" class="bg-gray-400 text-white px-4 py-2 mt-4 rounded-lg cursor-not-allowed" disabled>Already Friends</button>
                 {% elif request_exists %}
-                    <button type ="button" class="bg-gray-400 text-white px-4 py-2 mt-4 rounded-lg cursor-not-allowed" disabled>Request Sent</button>
+                    <button id="request-sent" type ="button" class="bg-gray-400 text-white px-4 py-2 mt-4 rounded-lg cursor-not-allowed" disabled>Request Sent</button>
                 {% else %}
-                    <button type="submit" class="bg-green-500 text-white px-4 py-2 mt-4 rounded-lg">Send Friend Request</button>
+                    <button id="send-request" type="submit" class="bg-green-500 text-white px-4 py-2 mt-4 rounded-lg">Send Friend Request</button>
                 {% endif %}
             </form>
         {% else %}
