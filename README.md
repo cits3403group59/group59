@@ -30,6 +30,9 @@ pip install -r requirements.txt
 # apply data base migrations
 flask db upgrade
 
+# make instance folder in root directory to store database
+mkdir instance
+
 # start app
 python3 carboncopy.py
 ```
