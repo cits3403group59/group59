@@ -184,24 +184,8 @@ class SystemTests(unittest.TestCase):
         print("THIS SHOULD BE THE HOME PAGE")
         print(self.driver.current_url)
         
-        
-        
-    def test_upload_data_page(self):
-        print("##################### TESTING UPLOAD DATA ##################")
-        fname = "olivia"
-        lname = "fitzgerald"
-        email = "123@student.uwa.edu.au"
-        password = "olivia"
-        dob = datetime.datetime(2001, 1, 1)
-        
-        user1 = self.addUser(fname, lname, email, password, dob, True)
-        
-        self.login(email, password)
-        
-        # we are now on the home page and need to navigate to the upload data page
-        self.driver.get(localHost + "manual-data")
-        print("THIS SHOULD BE MANUAL DATA:", self.driver.current_url)
-        
+    def enter_data(self):
+        print("Starting to enter data")
         # Question 1: Sleep hours
         sleep_input = WebDriverWait(self.driver, 5).until(
             expected_conditions.visibility_of_element_located((By.ID, "sleep-hours"))
@@ -317,6 +301,24 @@ class SystemTests(unittest.TestCase):
         # Submit the form (final next-btn click should submit)
         self.driver.find_element(By.ID, "next-btn").click()
         
+    def test_upload_data_page(self):
+        print("##################### TESTING UPLOAD DATA ##################")
+        fname = "olivia"
+        lname = "fitzgerald"
+        email = "123@student.uwa.edu.au"
+        password = "olivia"
+        dob = datetime.datetime(2001, 1, 1)
+        
+        user1 = self.addUser(fname, lname, email, password, dob, True)
+        
+        self.login(email, password)
+        
+        # we are now on the home page and need to navigate to the upload data page
+        self.driver.get(localHost + "manual-data")
+        print("THIS SHOULD BE MANUAL DATA:", self.driver.current_url)
+        
+        # use enter data helpter function
+        self.enter_data()
         
         # Wait for the alert to appear
         WebDriverWait(self.driver, 5).until(
@@ -343,6 +345,73 @@ class SystemTests(unittest.TestCase):
         )
 
         self.assertTrue(localHost, self.driver.current_url)
+        
+    def test_visualise_my_data(self):
+        print("##################### TESTING VISUALISE MY DATA ##################")
+        fname = "olivia"
+        lname = "fitzgerald"
+        email = "123@student.uwa.edu.au"
+        password = "olivia"
+        dob = datetime.datetime(2001, 1, 1)
+        
+        # manually add user to db
+        user1 = self.addUser(fname, lname, email, password, dob, True)
+        
+        # login (starts on home page)
+        self.login(email, password)
+        
+        # we are now on the home page and need to navigate to the upload data page
+        self.driver.get(localHost + "manual-data")
+        print("THIS SHOULD BE MANUAL DATA:", self.driver.current_url)
+        
+        # use enter data helpter function
+        self.enter_data()   
+        
+        # Wait for the alert to appear
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.alert_is_present()
+        )
+
+        # Switch to the alert
+        alert = Alert(self.driver)
+        print("Alert was present")
+
+        print("ALERT TEXT", alert.text)
+        
+        # Accept the alert
+        alert.accept()
+        print("Alert was present and accepted")
+        
+        self.driver.switch_to.default_content()
+        print("switched to main window")
+        print(self.driver.current_url)
+
+        # Wait for the URL to change to home page
+        WebDriverWait(self.driver, 10).until(
+            expected_conditions.url_to_be(localHost)
+        )
+        
+        # Wait for link to be clickable
+        visualise_toggle = WebDriverWait(self.driver, 10).until(
+            expected_conditions.element_to_be_clickable((By.ID, "vis-dropdown"))
+        )
+        visualise_toggle.click()
+        
+        # navigate to the visualise my data page
+        myDataBtn = self.driver.find_element(By.ID, 'vis-my-data')
+        myDataBtn.click()
+        
+        # wait for page to change to my data 
+        WebDriverWait(self.driver, 10).until(
+            expected_conditions.url_to_be(localHost + "visualise-my-data")
+        )
+        
+        # check if the data has rendered
+        is_ready = WebDriverWait(self.driver, 10).until(
+            lambda d: d.execute_script("return window.canvasDataReady === true;")
+        )
+        
+        self.assertTrue(is_ready)
         
     def test_find_friends(self):
         print("##################### TESTING FIND FRIENDS ##################")
@@ -386,7 +455,7 @@ class SystemTests(unittest.TestCase):
             self.driver.find_element(By.ID, "send-request").is_displayed(),
             "The 'send-request' button is not displayed."
         )
-        
+    
     def test_manage_friends(self):
         print("##################### TESTING MANAGE FRIENDS ##################")
         fname1 = "olivia"
