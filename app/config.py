@@ -14,7 +14,8 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') #
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or default_db_path
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    REMEMBER_COOKIE_DURATION = timedelta(hours=1)  # Keep user logged in for 1 hour
+    # 29.05 (post project submission): commenting this out to demonstrat app login functionality 
+    # REMEMBER_COOKIE_DURATION = timedelta(hours=1)  # Keep user logged in for 1 hour
     
     # File upload settings
     UPLOAD_FOLDER = os.path.join(basedir, 'static', 'profile_pics')
