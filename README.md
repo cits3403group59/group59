@@ -4,6 +4,10 @@ CarbonCopy is an all in one habit tracking and social platform. With the ability
 
 CarbonCopy was designed with user experience in mind, the user interfaces are simple and intuitive, with no context required to navigate through the application. A simple colour scheme is maintained throughout, with various screen sizes kept in mind when rendering the web app. 
 
+Link for Demo Video: https://youtu.be/VBye8b3gs0c
+
+![Screenshot 2025-05-29 210215](https://github.com/user-attachments/assets/4de84f1c-2d67-4c33-9bd6-75e33987d805)
+
 ## Group Members
 | Student ID    | Student Name      | GitHub Username |
 | ------------- | ----------------- | --------------- |
